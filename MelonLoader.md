@@ -1,6 +1,31 @@
 What is MelonLoader
 MelonLoader is a Universal Mod-Loader for Games built in the Unity Engine.
 
+---
+
+## Troubleshooting (Data Center)
+
+### Issue #2 - Mod not loading in MelonLoader
+
+If your mod DLL does not appear in the "Melon Assembly loaded" list:
+
+1. Rebuild the mod locally with your real game references (not CI fallback output).
+2. Confirm the DLL is copied to the game's `Mods` folder.
+3. Verify the assembly metadata is compatible with your MelonLoader version.
+4. Check `MelonLoader/Latest.log` for loader errors before first gameplay logs.
+
+### Issue #3 - "Game Not Found on RemoteAPI Host"
+
+This message is usually informational and does not block mod loading by itself.
+
+Workarounds:
+
+- Keep using local IL2CPP generation output (when generation succeeds).
+- Ignore this warning unless assembly generation actually fails.
+- If generation fails, regenerate interop files and validate your MelonLoader runtime setup.
+
+---
+
 You can find mods for games by asking in their respective communities or by looking through our Officially Supported Games list.
 
 Please note that MelonLoader does not condone the use of malicious mods. e.g. mods that allow for cheating in online games, among other things.
