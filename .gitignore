@@ -10,7 +10,8 @@
 *.userosscache
 *.sln.docstates
 [Ee]xportedAssets/
-[Ii]l2Cpp-Unpack/
+[Ii]l2[Cc]pp-[Uu]npack/
+il2cpp-unpack/
 AssetUnpack.md
 MelonLoader.md
 ui.md
