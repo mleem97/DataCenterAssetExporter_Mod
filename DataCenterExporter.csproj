@@ -49,7 +49,6 @@
 
   <ItemGroup Condition="'$(CI)' == 'true'">
     <Compile Remove="Main.cs" />
-    <Compile Include="Main.CI.cs" />
   </ItemGroup>
 
   <ItemGroup>
