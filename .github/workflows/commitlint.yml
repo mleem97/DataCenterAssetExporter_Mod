@@ -1,0 +1,21 @@
+name: Commit Lint
+
+on:
+  pull_request:
+    branches: [ "master" ]
+  push:
+    branches: [ "master" ]
+
+jobs:
+  lint-commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Lint commit messages
+        uses: wagoid/commitlint-github-action@v6
+        with:
+          configFile: .commitlintrc.json
