@@ -1,0 +1,221 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>DataCenterModLoader</AssemblyName>
+    <RootNamespace>DataCenterModLoader</RootNamespace>
+    <Description>MelonLoader mod that provides a Rust FFI bridge for Data Center</Description>
+    <NoWarn>CS1701;CS1702</NoWarn>
+    <ReferencePath>$(MelonLoaderDir)\net6;$(MelonLoaderDir)\Il2CppAssemblies</ReferencePath>
+    <AssemblySearchPaths>{CandidateAssemblyFiles};{HintPathFromItem};$(MelonLoaderDir)\net6;$(MelonLoaderDir)\Il2CppAssemblies;{TargetFrameworkDirectory};{RawFileName}</AssemblySearchPaths>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GameDir>C:\Program Files (x86)\Steam\steamapps\common\Data Center</GameDir>
+    <MelonLoaderDir>$(GameDir)\MelonLoader</MelonLoaderDir>
+  </PropertyGroup>
+
+  <ItemGroup Condition="Exists('$(MelonLoaderDir)\net6\MelonLoader.dll')">
+    <Reference Include="0Harmony">
+      <HintPath>$(MelonLoaderDir)\net6\0Harmony.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>$(MelonLoaderDir)\net6\Il2CppInterop.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\Il2Cppmscorlib.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSystem">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\Il2CppSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="MelonLoader">
+      <HintPath>$(MelonLoaderDir)\net6\MelonLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\Unity.InputSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem.ForUI">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.InputSystem.RebindingUI">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\Unity.InputSystem.RebindingUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\UnityEngine.InputLegacyModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="il2cpp-unpack\**\*.cs" />
+    <Compile Remove="**\obj\**\*.cs" />
+    <Compile Remove="**\bin\**\*.cs" />
+    <Compile Remove="HexLabelMod\**\*.cs" />
+    <None Include="il2cpp-unpack\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(CI)' == 'true'">
+    <Compile Remove="Main.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include=".github\copilot-instructions.md" />
+    <None Include=".github\workflows\commitlint.yml" />
+    <None Include=".github\workflows\dotnet-ci.yml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="AsmResolver">
+      <HintPath>$(MelonLoaderDir)\net6\AsmResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver.DotNet">
+      <HintPath>$(MelonLoaderDir)\net6\AsmResolver.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver.PE">
+      <HintPath>$(MelonLoaderDir)\net6\AsmResolver.PE.dll</HintPath>
+    </Reference>
+    <Reference Include="AsmResolver.PE.File">
+      <HintPath>$(MelonLoaderDir)\net6\AsmResolver.PE.File.dll</HintPath>
+    </Reference>
+    <Reference Include="AssetRipper.Primitives">
+      <HintPath>$(MelonLoaderDir)\net6\AssetRipper.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="AssetsTools.NET">
+      <HintPath>$(MelonLoaderDir)\net6\AssetsTools.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="bHapticsLib">
+      <HintPath>$(MelonLoaderDir)\net6\bHapticsLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Iced">
+      <HintPath>$(MelonLoaderDir)\net6\Iced.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Common">
+      <HintPath>$(MelonLoaderDir)\net6\Il2CppInterop.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.Generator">
+      <HintPath>$(MelonLoaderDir)\net6\Il2CppInterop.Generator.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppInterop.HarmonySupport">
+      <HintPath>$(MelonLoaderDir)\net6\Il2CppInterop.HarmonySupport.dll</HintPath>
+    </Reference>
+    <Reference Include="IndexRange">
+      <HintPath>$(MelonLoaderDir)\net6\IndexRange.dll</HintPath>
+    </Reference>
+    <Reference Include="MelonLoader.NativeHost">
+      <HintPath>$(MelonLoaderDir)\net6\MelonLoader.NativeHost.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.Memory">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Bcl.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.NETCore.Client">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Diagnostics.NETCore.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.Runtime">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Diagnostics.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives">
+      <HintPath>$(MelonLoaderDir)\net6\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil">
+      <HintPath>$(MelonLoaderDir)\net6\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb">
+      <HintPath>$(MelonLoaderDir)\net6\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb">
+      <HintPath>$(MelonLoaderDir)\net6\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks">
+      <HintPath>$(MelonLoaderDir)\net6\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod">
+      <HintPath>$(MelonLoaderDir)\net6\MonoMod.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Backports">
+      <HintPath>$(MelonLoaderDir)\net6\MonoMod.Backports.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.ILHelpers">
+      <HintPath>$(MelonLoaderDir)\net6\MonoMod.ILHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>$(MelonLoaderDir)\net6\MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils">
+      <HintPath>$(MelonLoaderDir)\net6\MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(MelonLoaderDir)\net6\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration.ConfigurationManager">
+      <HintPath>$(MelonLoaderDir)\net6\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>$(MelonLoaderDir)\net6\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>$(MelonLoaderDir)\net6\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData">
+      <HintPath>$(MelonLoaderDir)\net6\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions">
+      <HintPath>$(MelonLoaderDir)\net6\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="Tomlet">
+      <HintPath>$(MelonLoaderDir)\net6\Tomlet.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Il2CppAssetBundleManager">
+      <HintPath>$(MelonLoaderDir)\net6\UnityEngine.Il2CppAssetBundleManager.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Il2CppImageConversionManager">
+      <HintPath>$(MelonLoaderDir)\net6\UnityEngine.Il2CppImageConversionManager.dll</HintPath>
+    </Reference>
+    <Reference Include="WebSocketDotNet">
+      <HintPath>$(MelonLoaderDir)\net6\WebSocketDotNet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>
