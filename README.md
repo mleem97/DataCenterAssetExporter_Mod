@@ -28,7 +28,8 @@
 - <kbd>F8</kbd> : Start the asset export process.
 - <kbd>F9</kbd> : Log the exact UI hierarchy path under the mouse cursor.
 - <kbd>F10</kbd> : Toggle Beta Export features (On/Off).
-- <kbd>F11</kbd> : Export a central IL2CPP event/trigger catalog (`Diagnostics/il2cpp-event-catalog.txt`).
+- <kbd>F11</kbd> : Export IL2CPP diagnostics (`il2cpp-event-catalog.txt` + `il2cpp-gameplay-index.txt`).
+- <kbd>F12</kbd> : Discover and install runtime hook candidates (framework mode).
 
 ### Export Destinations
 Assets are exported to the `Mods/ExportedAssets/CurrentGame` directory, organized as follows:
@@ -99,6 +100,8 @@ The compiled mod will typically be output to:
 - `Main.cs` — Central mod logic (Hotkey handling, Export routing, UI Logging).
 - `ModEventFramework.cs` + `Events/*.cs` — Central event hub and event-category files for framework-based modding.
 - `Il2CppEventCatalogService.cs` — Runtime/decompiled event and trigger discovery exporter.
+- `Il2CppGameplayIndexService.cs` — Full gameplay-relevant keyword index over `il2cpp-unpack` sources.
+- `RuntimeHookService.cs` — Runtime hook discovery and Harmony-based installation pipeline.
 - `AssetExport.md` — Documentation, requirements, and development notes regarding export behavior.
 - `ui.md` — UI reference context and layout documentation.
 
