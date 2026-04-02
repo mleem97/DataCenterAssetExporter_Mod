@@ -19,6 +19,7 @@ namespace AssetExporter
     {
         private string exportPath = string.Empty;
         private bool exportBetaNotUsed = true;
+        private readonly Il2CppEventCatalogService eventCatalogService = new Il2CppEventCatalogService();
 
         public override void OnInitializeMelon()
         {
@@ -26,7 +27,7 @@ namespace AssetExporter
             exportPath = Path.Combine(MelonEnvironment.ModsDirectory, "ExportedAssets");
             if (!Directory.Exists(exportPath)) Directory.CreateDirectory(exportPath);
 
-            MelonLogger.Msg("Asset Exporter geladen. Drücke F8 im Spiel (während ein Save geladen ist).");
+            MelonLogger.Msg("Asset Exporter geladen. Drücke F8 (Export), F9 (UI-Pfad), F10 (NotUsed), F11 (Event-Katalog).");
             MelonLogger.Msg("Projekt: https://github.com/mleem97/DataCenter-AEMod");
             ModFramework.Events.Publish(new ModInitializedEvent(DateTime.UtcNow, "1.0.2"));
         }
@@ -50,6 +51,29 @@ namespace AssetExporter
                 exportBetaNotUsed = !exportBetaNotUsed;
                 MelonLogger.Msg($"Beta-Export (nicht verwendete Assets) ist jetzt: {(exportBetaNotUsed ? "AKTIV" : "INAKTIV")}");
                 ModFramework.Events.Publish(new ToggleChangedEvent(DateTime.UtcNow, "ExportBetaNotUsed", exportBetaNotUsed));
+            }
+
+            if (Keyboard.current != null && Keyboard.current.f11Key.wasPressedThisFrame)
+            {
+                ExportIl2CppEventCatalog();
+            }
+        }
+
+        private void ExportIl2CppEventCatalog()
+        {
+            try
+            {
+                string diagnosticsPath = Path.Combine(exportPath, "Diagnostics");
+                string filePath = eventCatalogService.ExportCatalog(diagnosticsPath);
+                int linesCount = File.ReadAllLines(filePath).Length;
+
+                MelonLogger.Msg($"IL2CPP Event-Katalog exportiert: {filePath}");
+                ModFramework.Events.Publish(new Il2CppCatalogExportedEvent(DateTime.UtcNow, filePath, linesCount));
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"Fehler beim Export des IL2CPP Event-Katalogs: {ex.Message}");
+                ModFramework.Events.Publish(new ModErrorEvent(DateTime.UtcNow, "Il2CppCatalog", ex.Message));
             }
         }
 
