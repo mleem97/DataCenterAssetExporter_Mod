@@ -1,4 +1,4 @@
-# DataCenter Asset Exporter Mod (MelonLoader)
+# Frikadelle Modding Framework (MelonLoader)
 
 [![.NET CI](https://github.com/mleem97/DataCenter-AEMod/actions/workflows/dotnet-ci.yml/badge.svg?branch=master)](https://github.com/mleem97/DataCenter-AEMod/actions/workflows/dotnet-ci.yml)
 [![Commit Lint](https://github.com/mleem97/DataCenter-AEMod/actions/workflows/commitlint.yml/badge.svg?branch=master)](https://github.com/mleem97/DataCenter-AEMod/actions/workflows/commitlint.yml)
@@ -12,7 +12,7 @@
 
 ## 📖 Overview
 
-**DataCenterExporter** is a MelonLoader-based mod for the game *Data Center*. It allows modders to export in-game content (meshes, textures, etc.) at runtime to streamline custom modding workflows. 
+**Frikadelle Modding Framework** is a MelonLoader-based framework mod for the game *Data Center*. It allows modders to export in-game content (meshes, textures, etc.) at runtime and provides a central event/hook foundation for custom modding workflows.
 
 **Current Focus:**
 - **In-Use Asset Export:** Captures assets actively utilized in the game (both active and inactive objects within loaded scenes).

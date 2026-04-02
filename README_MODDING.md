@@ -1,6 +1,6 @@
 # Modding Framework Usage Guide
 
-This guide explains how to use the `DataCenterExporter` framework as a base to implement custom mods for `Data Center`.
+This guide explains how to use the `Frikadelle Modding Framework` as a base to implement custom mods for `Data Center`.
 
 ---
 
@@ -109,7 +109,7 @@ Recommended pattern:
 
 ## Summary
 
-`DataCenterExporter` can be used as an all-in-one base framework for Data Center modding:
+`Frikadelle Modding Framework` can be used as an all-in-one base framework for Data Center modding:
 
 - core game communication,
 - diagnostics and discovery,
