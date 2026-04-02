@@ -51,7 +51,7 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Restore dependencies
-        run: dotnet restore DataCenterExporter.csproj
+        run: dotnet restore FrikaMF.csproj
 
       - name: Build (${{ matrix.configuration }})
-        run: dotnet build DataCenterExporter.csproj --configuration ${{ matrix.configuration }} --no-restore
+        run: dotnet build FrikaMF.csproj --configuration ${{ matrix.configuration }} --no-restore
