@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 // Namespace AssetExporter muss zu deiner AssemblyInfo passen
-[assembly: MelonInfo(typeof(AssetExporter.Main), "Asset Exporter", "1.0.3", "mleem97")]
+[assembly: MelonInfo(typeof(AssetExporter.Main), "Frikadelle Modding Framework", "1.0.3", "mleem97")]
 [assembly: MelonGame(null, null)]
 
 namespace AssetExporter
@@ -30,7 +30,7 @@ namespace AssetExporter
             exportPath = Path.Combine(MelonEnvironment.ModsDirectory, "ExportedAssets");
             if (!Directory.Exists(exportPath)) Directory.CreateDirectory(exportPath);
 
-            MelonLogger.Msg("Asset Exporter geladen.");
+            MelonLogger.Msg("Frikadelle Modding Framework geladen.");
 #if DEBUG
             MelonLogger.Msg("Debug-Modus aktiv: F8 Export | F9 UI-Pfad | F10 NotUsed | F11 Katalog+Index | F12 Hooks installieren.");
 #else
