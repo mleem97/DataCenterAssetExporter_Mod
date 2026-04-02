@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 // Namespace AssetExporter muss zu deiner AssemblyInfo passen
-[assembly: MelonInfo(typeof(AssetExporter.Main), "Asset Exporter", "1.0.2", "mleem97")]
+[assembly: MelonInfo(typeof(AssetExporter.Main), "Asset Exporter", "1.0.3", "mleem97")]
 [assembly: MelonGame(null, null)]
 
 namespace AssetExporter
@@ -22,6 +22,7 @@ namespace AssetExporter
         private readonly Il2CppEventCatalogService eventCatalogService = new Il2CppEventCatalogService();
         private readonly Il2CppGameplayIndexService gameplayIndexService = new Il2CppGameplayIndexService();
         private readonly RuntimeHookService runtimeHookService = new RuntimeHookService();
+        private readonly GameSignalSnapshotService gameSignalSnapshotService = new GameSignalSnapshotService();
 
         public override void OnInitializeMelon()
         {
@@ -29,11 +30,15 @@ namespace AssetExporter
             exportPath = Path.Combine(MelonEnvironment.ModsDirectory, "ExportedAssets");
             if (!Directory.Exists(exportPath)) Directory.CreateDirectory(exportPath);
 
-            MelonLogger.Msg("Asset Exporter geladen. F8 Export | F9 UI-Pfad | F10 NotUsed | F11 Katalog+Index | F12 Hooks installieren.");
+            MelonLogger.Msg("Asset Exporter geladen. F8 Export | F9 UI-Pfad | F10 NotUsed.");
+#if DEBUG
+            MelonLogger.Msg("Dev-Hotkeys aktiv: F11 Katalog+Index | F12 Hooks installieren.");
+#endif
             MelonLogger.Msg("Projekt: https://github.com/mleem97/DataCenter-AEMod");
-            ModFramework.Events.Publish(new ModInitializedEvent(DateTime.UtcNow, "1.0.2"));
+            ModFramework.Events.Publish(new ModInitializedEvent(DateTime.UtcNow, "1.0.3"));
 
             ModFramework.Events.Subscribe<HookTriggeredEvent>(OnHookTriggered);
+            ExportAllGameSignalsOnStartup();
         }
 
         public override void OnUpdate()
@@ -57,6 +62,7 @@ namespace AssetExporter
                 ModFramework.Events.Publish(new ToggleChangedEvent(DateTime.UtcNow, "ExportBetaNotUsed", exportBetaNotUsed));
             }
 
+#if DEBUG
             if (Keyboard.current != null && Keyboard.current.f11Key.wasPressedThisFrame)
             {
                 ExportIl2CppEventCatalog();
@@ -65,6 +71,22 @@ namespace AssetExporter
             if (Keyboard.current != null && Keyboard.current.f12Key.wasPressedThisFrame)
             {
                 InstallRuntimeHooks();
+            }
+#endif
+        }
+
+        private void ExportAllGameSignalsOnStartup()
+        {
+            try
+            {
+                string diagnosticsPath = Path.Combine(exportPath, "Diagnostics");
+                string snapshotPath = gameSignalSnapshotService.ExportAll(diagnosticsPath, eventCatalogService, gameplayIndexService, runtimeHookService);
+                MelonLogger.Msg($"Startup-Snapshot erstellt: {snapshotPath}");
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"Startup-Snapshot fehlgeschlagen: {ex.Message}");
+                ModFramework.Events.Publish(new ModErrorEvent(DateTime.UtcNow, "StartupSnapshot", ex.Message));
             }
         }
 

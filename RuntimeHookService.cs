@@ -28,6 +28,18 @@ namespace AssetExporter
 
         private readonly string harmonyId = "assetexporter.framework.runtimehooks";
 
+        public HookScanResult ScanCandidates(int maxHooks)
+        {
+            var candidates = DiscoverCandidates(maxHooks).ToList();
+            var names = new List<string>(candidates.Count);
+
+            foreach (MethodInfo candidate in candidates)
+                names.Add(BuildMethodKey(candidate));
+
+            ModFramework.Events.Publish(new HookScanCompletedEvent(DateTime.UtcNow, names.Count));
+            return new HookScanResult(names);
+        }
+
         public HookInstallResult ScanAndInstall(int maxHooks)
         {
             var candidates = DiscoverCandidates(maxHooks).ToList();
@@ -198,5 +210,15 @@ namespace AssetExporter
         public int Installed { get; }
         public int Failed { get; }
         public IReadOnlyList<string> Errors { get; }
+    }
+
+    public sealed class HookScanResult
+    {
+        public HookScanResult(IReadOnlyList<string> candidates)
+        {
+            Candidates = candidates;
+        }
+
+        public IReadOnlyList<string> Candidates { get; }
     }
 }
