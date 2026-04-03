@@ -1,10 +1,10 @@
 # RustBridge Sync Report
 
-- Synced At: 2026-04-03 17:38:03 UTC
+- Synced At: 2026-04-03 19:13:49 UTC
 - Upstream Repo: https://github.com/Joniii11/DataCenter-RustBridge.git
 - Upstream Branch: main
-- Upstream Commit: d6bd6971dcc1171fb2d9770e9cc66b23ac74e093
-- Mode: staged
+- Upstream Commit: ba4ba07262eb1be16360c282931253138c082119
+- Mode: overwrite
 - Target Path: FrikaMF/JoniMF
 - Staging Path: .bridge-sync/staged/JoniMF
 
@@ -12,13 +12,15 @@
 
 | Source | Destination | Action | Notes |
 |---|---|---|---|
-| _tmp\rustbridge-upstream\csharp\DataCenterModLoader\Core.cs | .bridge-sync\staged\JoniMF\Core.cs.upstream.cs | staged-review | staged copy for manual merge review; target untouched |
-| _tmp\rustbridge-upstream\csharp\DataCenterModLoader\CustomEmployeeManager.cs | .bridge-sync\staged\JoniMF\CustomEmployeeManager.cs.upstream.cs | staged-review | staged copy for manual merge review; target untouched |
-| _tmp\rustbridge-upstream\csharp\DataCenterModLoader\EventSystem.cs | .bridge-sync\staged\JoniMF\EventDispatcher.cs.upstream.cs | staged-review | staged copy for manual merge review; target untouched |
-| _tmp\rustbridge-upstream\csharp\DataCenterModLoader\FFIBridge.cs | .bridge-sync\staged\JoniMF\FfiBridge.cs.upstream.cs | staged-review | staged copy for manual merge review; target untouched |
-| _tmp\rustbridge-upstream\csharp\DataCenterModLoader\GameAPI.cs | .bridge-sync\staged\JoniMF\GameApi.cs.upstream.cs | staged-review | staged copy for manual merge review; target untouched |
-| _tmp\rustbridge-upstream\csharp\DataCenterModLoader\GameHooks.cs | .bridge-sync\staged\JoniMF\GameHooks.cs.upstream.cs | staged-review | staged copy for manual merge review; target untouched |
-| _tmp\rustbridge-upstream\csharp\DataCenterModLoader\HarmonyPatches.cs | .bridge-sync\staged\JoniMF\HarmonyPatches.cs.upstream.cs | staged-review | staged copy for manual merge review; target untouched |
+| C:\Users\marvi\AppData\Local\Temp\FrikaRustBridgeSync_e63962c56e284cdaaf96cca08ce9ef0a\rustbridge\csharp\DataCenterModLoader\Core.cs | FrikaMF\JoniMF\Core.cs | overwritten | existing file overwritten by upstream |
+| C:\Users\marvi\AppData\Local\Temp\FrikaRustBridgeSync_e63962c56e284cdaaf96cca08ce9ef0a\rustbridge\csharp\DataCenterModLoader\CustomEmployeeManager.cs | FrikaMF\JoniMF\CustomEmployeeManager.cs | overwritten | existing file overwritten by upstream |
+| C:\Users\marvi\AppData\Local\Temp\FrikaRustBridgeSync_e63962c56e284cdaaf96cca08ce9ef0a\rustbridge\csharp\DataCenterModLoader\EventSystem.cs | FrikaMF\JoniMF\EventDispatcher.cs | overwritten | existing file overwritten by upstream |
+| C:\Users\marvi\AppData\Local\Temp\FrikaRustBridgeSync_e63962c56e284cdaaf96cca08ce9ef0a\rustbridge\csharp\DataCenterModLoader\FFIBridge.cs | FrikaMF\JoniMF\FfiBridge.cs | overwritten | existing file overwritten by upstream |
+| C:\Users\marvi\AppData\Local\Temp\FrikaRustBridgeSync_e63962c56e284cdaaf96cca08ce9ef0a\rustbridge\csharp\DataCenterModLoader\GameAPI.cs | FrikaMF\JoniMF\GameApi.cs | overwritten | existing file overwritten by upstream |
+| C:\Users\marvi\AppData\Local\Temp\FrikaRustBridgeSync_e63962c56e284cdaaf96cca08ce9ef0a\rustbridge\csharp\DataCenterModLoader\GameHooks.cs | FrikaMF\JoniMF\GameHooks.cs | overwritten | existing file overwritten by upstream |
+| C:\Users\marvi\AppData\Local\Temp\FrikaRustBridgeSync_e63962c56e284cdaaf96cca08ce9ef0a\rustbridge\csharp\DataCenterModLoader\HarmonyPatches.cs | FrikaMF\JoniMF\HarmonyPatches.cs | overwritten | existing file overwritten by upstream |
+| C:\Users\marvi\AppData\Local\Temp\FrikaRustBridgeSync_e63962c56e284cdaaf96cca08ce9ef0a\rustbridge\csharp\DataCenterModLoader\MultiplayerBridge.cs | FrikaMF\JoniMF\MultiplayerBridge.cs | overwritten | existing file overwritten by upstream |
+| C:\Users\marvi\AppData\Local\Temp\FrikaRustBridgeSync_e63962c56e284cdaaf96cca08ce9ef0a\rustbridge\csharp\DataCenterModLoader\TechnicianHiring.cs | FrikaMF\JoniMF\TechnicianHiring.cs | overwritten | existing file overwritten by upstream |
 
 ## Safety Notes
 

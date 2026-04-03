@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using MelonLoader;
 
-namespace FrikaMF;
+namespace DataCenterModLoader;
 
 public class FFIBridge : IDisposable
 {
@@ -78,14 +78,14 @@ public class FFIBridge : IDisposable
     {
         if (!Directory.Exists(_modsPath))
         {
-            _logger.Msg($"No native mod directory found: {_modsPath}");
+            _logger.Msg("No Mods/native/ directory found.");
             return;
         }
 
         var dllFiles = Directory.GetFiles(_modsPath, "*.dll", SearchOption.AllDirectories);
         if (dllFiles.Length == 0)
         {
-            _logger.Msg($"No native mod DLLs found in: {_modsPath}");
+            _logger.Msg("No native mod DLLs found in Mods/native/.");
             return;
         }
 

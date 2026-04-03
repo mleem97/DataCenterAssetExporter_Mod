@@ -132,6 +132,12 @@
     <Reference Include="UnityEngine.UI">
       <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.AIModule">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\UnityEngine.AIModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UIModule">
+      <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\UnityEngine.UIModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.TextRenderingModule">
       <HintPath>$(MelonLoaderDir)\Il2CppAssemblies\UnityEngine.TextRenderingModule.dll</HintPath>
     </Reference>
