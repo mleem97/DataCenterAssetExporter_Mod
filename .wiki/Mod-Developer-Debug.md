@@ -192,6 +192,8 @@ Unterstützte Bildtypen:
 
 Details: [`Web UI Bridge (DC2WEB)`](Web-UI-Bridge)
 
+Konfigurations-API: [`Mod Config System`](Mod-Config-System)
+
 ## Web FFI vs. Web UI (wichtig)
 
 - `DC2WebBridge` = UI-Übersetzung/Styling in Unity (kein allgemeiner Netzwerk-FFI-Bus).

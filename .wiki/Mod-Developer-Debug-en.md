@@ -100,6 +100,8 @@ Interop assemblies often contain metadata-facing stubs; real implementation live
 - It is not a generic network FFI transport bus.
 - For Web FFI, implement your own HTTP/WebSocket gateway with validation and rate limits.
 
+Config API reference: [`Mod Config System`](Mod-Config-System)
+
 ## Cross-track example
 
 ### 🦀 Rust
