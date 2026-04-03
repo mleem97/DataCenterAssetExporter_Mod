@@ -78,7 +78,6 @@ Each time game libraries are re-exported, run this intake gate before feature wo
 1. Run compatibility builds:
 
    - `dotnet build .\\FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo`
-   - `dotnet build .\\HexLabelMod\\HexLabelMod.csproj -c Release -nologo`
 
 1. Revalidate hook points in `FrikaMF/JoniMF/HarmonyPatches.cs` against `Assembly-CSharp` method signatures.
 1. Compare event surface (`FrikaMF/JoniMF/EventIds.cs` + dispatch callsites) for added/removed gameplay events.

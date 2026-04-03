@@ -91,7 +91,7 @@ Use `-WhatIf` for dry-run validation.
 
 ## Hex Label Mod Notes
 
-- Project path: `HexLabelMod/HexLabelMod.csproj`
+- Project path: `FrikaMF.csproj`
 - Build mode: release-only
 - Config file: `hexposition.cfg` in game `UserData`
 - Hotkey handling: Input System-based implementation
