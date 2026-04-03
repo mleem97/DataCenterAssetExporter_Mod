@@ -51,7 +51,7 @@ if (-not [string]::IsNullOrWhiteSpace($GitHubToken)) {
 
     $tokenUser = if (-not [string]::IsNullOrWhiteSpace($GitHubActor)) { $GitHubActor } else { 'x-access-token' }
     $encodedToken = [System.Uri]::EscapeDataString($GitHubToken)
-    $cloneUrl = $WikiRepoUrl -replace '^https://', ("https://$tokenUser:$encodedToken@")
+    $cloneUrl = $WikiRepoUrl -replace '^https://', ("https://${tokenUser}:${encodedToken}@")
 }
 
 $tempRoot = Join-Path ([System.IO.Path]::GetTempPath()) ('FrikaWikiSync_' + [guid]::NewGuid().ToString('N'))
