@@ -116,6 +116,16 @@ High-level managed API helpers are available under `FrikaMF/ModigAPIs/`:
 - `WorldApi`: world object discovery helpers.
 - `LocalisationApi`: language and text lookup helpers.
 
+### M. Runtime Mod Config System
+
+The framework supports a runtime mod configuration surface (C# wrappers + low-level bridge-facing API) for:
+
+- option registration (`bool`, `int`, `float`)
+- runtime panel editing
+- immediate persistence to JSON under `UserData/ModConfigs`
+
+Reference: [`Mod Config System`](Mod-Config-System)
+
 ### L. Lua/Python/Web FFI integration status
 
 Current implementation status in this repository:
@@ -311,5 +321,6 @@ When adding/removing framework capability:
 - [Architecture](Architecture)
 - [Setup](Setup)
 - [FFI Bridge Reference](FFI-Bridge-Reference)
+- [Mod Config System](Mod-Config-System)
 - [Web UI Bridge (DC2WEB)](Web-UI-Bridge)
 - [Web UI Bridge (DC2WEB) EN](Web-UI-Bridge-en)
