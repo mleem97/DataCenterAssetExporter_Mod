@@ -165,6 +165,7 @@ Implementation detail:
 ## Related links
 
 - [Framework Features & Use Cases](Framework-Features-Use-Cases)
+- [Mod Config System](Mod-Config-System)
 - [Modding Guide](Modding-Guide)
 - [Architecture](Architecture)
 - [Web UI Bridge (DC2WEB)](Web-UI-Bridge)
