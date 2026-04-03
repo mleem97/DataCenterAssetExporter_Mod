@@ -60,10 +60,10 @@ namespace AssetExporter
 
         private static void ApplyTestMutation()
         {
-            float previousMoney = FrikaMF.GameHooks.GetPlayerMoney();
+            float previousMoney = DataCenterModLoader.GameHooks.GetPlayerMoney();
             float updatedMoney = previousMoney + 1f;
 
-            FrikaMF.GameHooks.SetPlayerMoney(updatedMoney);
+            DataCenterModLoader.GameHooks.SetPlayerMoney(updatedMoney);
             FrameworkLog.Info("testmod", $"Money mutation applied: {previousMoney} -> {updatedMoney}");
         }
 
