@@ -39,13 +39,12 @@ Run from the repository root:
 ```powershell
 dotnet build .\FrikaMF.csproj -c Debug
 dotnet build .\FrikaMF.csproj -c Release
-dotnet build .\HexLabelMod\HexLabelMod.csproj -c Release
 ```
 
 Main framework output:
 
-- `bin/Debug/net6.0/DataCenterModLoader.dll`
-- `bin/Release/net6.0/DataCenterModLoader.dll`
+- `bin/Debug/net6.0/FrikaModdingFramework.dll`
+- `bin/Release/net6.0/FrikaModdingFramework.dll`
 
 Label mod output:
 
@@ -57,7 +56,6 @@ Run direct .NET checks (no Node/pnpm required):
 
 ```powershell
 dotnet build .\FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo
-dotnet build .\HexLabelMod\HexLabelMod.csproj -c Release -nologo
 ```
 
 ---
@@ -65,7 +63,7 @@ dotnet build .\HexLabelMod\HexLabelMod.csproj -c Release -nologo
 ## Installation into the Game
 
 1. Build the project(s).
-2. Copy `DataCenterModLoader.dll` into the game `Mods` folder.
+2. Copy `FrikaModdingFramework.dll` into the game `Mods` folder.
 3. Optional: copy `HexLabelMod.dll` into the game `Mods` folder.
 4. Start the game.
 5. Verify in `MelonLoader/Latest.log` that the assembly is loaded.

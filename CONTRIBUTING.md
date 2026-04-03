@@ -15,16 +15,42 @@ Thank you for your interest in contributing to `Frikadelle Modding Framework`.
 ## 🛠 Local Development Workflow
 
 1. Fork the repository and create a branch (`feature/...`, `fix/...`).
-2. Implement your changes.
-3. Build locally:
+1. Implement your changes.
+1. If your change includes RustBridge updates, run a safe staged sync first (no overwrite):
+
+```powershell
+pwsh -ExecutionPolicy Bypass -File .\scripts\Sync-RustBridge.ps1 -Mode staged
+```
+
+1. Build locally:
 
 ```sh
 dotnet build FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo
-dotnet build HexLabelMod/HexLabelMod.csproj -c Release -nologo
 ```
 
 1. Validate functionality (hotkeys `F8`, `F9`, `F10`).
-2. Open a pull request with a clear description.
+1. Open a pull request with a clear description.
+
+---
+
+## 🔁 RustBridge Sync Flow
+
+- Upstream reference: `https://github.com/Joniii11/DataCenter-RustBridge.git`.
+- Default sync mode is `staged` and does not overwrite existing files in `FrikaMF/JoniMF`.
+- Staged upstream candidates are written to `.bridge-sync/staged/JoniMF` as `*.upstream.cs` for manual merge review.
+- Sync report is written to `.bridge-sync/reports/rustbridge-sync-report.md`.
+
+For manual pull using an already cloned upstream copy:
+
+```powershell
+pwsh -ExecutionPolicy Bypass -File .\scripts\Sync-RustBridge.ps1 -Mode staged -UseExistingClonePath _tmp\rustbridge-upstream
+```
+
+Only use overwrite mode intentionally:
+
+```powershell
+pwsh -ExecutionPolicy Bypass -File .\scripts\Sync-RustBridge.ps1 -Mode overwrite -AllowOverwrite
+```
 
 ---
 

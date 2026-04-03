@@ -30,3 +30,15 @@ Welcome to the project wiki.
 
 - Keep pages concise and practical.
 - Link related pages to improve navigation.
+
+## Wiki Sync Automation
+
+- Changes in `.wiki/**` on `master` are auto-synced to the GitHub wiki via workflow.
+- Manual sync is still available and preferred for controlled maintenance:
+- PowerShell: `pwsh -ExecutionPolicy Bypass -File .\scripts\Sync-Wiki.ps1`
+- cmd: `powershell -ExecutionPolicy Bypass -File .\scripts\Sync-Wiki.ps1`
+- bash/sh: `pwsh -ExecutionPolicy Bypass -File ./scripts/Sync-Wiki.ps1`
+
+- Optional wrappers if package managers are installed:
+- `npm run wiki:sync`
+- `pnpm wiki:sync`

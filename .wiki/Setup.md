@@ -14,7 +14,6 @@ Before building the framework for the first time, start the game once with Melon
 ## Repository Structure (current)
 
 - `FrikaMF.csproj` and `FrikaMF.sln` for the framework mod
-- `HexLabelMod/HexLabelMod.csproj` for the standalone label mod
 - `.wiki/` for project wiki pages
 
 ## Build Commands
@@ -24,7 +23,55 @@ Use PowerShell from repository root:
 ```powershell
 dotnet build .\FrikaMF.csproj -c Debug
 dotnet build .\FrikaMF.csproj -c Release
-dotnet build .\HexLabelMod\HexLabelMod.csproj -c Release
+```
+
+Preferred command shells by platform:
+
+- Windows: `PowerShell` (preferred), `cmd` (supported)
+- Linux: `bash` / `sh` (preferred)
+
+Optional package-run wrappers (only if `npm` or `pnpm` is installed):
+
+```powershell
+# PowerShell / cmd
+npm run wiki:sync
+pnpm wiki:sync
+
+npm run release:prepare:minor
+pnpm release:prepare:minor
+```
+
+```bash
+# bash / sh
+npm run wiki:sync
+pnpm wiki:sync
+
+npm run release:prepare:minor
+pnpm release:prepare:minor
+```
+
+Direct script execution remains the default recommendation for maintainers.
+
+## GitHub Runner Strategy (DLL builds)
+
+The repository workflows are configured so DLL builds can run on a local self-hosted runner with game-specific resources.
+
+- Preferred runner labels for build jobs:
+- `self-hosted`
+- `windows`
+- `x64`
+- Workflow behavior:
+- `.github/workflows/dotnet-ci.yml`: uses self-hosted runner by default.
+- `.github/workflows/rustbridge-sync.yml`: uses self-hosted runner by default.
+- Both workflows provide manual `workflow_dispatch` fallback to hosted Windows via `useHostedRunner=true`.
+
+Recommended for local runner setup:
+
+```powershell
+# run in your self-hosted runner working copy
+dotnet --info
+dotnet restore .\FrikaMF.csproj
+dotnet build .\FrikaMF.csproj -c Release -nologo
 ```
 
 Optional deploy helper:
@@ -46,7 +93,7 @@ Publish-LocalRelease -Tag "vX.Y.Z"
 
 ## Runtime Placement
 
-- Copy framework output (`DataCenterModLoader.dll`) into game `Mods` folder
+- Copy framework output (`FrikaModdingFramework.dll`) into game `Mods` folder
 - Copy `HexLabelMod.dll` into game `Mods` folder
 
 ## Rust Mod Placement (separate from C# Mods)

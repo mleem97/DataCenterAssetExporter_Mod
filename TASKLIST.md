@@ -35,7 +35,6 @@
 - Priority: `P0`
 - Tasks:
   - Run `dotnet build .\\FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo`.
-  - Run `dotnet build .\\HexLabelMod\\HexLabelMod.csproj -c Release -nologo`.
 - Definition of Done:
   - Both builds pass with current local exports.
 
@@ -281,7 +280,6 @@
 - Priority: `P0`
 - Checklist:
   - `dotnet build .\FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo`
-  - `dotnet build .\HexLabelMod\HexLabelMod.csproj -c Release -nologo`
   - Test valid object pack load
   - Test invalid pack (missing model)
   - Test invalid values (bad collider/scale)

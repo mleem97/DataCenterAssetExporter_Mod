@@ -18,12 +18,11 @@
 
 ```powershell
 dotnet build .\FrikaMF.csproj -c Release
-dotnet build .\HexLabelMod\HexLabelMod.csproj -c Release
 ```
 
 ### Install into the game
 
-1. Copy `bin/Release/net6.0/DataCenterModLoader.dll` to `Data Center/Mods`.
+1. Copy `bin/Release/net6.0/FrikaModdingFramework.dll` to `Data Center/Mods`.
 2. Copy `HexLabelMod/bin/Release/net6.0/HexLabelMod.dll` to `Data Center/Mods`.
 3. Start the game and verify load in `MelonLoader/Latest.log`.
 
@@ -78,7 +77,7 @@ Publish-LocalRelease -Tag "v0.1.5"
 
 This uploads:
 
-- `bin/Release/net6.0/DataCenterModLoader.dll`
+- `bin/Release/net6.0/FrikaModdingFramework.dll`
 - `HexLabelMod/bin/Release/net6.0/HexLabelMod.dll`
 
 ---
@@ -87,7 +86,6 @@ This uploads:
 
 ```powershell
 dotnet build .\FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo
-dotnet build .\HexLabelMod\HexLabelMod.csproj -c Release -nologo
 ```
 
 ---
