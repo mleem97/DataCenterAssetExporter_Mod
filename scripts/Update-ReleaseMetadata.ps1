@@ -26,7 +26,14 @@ else {
 }
 
 $script:RepoRoot = Split-Path -Parent $script:MetadataScriptRoot
-$script:ReleaseVersionFile = Join-Path $script:RepoRoot 'FrikaMF\JoniMF\ReleaseVersion.cs'
+$legacyReleaseVersionFile = Join-Path $script:RepoRoot 'FrikaMF\JoniMF\ReleaseVersion.cs'
+$newReleaseVersionFile = Join-Path $script:RepoRoot 'FrikaMF\ReleaseVersion.cs'
+$script:ReleaseVersionFile = if (Test-Path -LiteralPath $newReleaseVersionFile) {
+    $newReleaseVersionFile
+}
+else {
+    $legacyReleaseVersionFile
+}
 $script:ChangelogFile = Join-Path $script:RepoRoot 'CHANGELOG.md'
 
 function Get-CurrentReleaseVersion {
@@ -177,12 +184,21 @@ This project uses framework release versions in `XX.XX.XXXX` format.
     $releaseLinkLine = "[${NewVersion}]: https://github.com/mleem97/FrikaModFramework/compare/$previousTag...$newTag"
     $unreleasedLinkLine = "[Unreleased]: https://github.com/mleem97/FrikaModFramework/compare/$newTag...HEAD"
 
-    $insertPattern = '(?s)(^## \[Unreleased\]\s*\r?\n(?:.*?\r?\n){0,30}?\r?\n)'
-    if (-not [regex]::IsMatch($changelog, $insertPattern)) {
-        throw 'Unable to find [Unreleased] section in CHANGELOG.md.'
+    $firstReleaseHeadingPattern = '(?m)^## \[\d{2}\.\d{2}\.\d{4}\]\s*-\s*\d{4}-\d{2}-\d{2}\s*$'
+    if ([regex]::IsMatch($changelog, $firstReleaseHeadingPattern)) {
+        $updated = [regex]::Replace(
+            $changelog,
+            $firstReleaseHeadingPattern,
+            {
+                param($match)
+                return $entry + $match.Value
+            },
+            1
+        )
     }
-
-    $updated = [regex]::Replace($changelog, $insertPattern, ('$1' + "`r`n" + $entry), 1)
+    else {
+        $updated = $changelog.TrimEnd() + "`r`n`r`n" + $entry
+    }
 
     if ($updated -match '(?m)^\[Unreleased\]:') {
         $updated = [regex]::Replace($updated, '(?m)^\[Unreleased\]:.*$', $unreleasedLinkLine, 1)
