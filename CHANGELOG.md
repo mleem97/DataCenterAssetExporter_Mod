@@ -13,6 +13,12 @@ This project uses framework release versions in `XX.XX.XXXX` format.
 
 - Maintain Keep a Changelog structure and release metadata automation.
 
+## [00.01.0012] - 2026-04-04
+
+### Changed
+
+- Automated release metadata update.
+
 ## [00.01.0009] - 2026-04-04
 
 ### Added
@@ -107,7 +113,7 @@ This project uses framework release versions in `XX.XX.XXXX` format.
 - Add initial `FrikaMF` project and core mod code.
 - Extend export structure and beta export functionality.
 
-[Unreleased]: https://github.com/mleem97/FrikaModFramework/compare/v00.01.0009...HEAD
+[Unreleased]: https://github.com/mleem97/FrikaModFramework/compare/v00.01.0012...HEAD
 [00.01.0009]: https://github.com/mleem97/FrikaModFramework/compare/v00.01.0008...v00.01.0009
 [00.01.0008]: https://github.com/mleem97/FrikaModFramework/compare/v00.01.0007...v00.01.0008
 [00.01.0007]: https://github.com/mleem97/FrikaModFramework/compare/v00.01.0006...v00.01.0007
@@ -119,4 +125,4 @@ This project uses framework release versions in `XX.XX.XXXX` format.
 [00.01.0002]: https://github.com/mleem97/FrikaModFramework/compare/v00.01.0001...v00.01.0002
 [00.01.0001]: https://github.com/mleem97/FrikaModFramework/compare/v00.01.0000...v00.01.0001
 [00.01.0000]: https://github.com/mleem97/FrikaModFramework/compare/3b2b394e6151a389abb9006c36890f3ec97f6346...v00.01.0000
-
+[00.01.0012]: https://github.com/mleem97/FrikaModFramework/compare/v00.01.0011...v00.01.0012
