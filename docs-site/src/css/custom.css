@@ -170,6 +170,12 @@
   display: none;
 }
 
+.navbar__item.nav-icon-only .navbar__link * {
+  color: transparent !important;
+  font-size: 0.0001rem !important;
+  line-height: 0 !important;
+}
+
 .navbar__item.nav-icon-only:not(.nav-locale) .dropdown__caret,
 .navbar__item.nav-icon-only:not(.nav-locale) .clean-btn {
   display: none;
@@ -204,6 +210,13 @@
   background: rgba(173, 20, 87, 0.24);
   border: 1px solid rgba(173, 20, 87, 0.45);
   content: '🌐';
+}
+
+.navbar [class*='colorModeToggle'],
+.navbar button[title*='theme' i],
+.navbar button[aria-label*='theme' i],
+.navbar button[aria-label*='color mode' i] {
+  display: none !important;
 }
 
 .navbar__item.nav-right-icon .navbar__link::before {
