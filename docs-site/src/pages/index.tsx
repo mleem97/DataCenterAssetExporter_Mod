@@ -3,6 +3,7 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { getHomepageContent } from '../i18n/homepage';
+import gregImage from '../image.png';
 import {
   FaArrowUpRightFromSquare,
   FaBookOpen,
@@ -214,8 +215,8 @@ export default function HomePage(): JSX.Element {
                 <p className="text-lg font-bold text-white italic">{t.gregQuote}</p>
               </div>
               <div className="shrink-0">
-                <div className="w-32 h-40 md:w-48 md:h-56 rounded-lg border flex items-center justify-center text-5xl md:text-7xl" style={{ borderColor: 'var(--color-card-border)', backgroundColor: 'rgba(226, 58, 113, 0.05)' }}>
-                  👨‍💼
+                <div className="w-32 h-40 md:w-48 md:h-56 overflow-hidden rounded-lg border" style={{ borderColor: 'var(--color-card-border)', backgroundColor: 'rgba(226, 58, 113, 0.05)' }}>
+                  <img src={gregImage} alt="Greg" className="h-full w-full object-cover" />
                 </div>
               </div>
             </div>

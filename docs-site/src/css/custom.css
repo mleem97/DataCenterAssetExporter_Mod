@@ -152,8 +152,16 @@
   padding: 0;
   justify-content: center;
   gap: 0;
-  color: transparent;
+  color: transparent !important;
   line-height: 0;
+  font-size: 0.0001rem;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+.navbar__item.nav-icon-only .navbar__link:hover,
+.navbar__item.nav-icon-only .navbar__link--active {
+  color: transparent !important;
 }
 
 .navbar__item.nav-icon-only .navbar__link > span,
@@ -174,8 +182,11 @@
   padding: 0;
   justify-content: center;
   align-items: center;
-  color: transparent;
+  color: transparent !important;
   line-height: 0;
+  font-size: 0.0001rem;
+  text-indent: -9999px;
+  overflow: hidden;
 }
 
 .navbar__item.nav-locale.nav-icon-only .dropdown__caret {
@@ -203,6 +214,7 @@
   height: 1.3rem;
   border-radius: 9999px;
   font-size: 0.73rem;
+  color: #f3f4f6;
   background: rgba(173, 20, 87, 0.24);
   border: 1px solid rgba(173, 20, 87, 0.45);
 }

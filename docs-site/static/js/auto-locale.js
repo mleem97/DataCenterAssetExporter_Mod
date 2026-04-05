@@ -3,14 +3,13 @@
     var supported = ['en', 'de', 'fr', 'es', 'ru', 'ja'];
     var defaultLocale = 'en';
     var storageKey = 'frikamf-locale';
-    var redirectMarkerKey = 'frikamf-locale-redirected';
 
     function pathLocale(pathname) {
       var first = pathname.split('/').filter(Boolean)[0];
       if (!first) {
-        return defaultLocale;
+        return null;
       }
-      return supported.indexOf(first) >= 0 ? first : defaultLocale;
+      return supported.indexOf(first) >= 0 ? first : null;
     }
 
     function detectFromRegionAndLanguage() {
@@ -62,9 +61,8 @@
     var pathname = window.location.pathname;
     var currentLocale = pathLocale(pathname);
 
-    if (currentLocale !== defaultLocale) {
+    if (currentLocale) {
       localStorage.setItem(storageKey, currentLocale);
-      sessionStorage.setItem(redirectMarkerKey, '1');
       return;
     }
 
@@ -79,19 +77,15 @@
       return;
     }
 
-    var isOnRootLikePath = pathname === '/' || pathname === '';
-    if (!isOnRootLikePath) {
+    var isRootLikePath = pathname === '/' || pathname === '' || pathname === '/index.html';
+    if (!isRootLikePath) {
       return;
     }
 
-    if (sessionStorage.getItem(redirectMarkerKey) === '1') {
-      return;
-    }
+    var redirectPath = '/' + targetLocale + '/';
 
-    var redirectTarget = '/' + targetLocale + '/';
-    if (window.location.pathname !== redirectTarget) {
-      sessionStorage.setItem(redirectMarkerKey, '1');
-      window.location.replace(redirectTarget + window.location.search + window.location.hash);
+    if (window.location.pathname !== redirectPath) {
+      window.location.replace(redirectPath + window.location.search + window.location.hash);
     }
   } catch (error) {
     // no-op

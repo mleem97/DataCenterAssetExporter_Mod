@@ -72,6 +72,11 @@ const config = {
   ],
   themeConfig: {
     image: 'img/logo.svg',
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: true,
+      respectPrefersColorScheme: false,
+    },
     navbar: {
       title: 'Frika Mod Framework',
       hideOnScroll: false,
