@@ -1,5 +1,7 @@
+# Coolify / production: only `docs-mcp` runs by default (one public URL).
+# Local dev with hot reload: docker compose --profile dev up
 services:
-  # Production-like docs + MCP in one image (Docusaurus static + /mcp). Host port 3040 → container 3000.
+  # Production: static Docusaurus + MCP (/mcp) — this should be the only public service in Coolify.
   docs-mcp:
     build:
       context: .
@@ -8,7 +10,10 @@ services:
     ports:
       - "3040:3000"
 
+  # Dev-only: Docusaurus `npm run start` (second HTTP service → duplicate Coolify URLs if left on default profile)
   docs:
+    profiles:
+      - dev
     build:
       context: .
       dockerfile: wiki/Dockerfile
@@ -26,7 +31,10 @@ services:
       - ./docs:/app/docs
       - /app/node_modules
 
+  # Dev-only: one-off `npm run build` (use locally; not for Coolify routing)
   docs-build:
+    profiles:
+      - dev
     build:
       context: .
       dockerfile: wiki/Dockerfile
