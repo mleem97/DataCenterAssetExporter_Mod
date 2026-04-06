@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "description": "Single source of truth for FMF hook names (FMF.DOMAIN.Event). Legacy runtime strings may still use FFM.* until migration.",
+  "hooks": [
+    {
+      "name": "FMF.GAMEPLAY.JobCompleted",
+      "description": "Emitted when a job has been fully processed.",
+      "payloadSchema": {
+        "jobId": "string",
+        "durationSeconds": "number",
+        "revenue": "number"
+      }
+    },
+    {
+      "name": "FMF.SERVER.RackOverheated",
+      "description": "Server rack exceeded a critical temperature threshold.",
+      "payloadSchema": {
+        "rackId": "string",
+        "temperature": "number"
+      }
+    },
+    {
+      "name": "FMF.PLAYER.LevelUp",
+      "description": "Player progression level increased.",
+      "payloadSchema": {
+        "newLevel": "number",
+        "previousLevel": "number"
+      }
+    },
+    {
+      "name": "FMF.EMPLOYEE.Hired",
+      "description": "An employee was hired into the roster.",
+      "payloadSchema": {
+        "employeeId": "string",
+        "role": "string"
+      }
+    },
+    {
+      "name": "FMF.RACK.PowerLimitExceeded",
+      "description": "Power draw or allocation for a rack exceeded configured limits.",
+      "payloadSchema": {
+        "rackId": "string",
+        "watts": "number"
+      }
+    }
+  ]
+}
