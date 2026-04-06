@@ -7,9 +7,9 @@
 
 ### Zielgruppen
 
-- [EndUser](/wiki-import/EndUser/)
-- [ModDevs](/wiki-import/ModDevs/)
-- [Contributors](/wiki-import/Contributors/)
+- [EndUser](/wiki/wiki-import/EndUser/)
+- [ModDevs](/wiki/wiki-import/ModDevs/)
+- [Contributors](/wiki/wiki-import/Contributors/)
 - [Sponsoren](Sponsoren)
 - [Brief an WASEKU (Data Center)](Brief-an-WASEKU)
 
@@ -46,19 +46,19 @@
 
 ## Data Center FAQ
 
-- [Data Center FAQ](/wiki-import/DataCenterFAQ/)
+- [Data Center FAQ](/wiki/wiki-import/DataCenterFAQ/)
 
 ## Technische Referenz (Direktseiten)
 
-- [HOOKS (Quelle der Wahrheit)](/wiki-import/HOOKS)
+- [HOOKS (Quelle der Wahrheit)](/wiki/wiki-import/HOOKS)
 - [Setup](Setup)
-- [Architecture](/wiki-import/Architecture)
-- [Framework Features & Use Cases](/wiki-import/Framework-Features-Use-Cases)
+- [Architecture](/wiki/wiki-import/Architecture)
+- [Framework Features & Use Cases](/wiki/wiki-import/Framework-Features-Use-Cases)
 - [Framework Features & Use Cases EN](Framework-Features-Use-Cases-en)
-- [FFI Bridge Reference](/wiki-import/FFI-Bridge-Reference)
-- [Lua FFI Start Developing (DE+EN)](/wiki-import/Lua-FFI-Start-Developing)
-- [Mod Config System](/wiki-import/Mod-Config-System)
-- [Web UI Bridge (DC2WEB)](/wiki-import/Web-UI-Bridge)
+- [FFI Bridge Reference](/wiki/wiki-import/FFI-Bridge-Reference)
+- [Lua FFI Start Developing (DE+EN)](/wiki/wiki-import/Lua-FFI-Start-Developing)
+- [Mod Config System](/wiki/wiki-import/Mod-Config-System)
+- [Web UI Bridge (DC2WEB)](/wiki/wiki-import/Web-UI-Bridge)
 - [Web UI Bridge (DC2WEB) EN](Web-UI-Bridge-en)
 - [Modding Guide](ModDevs/Guides/Getting-Started)
 - [Modding Guide EN](ModDevs/Guides/Getting-Started-en)

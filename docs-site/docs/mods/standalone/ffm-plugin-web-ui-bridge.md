@@ -12,4 +12,4 @@ Focuses on standalone web UI bridge integration flows.
 ## Sources
 
 - Module path: `StandaloneMods/FFM.Plugin.WebUIBridge`
-- Reference: [`Web UI Bridge (DC2WEB)`](/wiki-import/Web-UI-Bridge)
+- Reference: [`Web UI Bridge (DC2WEB)`](/wiki/wiki-import/Web-UI-Bridge)

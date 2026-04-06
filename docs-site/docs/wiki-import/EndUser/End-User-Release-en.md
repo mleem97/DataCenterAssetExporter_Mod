@@ -10,7 +10,7 @@ tags:
 
 This page is for players who do **not** develop mods and only install FrikaMF because another mod depends on it.
 
-For a complete overview of framework capabilities and setup flows, see [`Framework Features & Use Cases`](/wiki-import/Framework-Features-Use-Cases).
+For a complete overview of framework capabilities and setup flows, see [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases).
 
 ## What you install
 

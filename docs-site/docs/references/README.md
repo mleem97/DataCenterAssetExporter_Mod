@@ -32,4 +32,4 @@ $gzip.Dispose(); $out.Dispose(); $in.Dispose()
 
 - Hook alias and reference tooling should read `.gz` directly when possible.
 - If plaintext is required, scripts should decompress on demand and avoid committing extracted `.txt` files.
-- Keep all reference artifacts in `docs/references/`.
+- Keep all reference artifacts in `docs/wiki/references/`.

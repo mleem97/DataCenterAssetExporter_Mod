@@ -2,4 +2,4 @@
 
 This page was moved to:
 
-- [EndUser/Index](/wiki-import/EndUser/)
+- [EndUser/Index](/wiki/wiki-import/EndUser/)

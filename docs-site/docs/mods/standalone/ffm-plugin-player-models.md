@@ -12,4 +12,4 @@ Hosts standalone player-model specific behavior and integration.
 ## Sources
 
 - Module path: `StandaloneMods/FFM.Plugin.PlayerModels`
-- Debug docs: [`Mod Developer Debug`](/wiki-import/Mod-Developer-Debug)
+- Debug docs: [`Mod Developer Debug`](/wiki/wiki-import/Mod-Developer-Debug)

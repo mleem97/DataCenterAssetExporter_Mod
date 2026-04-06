@@ -12,4 +12,4 @@ Contains standalone custom employee-related gameplay behavior.
 ## Sources
 
 - Module path: `StandaloneMods/FMF.GregifyEmployees`
-- HR context: [`Framework Features & Use Cases`](/wiki-import/Framework-Features-Use-Cases)
+- HR context: [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases)

@@ -12,4 +12,4 @@ Contains standalone multiplayer-oriented plugin functionality.
 ## Sources
 
 - Module path: `StandaloneMods/FFM.Plugin.Multiplayer`
-- Roadmap context: [`Steamworks P2P Multiplayer Roadmap`](/wiki-import/Steamworks-P2P-Multiplayer-Roadmap)
+- Roadmap context: [`Steamworks P2P Multiplayer Roadmap`](/wiki/wiki-import/Steamworks-P2P-Multiplayer-Roadmap)

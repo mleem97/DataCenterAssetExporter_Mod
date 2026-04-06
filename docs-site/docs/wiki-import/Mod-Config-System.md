@@ -200,8 +200,8 @@ namespace ExampleConfigMod
 
 ## Related links
 
-- [Framework Features & Use Cases](/wiki-import/Framework-Features-Use-Cases)
-- [FFI Bridge Reference](/wiki-import/FFI-Bridge-Reference)
+- [Framework Features & Use Cases](/wiki/wiki-import/Framework-Features-Use-Cases)
+- [FFI Bridge Reference](/wiki/wiki-import/FFI-Bridge-Reference)
 - [Mod-Developer (Debug)](Mod-Developer-Debug)
 - [Mod-Developer (Debug) EN](Mod-Developer-Debug-en)
 - [Contributors (Debug)](Contributors-Debug)

@@ -33,4 +33,4 @@ This section contains the first-party standalone modules currently maintained in
 
 ## Additional context
 
-- [`Standalone Mods` wiki page](/wiki-import/StandaloneMods)
+- [`Standalone Mods` wiki page](/wiki/wiki-import/StandaloneMods)
