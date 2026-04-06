@@ -15,6 +15,9 @@
 *.7z
 *.zip
 _tmp/
+# Vendored MelonLoader interop (run tools/refresh_refs.py; do not commit binaries)
+lib/references/MelonLoader/**/*.dll
+lib/references/.previous/
 [Ii]l2[Cc]pp-[Uu]npack/
 il2cpp-unpack/
 AssetUnpack.md
