@@ -37,7 +37,7 @@ Floating elements (Navigation, Tooltips) must use **Glassmorphism**.
 - **Formula:** `surface-container` at 80% opacity + `backdrop-filter: blur(12px)`.
 - **Signature Texture:** Primary CTAs must utilize a subtle linear gradient from `primary` (#61F4D8) to `primary-container` (#08C1A6) at a 135-degree angle. This prevents "flatness" and gives the button a machined, metallic quality.
 
-Implementation reference: `docs-site/src/css/custom.css` (`@theme` tokens, `.btn-primary`, `.glass-card`, `.navbar`).
+Implementation reference: `wiki/src/css/custom.css` (`@theme` tokens, `.btn-primary`, `.glass-card`, `.navbar`).
 
 ## 3. Typography: The Editorial Edge
 
@@ -94,4 +94,4 @@ We abandon the traditional drop-shadow. Depth is achieved via **Tonal Layering**
 
 ## 7. Token map (implementation)
 
-Semantic colors are defined as Tailwind v4 `@theme` variables in `docs-site/src/css/custom.css` (e.g. `--color-primary`, `--color-on-surface`, `--color-surface-container-low`). Prefer those utilities in React pages (`bg-background`, `text-on-surface`, `border-outline-variant/15`) so the site stays aligned with this spec.
+Semantic colors are defined as Tailwind v4 `@theme` variables in `wiki/src/css/custom.css` (e.g. `--color-primary`, `--color-on-surface`, `--color-surface-container-low`). Prefer those utilities in React pages (`bg-background`, `text-on-surface`, `border-outline-variant/15`) so the site stays aligned with this spec.

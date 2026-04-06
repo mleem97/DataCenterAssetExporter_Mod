@@ -21,7 +21,7 @@ This repository has migrated to an asynchronous, file-based task management syst
 
 ## 3b. Live-Sync and `lib/references/`
 
-This repository supports a **Live-Sync** workflow for *Data Center* updates: MelonLoader regenerates IL2CPP interop DLLs under the game install. After running `python tools/refresh_refs.py`, **`lib/references/MelonLoader/`** (when populated) is the **authoritative type surface** for AI-assisted C# edits and MSBuild (`FrikaMF.csproj` prefers it when `net6/MelonLoader.dll` exists). The live Steam game folder remains the runtime truth for executing the game. Use `tools/diff_assembly_metadata.py` to compare snapshots after updates.
+This repository supports a **Live-Sync** workflow for *Data Center* updates: MelonLoader regenerates IL2CPP interop DLLs under the game install. After running `python tools/refresh_refs.py`, **`lib/references/MelonLoader/`** (when populated) is the **authoritative type surface** for AI-assisted C# edits and MSBuild (`framework/FrikaMF.csproj` prefers it when `net6/MelonLoader.dll` exists). The live Steam game folder remains the runtime truth for executing the game. Use `tools/diff_assembly_metadata.py` to compare snapshots after updates.
 
 ## 4. AI Behavior: Auto-Sync & Maintenance
 All AI instances must treat this file as the absolute Single Source of Truth. If the user defines a new operational rule, coding standard, or workflow step, the Orchestrator AI is strictly mandated to revise these instructions and immediately mirror the updates to BOTH `.github/copilot-instructions.md` AND `.gemini/instructions.md`. Keep the workspace clean of obsolete prompts.

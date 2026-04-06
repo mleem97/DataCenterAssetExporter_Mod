@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.37111.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrikaMF", "FrikaMF.csproj", "{73B346A1-72BC-4F8C-BDAF-C2E88AB9CF69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrikaMF", "framework\FrikaMF.csproj", "{73B346A1-72BC-4F8C-BDAF-C2E88AB9CF69}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFM.Plugin.Multiplayer", "plugins\FFM.Plugin.Multiplayer\FFM.Plugin.Multiplayer.csproj", "{E6D8D7AD-8D3F-4B1B-97A4-5D6F8F2E0D21}"
 EndProject

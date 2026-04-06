@@ -15,14 +15,14 @@ For the complete and maintainable feature matrix with implementation use cases, 
 ## Dev setup
 
 ```powershell
-dotnet build .\FrikaMF.csproj -c Debug -nologo
+dotnet build .\framework\framework/FrikaMF.csproj -c Debug -nologo
 cargo build --release
 ```
 
 Optional game path override:
 
 ```powershell
-dotnet build .\FrikaMF.csproj /p:GameDir="C:\Path\To\Data Center"
+dotnet build .\framework\framework/FrikaMF.csproj /p:GameDir="C:\Path\To\Data Center"
 ```
 
 ## Add a new hook workflow

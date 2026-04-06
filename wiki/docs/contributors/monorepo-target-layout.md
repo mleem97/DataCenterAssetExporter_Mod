@@ -13,11 +13,11 @@ The repository **stays one Git repo**. The goal is **clear boundaries** between 
 
 | Top-level | Purpose |
 |-----------|---------|
-| `framework/` or keep root `FrikaMF` | Core MelonLoader framework assembly — exact extraction is optional if root layout is documented |
+| `framework/` | Core MelonLoader framework (`framework/FrikaMF.csproj`, `framework/FrikaMF/`, entry `Main.cs`) |
 | `mods/` | Gameplay mods (`FMF.Mod.*`, `FMF.*.dll` style) |
 | `plugins/` | FFM plugins (`FFM.Plugin.*`) |
-| `templates/` | Already exists — scaffolds only |
-| `docs-site/` | Docusaurus — **do not rename** without updating `baseUrl`, redirects, and CI |
+| `Templates/` | Scaffolds for new mods/plugins |
+| `wiki/` | Docusaurus site (product docs; route base `/wiki`) |
 | `tools/` | Repo maintenance: hook catalog generator, codegen stubs |
 | `scripts/` | Release automation (existing) |
 
@@ -38,7 +38,7 @@ flowchart LR
 |-------|--------|---------------|
 | **1** | Docs, `tools/`, naming wiki, hook catalog script | Docusaurus build green; script generates catalog |
 | **2** | `git mv` former `ModsAndPlugins/` → `mods/` / `plugins/` | Done — `.csproj` relative paths unchanged (depth preserved); CI/docs updated |
-| **3** | Optional: isolate framework sources under `framework/` | `dotnet build` for solution subset green |
+| **3** | Framework sources under `framework/` | Done — `FrikaMF.sln` points at `framework\framework/FrikaMF.csproj`; plugins reference `..\..\framework\framework/FrikaMF.csproj` |
 | **4** | CI matrix: docs + dotnet; `plugin-client-redirects` for old URLs | PR checks match local workflow |
 
 ## Path updates checklist (Phase 2 applied)
@@ -46,7 +46,7 @@ flowchart LR
 - [x] `FrikaMF.sln` project paths (`plugins\FFM.Plugin.*`)
 - [x] `.github/workflows` (CodeQL, release assets, Discord feed)
 - [x] Contributor docs and mod/plugin wiki pages (`Project Path` lines)
-- [ ] [`docs-site/docusaurus.config.js`](https://github.com/mleem97/gregFramework/blob/master/docs-site/docusaurus.config.js) redirects (only if public URLs must map old paths)
+- [ ] [`wiki/docusaurus.config.js`](https://github.com/mleem97/gregFramework/blob/master/wiki/docusaurus.config.js) redirects (only if public URLs must map old paths)
 - [ ] Historical wiki-import pages may still mention `StandaloneMods/` — update when editing those files
 
 ## Related

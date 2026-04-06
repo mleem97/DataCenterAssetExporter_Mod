@@ -60,7 +60,7 @@ function Invoke-DataCenterModDeploy {
     [CmdletBinding(SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
     param(
         [Parameter()]
-        [string]$ProjectPath = (Join-Path $script:DeployScriptRoot "..\FrikaMF.csproj"),
+        [string]$ProjectPath = (Join-Path $script:DeployScriptRoot "..\framework\FrikaMF.csproj"),
 
         [Parameter()]
         [ValidateSet('Debug', 'Release')]
@@ -212,7 +212,7 @@ function Invoke-Deploy {
     $isAll = $Target -in @('--all', 'all')
     $useFrika = $Target -in @('--1', '1', 'Frika')
 
-    $projectPaths = @((Join-Path $script:DeployScriptRoot '..\FrikaMF.csproj'))
+    $projectPaths = @((Join-Path $script:DeployScriptRoot '..\framework\FrikaMF.csproj'))
 
     $projectPaths = @($projectPaths)
 

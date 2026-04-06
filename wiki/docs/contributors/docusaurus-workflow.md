@@ -25,9 +25,9 @@ Short answer for a **public repo**: **not fully**.
 What you can do:
 
 - Keep generated output (`build/`, `.docusaurus/`, `node_modules/`) out of Git using `.gitignore`.
-- Put docs tooling under `docs-site/` so core runtime contributors can ignore it.
+- Put docs tooling under `wiki/` so core runtime contributors can ignore it.
 - Use path-based CODEOWNERS to limit review noise.
-- Trigger docs CI only on `docs-site/**` changes.
+- Trigger docs CI only on `wiki/**` changes.
 
 What you cannot do in a public repo:
 

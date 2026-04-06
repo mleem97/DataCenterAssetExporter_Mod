@@ -1,16 +1,16 @@
 ---
 description: Docusaurus docs site visual design — Luminescent Architect
 globs:
-  - docs-site/**/*
+  - wiki/**/*
 ---
 
 # Luminescent Architect (docs site)
 
 **Product branding** in Docusaurus (navbar title, `Layout` titles, `docusaurus.config.js` `title`) must stay **Frika Mod Framework** (project name). **Luminescent Architect** is only the visual design system codename (tokens, CSS, contributor doc).
 
-When changing UI, styling, or layout under `docs-site/`, follow the canonical spec:
+When changing UI, styling, or layout under `wiki/`, follow the canonical spec:
 
-- **Doc:** `docs-site/docs/contributors/luminescent-design-system.md` (also in the wiki sidebar under Contributors).
-- **Tokens & global CSS:** `docs-site/src/css/custom.css` (`@theme` color tokens, Infima overrides, `.btn-primary`, `.app-card`, navbar, sidebar).
+- **Doc:** `wiki/docs/contributors/luminescent-design-system.md` (also in the wiki sidebar under Contributors).
+- **Tokens & global CSS:** `wiki/src/css/custom.css` (`@theme` color tokens, Infima overrides, `.btn-primary`, `.app-card`, navbar, sidebar).
 
 Prefer semantic Tailwind utilities wired to those tokens (`bg-background`, `text-on-surface`, `text-on-surface-variant`, `border-outline-variant/15`, `font-headline`, `primary` / `secondary` / `tertiary` colors). Avoid raw greys and pure `#fff` for body text. Respect the no-line sectioning rule: separate regions with surface layers, not 1px rules.

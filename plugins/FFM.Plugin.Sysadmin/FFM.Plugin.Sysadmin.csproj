@@ -109,6 +109,6 @@
   </Target>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FrikaMF.csproj" />
+    <ProjectReference Include="..\..\framework\FrikaMF.csproj" />
   </ItemGroup>
 </Project>

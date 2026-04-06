@@ -9,10 +9,9 @@ description: Auto-generated catalog of hook strings and event id mappings from F
 
 # FMF hooks catalog
 
-This page is **generated** from `FrikaMF/HookNames.cs` and `FrikaMF/EventIds.cs`.
-Regenerate after hook changes: `./tools/Generate-FmfHookCatalog.ps1`
+This page is **generated** from `framework/FrikaMF/HookNames.cs` and `framework/FrikaMF/EventIds.cs`.
 
-**Generated:** 2026-04-06 14:05:47 UTC
+**Generated:** 2026-04-06 14:26:09 UTC
 
 ## Hook string constants
 
@@ -23,7 +22,7 @@ Regenerate after hook changes: `./tools/Generate-FmfHookCatalog.ps1`
 | ``CustomerSlaOnBreached`` | ``FFM.Customer.SLA.OnBreached`` |
 | ``CustomerSlaOnRestored`` | ``FFM.Customer.SLA.OnRestored`` |
 | ``EconomyBalanceOnChanged`` | ``FFM.Economy.Balance.OnChanged`` |
-| ``EmployeesStaffOnHired`` | ``FFM.Employees.Staff.OnHired`` |
+| ``EmployeesStaffOnHiredCustom`` | ``FFM.Employees.Staff.OnHired`` |
 | ``EmployeesStaffOnTerminatedCustom`` | ``FFM.Employees.Staff.OnTerminated`` |
 | ``FrameworkHooksOnBridgeInstalled`` | ``FFM.Framework.Hooks.OnBridgeInstalled`` |
 | ``FrameworkHooksOnBridgeTriggered`` | ``FFM.Framework.Hooks.OnBridgeTriggered`` |
@@ -49,7 +48,7 @@ Regenerate after hook changes: `./tools/Generate-FmfHookCatalog.ps1`
 | ``ObjectsRackOnRemoved`` | ``FFM.Objects.Rack.OnRemoved`` |
 | ``ObjectsServerOnClientAssigned`` | ``FFM.Objects.Server.OnClientAssigned`` |
 | ``ObjectsServerOnClientUnassigned`` | ``FFM.Objects.Server.OnClientUnassigned`` |
-| ``StoreCartOnCheckedOut`` | ``FFM.Store.Cart.OnCheckedOut`` |
+| ``StoreCartOnCheckedOutCleared`` | ``FFM.Store.Cart.OnCheckedOut`` |
 | ``StoreCartOnItemAdded`` | ``FFM.Store.Cart.OnItemAdded`` |
 | ``StoreCartOnItemRemoved`` | ``FFM.Store.Cart.OnItemRemoved`` |
 | ``WorldRoomOnExpanded`` | ``FFM.World.Room.OnExpanded`` |
@@ -106,5 +105,5 @@ Unknown event ids resolve to ``FFM.Framework.Unknown.OnEvent`` in `HookNames.Res
 ## See also
 
 - [FMF hook naming](./fmf-hook-naming.md)
-- [EventIds source](https://github.com/mleem97/gregFramework/blob/master/FrikaMF/EventIds.cs)
-- [HookNames source](https://github.com/mleem97/gregFramework/blob/master/FrikaMF/HookNames.cs)
+- [EventIds source](https://github.com/mleem97/gregFramework/blob/master/framework/FrikaMF/EventIds.cs)
+- [HookNames source](https://github.com/mleem97/gregFramework/blob/master/framework/FrikaMF/HookNames.cs)

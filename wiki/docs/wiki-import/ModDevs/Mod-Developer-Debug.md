@@ -74,14 +74,14 @@ Rust Mod (.dll)                         C# Mod (.dll)
 ### Build (Rust)
 
 ```powershell
-dotnet build .\FrikaMF.csproj /p:GameDir="C:\Pfad\zu\Data Center"
+dotnet build .\framework\framework/FrikaMF.csproj /p:GameDir="C:\Pfad\zu\Data Center"
 ```
 
 Alternative mit Umgebungsvariable:
 
 ```powershell
 $env:DATA_CENTER_GAME_DIR = "C:\Pfad\zu\Data Center"
-dotnet build .\FrikaMF.csproj
+dotnet build .\framework\framework/FrikaMF.csproj
 ```
 
 ### Minimaler C# Mod

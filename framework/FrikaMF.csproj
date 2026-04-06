@@ -13,12 +13,12 @@
 
   <PropertyGroup>
     <DefaultSteamGamePath>Program Files (x86)\Steam\steamapps\common\Data Center</DefaultSteamGamePath>
-    <FindDataCenterPathScript>$(MSBuildProjectDirectory)\scripts\Find-DataCenterPath.ps1</FindDataCenterPathScript>
+    <FindDataCenterPathScript>$(MSBuildProjectDirectory)\..\scripts\Find-DataCenterPath.ps1</FindDataCenterPathScript>
   </PropertyGroup>
 
   <Target Name="DetectGameDir" BeforeTargets="ResolveAssemblyReferences">
     <PropertyGroup>
-      <RepoMelonLoaderDir>$(MSBuildProjectDirectory)\lib\references\MelonLoader</RepoMelonLoaderDir>
+      <RepoMelonLoaderDir>$(MSBuildProjectDirectory)\..\lib\references\MelonLoader</RepoMelonLoaderDir>
     </PropertyGroup>
     <PropertyGroup Condition="'$(MelonLoaderDir)' == '' and Exists('$(RepoMelonLoaderDir)\net6\MelonLoader.dll')">
       <MelonLoaderDir>$(RepoMelonLoaderDir)</MelonLoaderDir>
@@ -261,30 +261,30 @@
   <ItemGroup>
     <Compile Remove="Main.cs" />
     <Compile Remove="Main.CI.cs" />
-    <Compile Remove="WorkshopUploader\**\*.cs" />
-    <Compile Remove="StandalonePlugins\**\*.cs" />
-    <Compile Remove="Templates\**\*.cs" />
+    <Compile Remove="..\WorkshopUploader\**\*.cs" />
+    <Compile Remove="..\StandalonePlugins\**\*.cs" />
+    <Compile Remove="..\Templates\**\*.cs" />
     <Compile Remove="FrikaMF\TestMods\FrameworkDependencyTest.cs" />
-    <Compile Remove="JoniML\**\*.cs" />
-    <Compile Remove="il2cpp-unpack\**\*.cs" />
-    <Compile Remove="References\il2cpp-unpack\**\*.cs" />
-    <Compile Remove="_tmp\**\*.cs" />
-    <Compile Remove=".bridge-sync\**\*.cs" />
+    <Compile Remove="..\JoniML\**\*.cs" />
+    <Compile Remove="..\il2cpp-unpack\**\*.cs" />
+    <Compile Remove="..\References\il2cpp-unpack\**\*.cs" />
+    <Compile Remove="..\_tmp\**\*.cs" />
+    <Compile Remove="..\.bridge-sync\**\*.cs" />
     <Compile Remove="**\obj\**\*.cs" />
     <Compile Remove="**\bin\**\*.cs" />
     <None Include="Main.cs" />
     <None Include="Main.CI.cs" />
-    <None Include="WorkshopUploader\**\*.cs" />
-    <None Include="StandalonePlugins\**\*.cs" />
+    <None Include="..\WorkshopUploader\**\*.cs" />
+    <None Include="..\StandalonePlugins\**\*.cs" />
     <None Include="FrikaMF\TestMods\FrameworkDependencyTest.cs" />
     <None Include="FrikaMF\DC2WebBridge.cs" />
     <None Include="FrikaMF\UiModernizer.cs" />
     <None Include="FrikaMF\ModSettingsMenuBridge.cs" />
-    <None Include="JoniML\**\*.cs" />
-    <None Include="il2cpp-unpack\**\*.cs" />
-    <None Include="References\il2cpp-unpack\**\*.cs" />
-    <None Include="_tmp\**\*.cs" />
-    <None Include=".bridge-sync\**\*.cs" />
+    <None Include="..\JoniML\**\*.cs" />
+    <None Include="..\il2cpp-unpack\**\*.cs" />
+    <None Include="..\References\il2cpp-unpack\**\*.cs" />
+    <None Include="..\_tmp\**\*.cs" />
+    <None Include="..\.bridge-sync\**\*.cs" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(CI)' == 'true'">
@@ -292,9 +292,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include=".github\copilot-instructions.md" />
-    <None Include=".github\workflows\commitlint.yml" />
-    <None Include=".github\workflows\dotnet-ci.yml" />
-    <None Include="scripts\Find-DataCenterPath.ps1" />
+    <None Include="..\.github\copilot-instructions.md" />
+    <None Include="..\.github\workflows\commitlint.yml" />
+    <None Include="..\.github\workflows\dotnet-ci.yml" />
+    <None Include="..\scripts\Find-DataCenterPath.ps1" />
   </ItemGroup>
 </Project>

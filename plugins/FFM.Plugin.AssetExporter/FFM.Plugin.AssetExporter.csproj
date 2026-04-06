@@ -93,24 +93,24 @@
   </Target>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FrikaMF.csproj" />
+    <ProjectReference Include="..\..\framework\FrikaMF.csproj" />
 
-    <Compile Include="..\..\Main.cs" Link="Main.cs" />
-    <Compile Include="..\..\Main.CI.cs" Link="Main.CI.cs" />
+    <Compile Include="..\..\framework\Main.cs" Link="Main.cs" />
+    <Compile Include="..\..\framework\Main.CI.cs" Link="Main.CI.cs" />
 
-    <Compile Include="..\..\FrikaMF\GameSignalSnapshotService.cs" Link="Services\GameSignalSnapshotService.cs" />
-    <Compile Include="..\..\FrikaMF\Il2CppEventCatalogService.cs" Link="Services\Il2CppEventCatalogService.cs" />
-    <Compile Include="..\..\FrikaMF\Il2CppGameplayIndexService.cs" Link="Services\Il2CppGameplayIndexService.cs" />
-    <Compile Include="..\..\FrikaMF\ModEventFramework.cs" Link="Framework\ModEventFramework.cs" />
-    <Compile Include="..\..\FrikaMF\RuntimeHookService.cs" Link="Services\RuntimeHookService.cs" />
-    <Compile Include="..\..\FrikaMF\TestMods\FrameworkDependencyTest.cs" Link="TestMods\FrameworkDependencyTest.cs" />
+    <Compile Include="..\..\framework\FrikaMF\GameSignalSnapshotService.cs" Link="Services\GameSignalSnapshotService.cs" />
+    <Compile Include="..\..\framework\FrikaMF\Il2CppEventCatalogService.cs" Link="Services\Il2CppEventCatalogService.cs" />
+    <Compile Include="..\..\framework\FrikaMF\Il2CppGameplayIndexService.cs" Link="Services\Il2CppGameplayIndexService.cs" />
+    <Compile Include="..\..\framework\FrikaMF\ModEventFramework.cs" Link="Framework\ModEventFramework.cs" />
+    <Compile Include="..\..\framework\FrikaMF\RuntimeHookService.cs" Link="Services\RuntimeHookService.cs" />
+    <Compile Include="..\..\framework\FrikaMF\TestMods\FrameworkDependencyTest.cs" Link="TestMods\FrameworkDependencyTest.cs" />
 
-    <Compile Include="..\..\FrikaMF\Events\ErrorEvents.cs" Link="Events\ErrorEvents.cs" />
-    <Compile Include="..\..\FrikaMF\Events\ExportEvents.cs" Link="Events\ExportEvents.cs" />
-    <Compile Include="..\..\FrikaMF\Events\HookEvents.cs" Link="Events\HookEvents.cs" />
-    <Compile Include="..\..\FrikaMF\Events\Il2CppCatalogEvents.cs" Link="Events\Il2CppCatalogEvents.cs" />
-    <Compile Include="..\..\FrikaMF\Events\IModEvent.cs" Link="Events\IModEvent.cs" />
-    <Compile Include="..\..\FrikaMF\Events\ModLifecycleEvents.cs" Link="Events\ModLifecycleEvents.cs" />
-    <Compile Include="..\..\FrikaMF\Events\ToggleEvents.cs" Link="Events\ToggleEvents.cs" />
+    <Compile Include="..\..\framework\FrikaMF\Events\ErrorEvents.cs" Link="Events\ErrorEvents.cs" />
+    <Compile Include="..\..\framework\FrikaMF\Events\ExportEvents.cs" Link="Events\ExportEvents.cs" />
+    <Compile Include="..\..\framework\FrikaMF\Events\HookEvents.cs" Link="Events\HookEvents.cs" />
+    <Compile Include="..\..\framework\FrikaMF\Events\Il2CppCatalogEvents.cs" Link="Events\Il2CppCatalogEvents.cs" />
+    <Compile Include="..\..\framework\FrikaMF\Events\IModEvent.cs" Link="Events\IModEvent.cs" />
+    <Compile Include="..\..\framework\FrikaMF\Events\ModLifecycleEvents.cs" Link="Events\ModLifecycleEvents.cs" />
+    <Compile Include="..\..\framework\FrikaMF\Events\ToggleEvents.cs" Link="Events\ToggleEvents.cs" />
   </ItemGroup>
 </Project>

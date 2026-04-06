@@ -32,7 +32,7 @@ pwsh -ExecutionPolicy Bypass -File .\scripts\Sync-RustBridge.ps1 -Mode staged
 1. Build locally:
 
 ```sh
-dotnet build FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo
+dotnet build framework/FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo
 ```
 
 1. Validate functionality (hotkeys `F8`, `F9`, `F10`).

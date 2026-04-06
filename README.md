@@ -27,6 +27,18 @@
 - Content packs: `Data Center/Data Center_Data/StreamingAssets/Mods`
 - Optional Workshop tool (see `WorkshopUploader/README.md`): `Data Center/WorkshopUploader/`
 
+## Repository layout (contributors)
+
+| Area | Path |
+|------|------|
+| Framework (MelonLoader mod + bridge) | `framework/` — build `framework/FrikaMF.csproj` or `FrikaMF.sln` |
+| Public docs site (Docusaurus) | `wiki/` — `npm install` / `npm run build` inside `wiki/` |
+| Gameplay mods | `mods/` — e.g. `mods/FMF.Mod.HexLabelMod/` |
+| FFM plugins | `plugins/` — e.g. `plugins/FFM.Plugin.AssetExporter/` |
+| Templates & tooling | `Templates/`, `tools/`, `scripts/` |
+
+Legacy GitHub Wiki sources remain under `.wiki/`; the browsable site is built from `wiki/`.
+
 ## Developer tooling (Live-Sync)
 
 - `python tools/refresh_refs.py` — copy MelonLoader interop DLLs into `lib/references/` for MSBuild and AI workflows.
