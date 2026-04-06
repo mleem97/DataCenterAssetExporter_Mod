@@ -27,7 +27,7 @@ This project uses **two complementary channels** for distributing mods and plugi
 | Need | Where |
 |------|--------|
 | Wiki entry for a module | `/wiki/mods/...` |
-| Download link (when configured) | GitHub Releases asset or redirect from [`moduleCatalog`](https://github.com/mleem97/gregFramework/blob/master/docs-site/src/data/moduleCatalog.ts) |
+| Download link (when configured) | GitHub Releases asset or redirect from [`moduleCatalog`](https://github.com/mleem97/gregFramework/blob/master/wiki/src/data/moduleCatalog.ts) |
 | Catalog overview | [`/mods`](/mods) |
 
 ## Maintainer checklist

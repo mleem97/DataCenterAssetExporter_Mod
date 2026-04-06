@@ -56,7 +56,7 @@ jobs:
       - name: Restore
         shell: pwsh
         run: |
-          dotnet restore .\FrikaMF.csproj
+          dotnet restore .\framework\FrikaMF.csproj
           dotnet restore .\mods\FMF.Mod.HexLabelMod\FMF.HexLabelMod.csproj
           dotnet restore .\mods\FMF.Plugin.LangCompatBridge\FMF.JoniMLCompatMod.csproj
           dotnet restore .\mods\FMF.Mod.GregifyEmployees\FMF.GregifyEmployees.csproj
@@ -64,7 +64,7 @@ jobs:
       - name: Build release DLLs
         shell: pwsh
         run: |
-          dotnet build .\FrikaMF.csproj -c Release --no-restore
+          dotnet build .\framework\FrikaMF.csproj -c Release --no-restore
           dotnet build .\mods\FMF.Mod.HexLabelMod\FMF.HexLabelMod.csproj -c Release --no-restore
           dotnet build .\mods\FMF.Plugin.LangCompatBridge\FMF.JoniMLCompatMod.csproj -c Release --no-restore
           dotnet build .\mods\FMF.Mod.GregifyEmployees\FMF.GregifyEmployees.csproj -c Release --no-restore
@@ -77,7 +77,7 @@ jobs:
           New-Item -ItemType Directory -Path $outDir -Force | Out-Null
 
           $files = @(
-            ".\bin\Release\net6.0\FrikaModdingFramework.dll",
+            ".\framework\bin\Release\net6.0\FrikaModdingFramework.dll",
             ".\mods\FMF.Mod.HexLabelMod\bin\Release\net6.0\FMF.HexLabelMod.dll",
             ".\mods\FMF.Plugin.LangCompatBridge\bin\Release\net6.0\FMF.JoniMLCompatMod.dll",
             ".\mods\FMF.Mod.GregifyEmployees\bin\Release\net6.0\FMF.GregifyEmployees.dll"

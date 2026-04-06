@@ -190,13 +190,13 @@ function Publish-LocalRelease {
         }
 
         if (-not $SkipBuild) {
-            dotnet build .\FrikaMF.csproj -c $Configuration -p:TreatWarningsAsErrors=true -nologo
+            dotnet build .\framework\FrikaMF.csproj -c $Configuration -p:TreatWarningsAsErrors=true -nologo
             if ($LASTEXITCODE -ne 0) {
                 throw "FrikaMF build failed with exit code $LASTEXITCODE"
             }
         }
 
-        $frameworkDll = Join-Path $script:RepoRoot ("bin\$Configuration\net6.0\FrikaModdingFramework.dll")
+        $frameworkDll = Join-Path $script:RepoRoot ("framework\bin\$Configuration\net6.0\FrikaModdingFramework.dll")
 
         if (-not (Test-Path -LiteralPath $frameworkDll)) {
             throw "Missing framework DLL: $frameworkDll"

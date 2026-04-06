@@ -1,7 +1,7 @@
 #requires -Version 5.1
 <#
 .SYNOPSIS
-  Regenerates docs-site/docs/reference/fmf-hooks-catalog.md from FrikaMF HookNames.cs and EventIds.cs
+  Regenerates wiki/docs/reference/fmf-hooks-catalog.md from framework FrikaMF HookNames.cs and EventIds.cs
 #>
 param(
     [switch]$SkipChangelogNote
@@ -12,9 +12,9 @@ $ErrorActionPreference = 'Stop'
 
 $scriptRoot = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Parent $PSCommandPath }
 $repoRoot = Resolve-Path (Join-Path $scriptRoot '..')
-$hookNamesPath = Join-Path $repoRoot 'FrikaMF/HookNames.cs'
-$eventIdsPath = Join-Path $repoRoot 'FrikaMF/EventIds.cs'
-$outPath = Join-Path $repoRoot 'docs-site/docs/reference/fmf-hooks-catalog.md'
+$hookNamesPath = Join-Path $repoRoot 'framework/FrikaMF/HookNames.cs'
+$eventIdsPath = Join-Path $repoRoot 'framework/FrikaMF/EventIds.cs'
+$outPath = Join-Path $repoRoot 'wiki/docs/reference/fmf-hooks-catalog.md'
 
 if (-not (Test-Path -LiteralPath $hookNamesPath)) {
     throw "Not found: $hookNamesPath"
@@ -69,7 +69,7 @@ $sb = [System.Text.StringBuilder]::new()
 [void]$sb.AppendLine('')
 [void]$sb.AppendLine('# FMF hooks catalog')
 [void]$sb.AppendLine('')
-[void]$sb.AppendLine('This page is **generated** from `FrikaMF/HookNames.cs` and `FrikaMF/EventIds.cs`.')
+[void]$sb.AppendLine('This page is **generated** from `framework/FrikaMF/HookNames.cs` and `framework/FrikaMF/EventIds.cs`.')
 if (-not $SkipChangelogNote) {
     [void]$sb.AppendLine('Regenerate after hook changes: `./tools/Generate-FmfHookCatalog.ps1`')
 }
@@ -111,8 +111,8 @@ foreach ($evName in ($idToField.Keys | Sort-Object)) {
 [void]$sb.AppendLine('## See also')
 [void]$sb.AppendLine('')
 [void]$sb.AppendLine('- [FMF hook naming](./fmf-hook-naming.md)')
-[void]$sb.AppendLine('- [EventIds source](https://github.com/mleem97/gregFramework/blob/master/FrikaMF/EventIds.cs)')
-[void]$sb.AppendLine('- [HookNames source](https://github.com/mleem97/gregFramework/blob/master/FrikaMF/HookNames.cs)')
+[void]$sb.AppendLine('- [EventIds source](https://github.com/mleem97/gregFramework/blob/master/framework/FrikaMF/EventIds.cs)')
+[void]$sb.AppendLine('- [HookNames source](https://github.com/mleem97/gregFramework/blob/master/framework/FrikaMF/HookNames.cs)')
 
 $utf8NoBom = New-Object System.Text.UTF8Encoding $false
 [System.IO.File]::WriteAllText($outPath, $sb.ToString(), $utf8NoBom)

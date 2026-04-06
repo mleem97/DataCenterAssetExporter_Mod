@@ -2,10 +2,10 @@
 
 ## `Generate-FmfHookCatalog.ps1`
 
-Generates the Docusaurus page [`docs-site/docs/reference/fmf-hooks-catalog.md`](../docs-site/docs/reference/fmf-hooks-catalog.md) from:
+Generates the Docusaurus page [`wiki/docs/reference/fmf-hooks-catalog.md`](../wiki/docs/reference/fmf-hooks-catalog.md) from:
 
-- `FrikaMF/HookNames.cs` — string literals and `EventId` → hook mappings
-- `FrikaMF/EventIds.cs` — numeric event id constants
+- `framework/FrikaMF/HookNames.cs` — string literals and `EventId` → hook mappings
+- `framework/FrikaMF/EventIds.cs` — numeric event id constants
 
 Run from repo root:
 

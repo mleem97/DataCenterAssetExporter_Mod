@@ -137,8 +137,8 @@ Use `-WhatIf` for dry-run validation.
 Build from repository root:
 
 ```powershell
-dotnet build .\FrikaMF.csproj -c Debug
-dotnet build .\FrikaMF.csproj -c Release
+dotnet build .\framework\framework/FrikaMF.csproj -c Debug
+dotnet build .\framework\framework/FrikaMF.csproj -c Release
 ```
 
 Main outputs:

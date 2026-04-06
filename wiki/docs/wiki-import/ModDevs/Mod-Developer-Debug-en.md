@@ -56,7 +56,7 @@ Rust Mod (.dll)                         C# Mod (.dll)
 ## C# track quick start
 
 ```powershell
-dotnet build .\FrikaMF.csproj /p:GameDir="C:\Path\To\Data Center"
+dotnet build .\framework\framework/FrikaMF.csproj /p:GameDir="C:\Path\To\Data Center"
 ```
 
 ```csharp

@@ -16,22 +16,22 @@ Before the first framework build, run the game once with MelonLoader. This gener
 ## Quick setup (maintainer path)
 
 ```powershell
-dotnet restore .\FrikaMF.csproj
-dotnet build .\FrikaMF.csproj -c Debug -nologo
-dotnet build .\FrikaMF.csproj -c Release -nologo
+dotnet restore .\framework\framework/FrikaMF.csproj
+dotnet build .\framework\framework/FrikaMF.csproj -c Debug -nologo
+dotnet build .\framework\framework/FrikaMF.csproj -c Release -nologo
 ```
 
 If your game is not installed in the default path, set the game directory explicitly:
 
 ```powershell
-dotnet build .\FrikaMF.csproj -c Debug -p:GameDir="D:\Games\Data Center"
+dotnet build .\framework\framework/FrikaMF.csproj -c Debug -p:GameDir="D:\Games\Data Center"
 ```
 
 Alternative via environment variable:
 
 ```powershell
 $env:DATA_CENTER_GAME_DIR = "D:\Games\Data Center"
-dotnet build .\FrikaMF.csproj -c Debug
+dotnet build .\framework\framework/FrikaMF.csproj -c Debug
 ```
 
 Important: after installing MelonLoader, launch the game once so `MelonLoader\Il2CppAssemblies` is generated.

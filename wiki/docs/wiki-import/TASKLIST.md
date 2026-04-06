@@ -124,7 +124,7 @@
 
 - Status: `todo`
 - Priority: `P0`
-- Area: `FrikaMF.csproj`
+- Area: `framework/FrikaMF.csproj`
 - Tasks:
   - Ensure generated decompiled sources under `References/il2cpp-unpack` are excluded from `Compile`.
   - Ensure generated files are tracked as `None` only.
@@ -136,7 +136,7 @@
 - Status: `todo`
 - Priority: `P0`
 - Tasks:
-  - Run `dotnet build .\\FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo`.
+  - Run `dotnet build .\\framework\\framework/FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo`.
 - Definition of Done:
   - Both builds pass with current local exports.
 
@@ -381,7 +381,7 @@
 - Status: `todo`
 - Priority: `P0`
 - Checklist:
-  - `dotnet build .\FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo`
+  - `dotnet build .\framework\framework/FrikaMF.csproj -c Release -p:TreatWarningsAsErrors=true -nologo`
   - Test valid object pack load
   - Test invalid pack (missing model)
   - Test invalid values (bad collider/scale)

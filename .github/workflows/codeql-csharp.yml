@@ -38,7 +38,7 @@ jobs:
           $ErrorActionPreference = 'Stop'
 
           $projects = @(
-            'FrikaMF.csproj',
+            'framework/FrikaMF.csproj',
             'References/il2cpp-unpack/Assembly-CSharp/Assembly-CSharp.csproj',
             'mods/FMF.Mod.HexLabelMod/FMF.HexLabelMod.csproj',
             'mods/FMF.Mod.GregifyEmployees/FMF.GregifyEmployees.csproj',

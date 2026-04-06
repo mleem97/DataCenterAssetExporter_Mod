@@ -24,14 +24,14 @@ Für die vollständige, laufend zu pflegende Feature-Matrix mit Implementierungs
 ### Build-Kommandos
 
 ```powershell
-dotnet build .\FrikaMF.csproj -c Debug -nologo
+dotnet build .\framework\framework/FrikaMF.csproj -c Debug -nologo
 cargo build --release
 ```
 
 Mit explizitem Spielpfad:
 
 ```powershell
-dotnet build .\FrikaMF.csproj /p:GameDir="C:\Pfad\zu\Data Center"
+dotnet build .\framework\framework/FrikaMF.csproj /p:GameDir="C:\Pfad\zu\Data Center"
 ```
 
 ## Projektstruktur (kurz erklärt)
@@ -119,7 +119,7 @@ Contribution guidance:
 ## CI-Pipeline (warum Builds in CI anders sind)
 
 - CI läuft ohne lokale Spielinstallation.
-- In `FrikaMF.csproj` wird `$(CI)=true` verwendet, um lokale Referenzvalidierung zu überspringen.
+- In `framework/FrikaMF.csproj` wird `$(CI)=true` verwendet, um lokale Referenzvalidierung zu überspringen.
 - Lokal gilt: ohne erzeugte MelonLoader-/Interop-Dateien scheitert der Build absichtlich mit klarer Fehlermeldung.
 
 ## PR-Checkliste

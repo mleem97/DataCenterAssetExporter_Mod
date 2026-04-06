@@ -101,14 +101,14 @@ jobs:
             if (hasMatch([
               /^mods\//,
               /^plugins\//,
-              /^docs-site\/docs\/mods\/standalone\//,
+              /^wiki\/docs\/mods\/standalone\//,
               /^Templates\/StandaloneModTemplate\//
             ])) {
               updateTypes.push('Plugin Update');
             }
 
             if (hasMatch([
-              /^docs-site\/docs\/mods\//,
+              /^wiki\/docs\/mods\//,
               /^Data Center\/Mods\//,
               /^Data Center_Data\/StreamingAssets\/Mods\//
             ])) {
@@ -116,8 +116,8 @@ jobs:
             }
 
             if (hasMatch([
-              /^docs-site\/docs\/wiki\//,
-              /^docs-site\/docs\/wiki-import\//,
+              /^wiki\/docs\/wiki\//,
+              /^wiki\/docs\/wiki-import\//,
               /^docs\/wiki\//,
               /^\.wiki\//,
               /^README\.md$/,

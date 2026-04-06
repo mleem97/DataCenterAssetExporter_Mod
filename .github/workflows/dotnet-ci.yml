@@ -126,10 +126,10 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Restore dependencies
-        run: dotnet restore FrikaMF.csproj
+        run: dotnet restore framework/FrikaMF.csproj
 
       - name: Build (${{ matrix.configuration }})
-        run: dotnet build FrikaMF.csproj --configuration ${{ matrix.configuration }} --no-restore
+        run: dotnet build framework/FrikaMF.csproj --configuration ${{ matrix.configuration }} --no-restore
 
   build-hosted-fallback:
     runs-on: ubuntu-latest
@@ -151,10 +151,10 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Restore dependencies
-        run: dotnet restore FrikaMF.csproj
+        run: dotnet restore framework/FrikaMF.csproj
 
       - name: Build (${{ matrix.configuration }})
-        run: dotnet build FrikaMF.csproj --configuration ${{ matrix.configuration }} --no-restore
+        run: dotnet build framework/FrikaMF.csproj --configuration ${{ matrix.configuration }} --no-restore
 
   notify-status:
     runs-on: ubuntu-latest
