@@ -12,7 +12,7 @@ The core `FrikaMF` runtime provides:
 
 ## Core references
 
-- [`Framework Features & Use Cases`](/wiki-import/Framework-Features-Use-Cases)
-- [`HOOKS`](/wiki-import/HOOKS)
-- [`FFI Bridge Reference`](/wiki-import/FFI-Bridge-Reference)
-- [`Mod Developer Debug`](/wiki-import/Mod-Developer-Debug)
+- [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases)
+- [`HOOKS`](/wiki/wiki-import/HOOKS)
+- [`FFI Bridge Reference`](/wiki/wiki-import/FFI-Bridge-Reference)
+- [`Mod Developer Debug`](/wiki/wiki-import/Mod-Developer-Debug)

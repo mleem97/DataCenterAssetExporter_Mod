@@ -48,7 +48,7 @@ const config = {
       '@docusaurus/plugin-client-redirects',
       {
         createRedirects(existingPath) {
-          if (existingPath === '/wiki') {
+          if (existingPath === '/wiki/docs') {
             return ['/docs'];
           }
 
@@ -65,7 +65,7 @@ const config = {
             from: ['/framework'],
           },
           {
-            to: '/wiki/mods/plugins',
+            to: '/wiki/mods/plugins/',
             from: ['/plugins', '/standalone-mods'],
           },
           {

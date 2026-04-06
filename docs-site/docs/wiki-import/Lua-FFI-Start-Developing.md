@@ -476,7 +476,7 @@ end
 
 ## Related links
 
-- [FFI Bridge Reference](/wiki-import/FFI-Bridge-Reference)
+- [FFI Bridge Reference](/wiki/wiki-import/FFI-Bridge-Reference)
 - [Modding Guide](Modding-Guide)
 - [Mod-Developer (Debug)](Mod-Developer-Debug)
-- [Framework Features & Use Cases](/wiki-import/Framework-Features-Use-Cases)
+- [Framework Features & Use Cases](/wiki/wiki-import/Framework-Features-Use-Cases)

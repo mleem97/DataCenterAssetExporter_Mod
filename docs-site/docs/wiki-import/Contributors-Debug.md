@@ -2,4 +2,4 @@
 
 Diese Seite wurde verschoben nach:
 
-- [Contributors/Index](/wiki-import/Contributors/)
+- [Contributors/Index](/wiki/wiki-import/Contributors/)

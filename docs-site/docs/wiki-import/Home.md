@@ -20,17 +20,17 @@ FrikaMF ist ein inoffizielles, community-getriebenes Modding-Framework für das 
 
 ## Zielgruppen-Navigation
 
-- 🚀 **Ich will Mods nutzen:** [EndUser](/wiki-import/EndUser/)
-- 🛠️ **Ich will Mods bauen:** [ModDevs](/wiki-import/ModDevs/)
-- 🤝 **Ich will contributen:** [Contributors](/wiki-import/Contributors/)
+- 🚀 **Ich will Mods nutzen:** [EndUser](/wiki/wiki-import/EndUser/)
+- 🛠️ **Ich will Mods bauen:** [ModDevs](/wiki/wiki-import/ModDevs/)
+- 🤝 **Ich will contributen:** [Contributors](/wiki/wiki-import/Contributors/)
 - 💖 **Ich will sponsoren:** [Sponsoren](Sponsoren)
 
 ## Schnelle Orientierung
 
-- Hook-Quelle der Wahrheit: [`HOOKS.md`](/wiki-import/HOOKS)
+- Hook-Quelle der Wahrheit: [`HOOKS.md`](/wiki/wiki-import/HOOKS)
 - Versionen/Release-Historie: [Changelog & Versionen](Changelog-Versionen)
 - Spielpatch-Probleme: [Bekannte Inkompatibilitäten](Bekannte-Inkompatibilitaeten)
-- Vanilla-FAQ: [Data Center FAQ](/wiki-import/DataCenterFAQ/)
+- Vanilla-FAQ: [Data Center FAQ](/wiki/wiki-import/DataCenterFAQ/)
 - Begriffe & Grundlagen: [Glossar](Glossar)
 - Rechtliches: [Lizenz & Rechtliches](Lizenz-Rechtliches)
 - AI-Richtlinie: [AI Usage Policy](AI-USAGE)
@@ -49,10 +49,10 @@ FrikaMF ist ein inoffizielles, community-getriebenes Modding-Framework für das 
 
 ## Technische Referenz (Direktlinks)
 
-- [Framework Features & Use Cases](/wiki-import/Framework-Features-Use-Cases)
-- [FFI Bridge Reference](/wiki-import/FFI-Bridge-Reference)
-- [Lua FFI Start Developing (DE+EN)](/wiki-import/Lua-FFI-Start-Developing)
-- [Web UI Bridge (DC2WEB)](/wiki-import/Web-UI-Bridge)
+- [Framework Features & Use Cases](/wiki/wiki-import/Framework-Features-Use-Cases)
+- [FFI Bridge Reference](/wiki/wiki-import/FFI-Bridge-Reference)
+- [Lua FFI Start Developing (DE+EN)](/wiki/wiki-import/Lua-FFI-Start-Developing)
+- [Web UI Bridge (DC2WEB)](/wiki/wiki-import/Web-UI-Bridge)
 - [Modding Guide](ModDevs/Guides/Getting-Started)
-- [Architecture](/wiki-import/Architecture)
+- [Architecture](/wiki/wiki-import/Architecture)
 - [Setup](Setup)

@@ -40,11 +40,10 @@ jobs:
           $projects = @(
             'FrikaMF.csproj',
             'References/il2cpp-unpack/Assembly-CSharp/Assembly-CSharp.csproj',
-            'StandaloneMods/FMF.UIReplacementMod/FMF.UIReplacementMod.csproj',
-            'StandaloneMods/FMF.JoniMLCompatMod/FMF.JoniMLCompatMod.csproj',
-            'StandaloneMods/FMF.HexLabelMod/FMF.HexLabelMod.csproj',
-            'StandaloneMods/FMF.GregifyEmployees/FMF.GregifyEmployees.csproj',
-            'StandaloneMods/FMF.ConsoleInputGuard/FMF.ConsoleInputGuard.csproj',
+            'ModsAndPlugins/FMF.Mod.HexLabelMod/FMF.HexLabelMod.csproj',
+            'ModsAndPlugins/FMF.Mod.GregifyEmployees/FMF.GregifyEmployees.csproj',
+            'ModsAndPlugins/FMF.ConsoleInputGuard/FMF.ConsoleInputGuard.csproj',
+            'ModsAndPlugins/FMF.Plugin.LangCompatBridge/FMF.JoniMLCompatMod.csproj',
             'Templates/StandaloneModTemplate/StandaloneModTemplate.csproj'
           )
 
@@ -71,10 +70,6 @@ jobs:
               '--no-restore',
               '/p:CI=true'
             )
-
-            if ($project -like '*FMF.UIReplacementMod.csproj') {
-              $buildArgs += '/p:EnableReactBuildOnBuild=false'
-            }
 
             try {
               dotnet @buildArgs

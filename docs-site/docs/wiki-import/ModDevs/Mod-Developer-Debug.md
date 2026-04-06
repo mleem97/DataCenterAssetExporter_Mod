@@ -10,7 +10,7 @@ tags:
 
 Diese Seite richtet sich an Entwickler, die eigene Mods auf Basis von FrikaMF bauen.
 
-Vollständiger Framework-Funktionskatalog inkl. Use-Case-Anleitungen: [`Framework Features & Use Cases`](/wiki-import/Framework-Features-Use-Cases).
+Vollständiger Framework-Funktionskatalog inkl. Use-Case-Anleitungen: [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases).
 
 ## Kurz gesagt
 
@@ -46,7 +46,7 @@ Empfohlener Weg:
 
 Für vollständige DE/EN Schritt-für-Schritt Tutorials pro FFI-Einstiegspunkt siehe:
 
-- [Lua FFI — How to Start Developing (DE + EN)](/wiki-import/Lua-FFI-Start-Developing)
+- [Lua FFI — How to Start Developing (DE + EN)](/wiki/wiki-import/Lua-FFI-Start-Developing)
 
 ## Architekturüberblick
 
@@ -194,9 +194,9 @@ Unterstützte Bildtypen:
 - SVG (bevorzugt, zur Laufzeit rasterisiert)
 - PNG, JPG/JPEG, BMP, GIF, TGA
 
-Details: [`Web UI Bridge (DC2WEB)`](/wiki-import/Web-UI-Bridge)
+Details: [`Web UI Bridge (DC2WEB)`](/wiki/wiki-import/Web-UI-Bridge)
 
-Konfigurations-API: [`Mod Config System`](/wiki-import/Mod-Config-System)
+Konfigurations-API: [`Mod Config System`](/wiki/wiki-import/Mod-Config-System)
 
 ## Web FFI vs. Web UI (wichtig)
 

@@ -8,4 +8,4 @@
 ## Policies
 
 - [AI Usage Policy (Wiki)](../../AI-USAGE)
-- [AI Usage Policy (Root)](/wiki-import/AI-USAGE)
+- [AI Usage Policy (Root)](/wiki/wiki-import/AI-USAGE)

@@ -10,7 +10,7 @@ tags:
 
 This page is for contributors working on FrikaMF itself.
 
-For the complete and maintainable feature matrix with implementation use cases, see [`Framework Features & Use Cases`](/wiki-import/Framework-Features-Use-Cases).
+For the complete and maintainable feature matrix with implementation use cases, see [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases).
 
 ## Dev setup
 

@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "docusaurus start --host 0.0.0.0 --port 3000",
+    "dev": "docusaurus clear && docusaurus build && docusaurus start --host 0.0.0.0 --port 3000",
     "start": "docusaurus start --host 0.0.0.0 --port 3000",
     "build": "docusaurus build",
+    
     "serve": "docusaurus serve",
     "clear": "docusaurus clear",
     "wiki:sync": "node ./scripts/sync-wiki-to-docs.mjs"

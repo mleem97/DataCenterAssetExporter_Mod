@@ -12,4 +12,4 @@ Provides export-focused tooling for asset-related workflows.
 ## Sources
 
 - Module path: `StandaloneMods/FFM.Plugin.AssetExporter`
-- Overview: [`Standalone Mods`](/wiki-import/StandaloneMods)
+- Overview: [`Standalone Mods`](/wiki/wiki-import/StandaloneMods)

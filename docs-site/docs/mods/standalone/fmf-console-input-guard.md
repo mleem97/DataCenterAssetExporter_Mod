@@ -12,4 +12,4 @@ Provides guardrails around console input handling.
 ## Sources
 
 - Module path: `StandaloneMods/FMF.ConsoleInputGuard`
-- Overview: [`Standalone Mods`](/wiki-import/StandaloneMods)
+- Overview: [`Standalone Mods`](/wiki/wiki-import/StandaloneMods)

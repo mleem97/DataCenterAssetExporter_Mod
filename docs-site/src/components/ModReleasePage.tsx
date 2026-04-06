@@ -40,6 +40,9 @@ export default function ModReleasePage({
   const downloadPath = `/${kind}/${dllName}`;
   const downloadUrl =
     typeof window !== 'undefined' ? new URL(downloadPath, window.location.origin).toString() : downloadPath;
+  const normalizedReleaseNotesPath = releaseNotesPath?.startsWith('/mods/')
+    ? `/wiki${releaseNotesPath}`
+    : releaseNotesPath;
 
   return (
     <div className="mod-release-page">
@@ -99,8 +102,8 @@ export default function ModReleasePage({
               </button>
             )}
 
-            {releaseNotesPath ? (
-              <Link className="button button--secondary button--sm mod-release-secondary-btn" to={releaseNotesPath}>
+            {normalizedReleaseNotesPath ? (
+              <Link className="button button--secondary button--sm mod-release-secondary-btn" to={normalizedReleaseNotesPath}>
                 <Translate id="modRelease.releaseNotesButton">Open module docs</Translate>
               </Link>
             ) : null}
