@@ -440,3 +440,14 @@ References/UI-Images/20260403201650_1.jpg
 References/UI-Images/20260403201650_2.jpg
 References/UI-Images/20260403201651_1.jpg
 Refactoring.md
+
+# Local secrets and environment (never commit real credentials)
+.env
+.env.*
+!.env.example
+
+# One-off filter-repo helper (if recreated locally)
+_filter_repo_replacements.txt
+
+# Local MCP server experiments (keep package.json; ignore install tree)
+mcp-server/node_modules/
