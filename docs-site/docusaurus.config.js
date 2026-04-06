@@ -13,6 +13,15 @@ const config = {
     },
   },
   scripts: ['/js/canonical-host.js'],
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0',
+      },
+    },
+  ],
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'de', 'fr', 'es', 'ru', 'ja'],
