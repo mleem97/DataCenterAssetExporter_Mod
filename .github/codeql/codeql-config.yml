@@ -1,0 +1,9 @@
+# CodeQL for C# — narrows noise from build artifacts and non-product trees.
+# See: https://docs.github.com/en/code-security/code-scanning/creating-an-advanced-setup-for-code-scanning/customizing-your-advanced-setup-for-code-scanning
+name: FrikaMF C#
+paths-ignore:
+  - "**/bin/**"
+  - "**/obj/**"
+  - "**/node_modules/**"
+  - "wiki/**"
+  - "_maui_template_probe/**"

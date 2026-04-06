@@ -1,3 +1,6 @@
+# Advanced CodeQL for C# (manual build). If GitHub Security still shows
+# "build-mode: none" for language:csharp, disable duplicate "Default setup"
+# under Settings → Code security → Code scanning, or this workflow will run twice.
 name: "CodeQL CSharp"
 
 on:
@@ -15,29 +18,40 @@ permissions:
 jobs:
   analyze:
     runs-on: windows-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      # Install SDKs before CodeQL init so traced builds resolve targets and packages.
+      - name: Setup .NET SDKs
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            6.0.x
+            9.0.x
+
+      - name: Install MAUI workload (WorkshopUploader)
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          dotnet workload install maui --disable-parallel
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: csharp
           build-mode: manual
+          config-file: .github/codeql/codeql-config.yml
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 6.0.x
-
-      - name: Restore and build available C# projects
+      - name: Restore and build C# projects
         shell: pwsh
         run: |
           $ErrorActionPreference = 'Stop'
 
           $projects = @(
+            'WorkshopUploader/WorkshopUploader.csproj',
             'framework/FrikaMF.csproj',
             'References/il2cpp-unpack/Assembly-CSharp/Assembly-CSharp.csproj',
             'mods/FMF.Mod.HexLabelMod/FMF.HexLabelMod.csproj',
@@ -55,27 +69,19 @@ jobs:
 
             Write-Host "Restoring $project"
             dotnet restore $project --no-cache
-          }
-
-          foreach ($project in $projects) {
-            if (-not (Test-Path -LiteralPath $project)) {
+            if ($LASTEXITCODE -ne 0) {
+              Write-Warning "Restore failed for $project (exit $LASTEXITCODE); skipping build."
               continue
             }
 
             Write-Host "Building $project"
-            $buildArgs = @(
-              'build',
-              $project,
-              '--configuration', 'Release',
-              '--no-restore',
-              '/p:CI=true'
-            )
+            dotnet build $project `
+              --configuration Release `
+              --no-restore `
+              /p:CI=true
 
-            try {
-              dotnet @buildArgs
-            }
-            catch {
-              Write-Warning "Build failed for $project. Continuing so CodeQL can analyze any successfully compiled projects."
+            if ($LASTEXITCODE -ne 0) {
+              Write-Warning "Build failed for $project (exit $LASTEXITCODE). Continuing with other projects."
             }
           }
 
