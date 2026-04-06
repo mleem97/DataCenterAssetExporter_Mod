@@ -81,9 +81,13 @@ const sidebars = {
         'topics/index',
         {
           type: 'category',
-          label: 'By audience',
+          label: 'Audiences & roles',
           items: [
             'topics/audiences/overview',
+            'topics/end-user/overview',
+            'topics/mod-developers/overview',
+            'topics/contributors/overview',
+            'topics/sponsors/overview',
             'audiences/newbies',
             'audiences/intermediates',
             'audiences/professionals',

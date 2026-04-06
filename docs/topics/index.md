@@ -12,10 +12,11 @@ Documentation is split into **curated wiki pages** (this site), **generated refe
 
 | Area | Start here |
 |------|------------|
-| **Audience paths** | [By audience](/wiki/topics/audiences/overview) |
+| **Roles (Spieler · Moddevs · Contributor · Sponsoren)** | [By audience](/wiki/topics/audiences/overview) — [End users](/wiki/topics/end-user/overview), [Mod developers](/wiki/topics/mod-developers/overview), [Contributors (workflow)](/wiki/topics/contributors/overview), [Sponsors](/wiki/topics/sponsors/overview) |
+| **Audience paths (experience)** | [Newbies](/wiki/audiences/newbies) · [Intermediates](/wiki/audiences/intermediates) · [Professionals](/wiki/audiences/professionals) |
 | **Technical reference** | [Reference & technical](/wiki/topics/reference/overview) |
 | **Ship planning** | [Roadmap & planning](/wiki/topics/roadmap/overview) |
-| **Repo workflows** | [Contributors](/wiki/topics/contributors/overview) |
+| **Repository inventory** | [Repo inventory](/wiki/contributors/repo-inventory) |
 | **Imported legacy wiki** | [Legacy wiki import](/wiki/topics/wiki-import/overview) |
 | **Steam, betas, backlog, game paths** | [Meta & operations](/wiki/topics/meta/overview) — [Game folder layout](/wiki/topics/meta/game-folder-layout) |
 

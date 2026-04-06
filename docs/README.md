@@ -7,7 +7,7 @@ This folder is the **single source of truth** for the public Docusaurus site. Th
 | Area | Path | Purpose |
 |------|------|--------|
 | **Landing** | [`intro.md`](./intro.md) | Site home (`/wiki/docs`). |
-| **Curated topics** | [`topics/`](./topics/) | Hubs (audiences, roadmap, security, **wiki import overview**). |
+| **Curated topics** | [`topics/`](./topics/) | Hubs: **Rollen** (Spieler, Moddevs, Contributor, Sponsoren → [`audiences/overview`](./topics/audiences/overview.md)), Roadmap, Security, Wiki-Import. |
 | **Mods & plugins** | [`mods/`](./mods/) | Framework, plugin wiki, mod wiki, standalone index. |
 | **Releases** | [`releases/`](./releases/) | Per-artifact release notes. |
 | **Reference** | [`reference/`](./reference/) | Hooks, naming, MCP, generated catalogs. |

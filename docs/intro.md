@@ -4,14 +4,18 @@ title: FrikaMF Docs Start
 slug: /docs
 ---
 
-This documentation matches the **current monorepo**: MelonLoader framework under `framework/`, gameplay mods under `mods/`, FFM plugins under `plugins/`, Docusaurus content in `docs/`, and the wiki app in `wiki/`. Content is organized by experience level so newcomers can start fast while advanced contributors still get deep references.
+This documentation matches the **current monorepo**: MelonLoader framework under `framework/`, gameplay mods under `mods/`, FFM plugins under `plugins/`, Docusaurus content in `docs/`, and the wiki app in `wiki/`. It is written for **players**, **mod developers**, **contributors**, and **sponsors** — pick a lane below.
 
-## Choose your path
+## Für wen? — Who is this for?
 
-- New to modding: go to **Newbies** (Topics → By audience)
-- Built a few mods: go to **Intermediates**
-- Working on runtime internals: go to **Pros**
-- Official modules: **Mods → Framework** and **Mods** (plugins & mod wiki)
+| Audience | Start here |
+|----------|------------|
+| **Spieler** — install, play, troubleshoot | [End users (hub)](./topics/end-user/overview.md) · [End user wiki (import)](./wiki-import/EndUser/) |
+| **Moddevs** — build mods, hooks, debugging | [Mod developers (hub)](./topics/mod-developers/overview.md) · [ModDevs wiki (import)](./wiki-import/ModDevs/) · [Framework](./mods/framework.md) |
+| **Contributor** — PRs, docs, plugins, CI | [Contributors (workflow)](./topics/contributors/overview.md) · [Contributors wiki (import)](./wiki-import/Contributors/) |
+| **Sponsorinnen & Sponsoren** — support & transparency | [Sponsors (hub)](./topics/sponsors/overview.md) · [Sponsors (EN)](./wiki-import/Sponsors.md) · [Sponsoren (DE)](./wiki-import/Sponsoren.md) |
+
+**Experience tracks** (newbies → pros): [By audience](./topics/audiences/overview.md) → [Newbies](./audiences/newbies.md), [Intermediates](./audiences/intermediates.md), [Professionals](./audiences/professionals.md).
 
 ## Mods Hub
 
