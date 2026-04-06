@@ -1,7 +1,7 @@
 ---
 title: Home EN
 description: Entry point for all FrikaMF audiences in English.
-sidebar_position: 110
+sidebar_position: 1
 tags:
   - audience:enduser
   - audience:moddev
@@ -20,9 +20,9 @@ FrikaMF is an unofficial, community-driven modding framework for the Unity IL2CP
 
 ## Audience shortcuts
 
-- Use mods: [EndUser EN](EndUser/Index)
-- Build mods: [ModDevs EN](ModDevs/Index)
-- Contribute: [Contributors EN](Contributors/Index)
+- Use mods: [EndUser EN](EndUser/)
+- Build mods: [ModDevs EN](ModDevs/)
+- Contribute: [Contributors EN](Contributors/)
 - Sponsor: [Sponsors EN](Sponsors)
 - Game developer note: [Letter to WASEKU EN](Letter-to-WASEKU)
 

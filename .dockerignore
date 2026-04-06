@@ -1,0 +1,11 @@
+.git
+.github
+**/.vs
+**/bin
+**/obj
+**/node_modules
+wiki/node_modules
+mcp-server/node_modules
+**/*.user
+_tmp
+**/BenchmarkDotNet.Artifacts

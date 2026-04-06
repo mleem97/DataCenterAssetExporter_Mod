@@ -2,4 +2,4 @@
 
 This page was moved to:
 
-- [Contributors/Index](Contributors/Index)
+- [Contributors](Contributors/)

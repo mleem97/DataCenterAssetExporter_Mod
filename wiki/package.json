@@ -10,7 +10,8 @@
     "serve": "docusaurus serve",
     "clear": "docusaurus clear",
     "wiki:sync": "node ./scripts/sync-wiki-to-docs.mjs",
-    "wiki:normalize-i18n": "node ./scripts/normalize-wiki-import-i18n.mjs"
+    "wiki:normalize-i18n": "node ./scripts/normalize-wiki-import-i18n.mjs",
+    "wiki:refresh": "node ./scripts/sync-wiki-to-docs.mjs && node ./scripts/normalize-wiki-import-i18n.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "3.9.2",

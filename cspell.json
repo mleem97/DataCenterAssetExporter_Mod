@@ -20,6 +20,8 @@
     "Il2Cpp",
     "MelonLoader",
     "HarmonyX",
-    "WASEKU"
+    "WASEKU",
+    "Steamworks",
+    "TASKLIST"
   ]
 }

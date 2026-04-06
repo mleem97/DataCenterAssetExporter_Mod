@@ -9,6 +9,8 @@
     <RootNamespace>FrikaMF</RootNamespace>
     <Description>MelonLoader plugin that provides a Rust FFI bridge for Data Center</Description>
     <NoWarn>CS1701;CS1702</NoWarn>
+    <!-- MelonLoader net6 ships DiagnosticSource 10.x; .NET 6 targeting pack uses 6.x — harmless at runtime; suppress MSBuild noise. -->
+    <MSBuildWarningsAsMessages>MSB3243;MSB3277</MSBuildWarningsAsMessages>
   </PropertyGroup>
 
   <PropertyGroup>

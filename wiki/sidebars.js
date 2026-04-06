@@ -6,6 +6,7 @@ const sidebars = {
       type: 'category',
       label: 'Monorepo layout',
       items: [
+        'wiki/README',
         'wiki/framework/getting-started',
         'wiki/framework/architecture',
         'wiki/framework/fmf-hooks',
@@ -97,6 +98,7 @@ const sidebars = {
             'reference/mod-store-vision',
             'reference/fmf-hook-naming',
             'reference/fmf-hooks-catalog',
+            'reference/mcp-server',
             'reference/release-channels',
           ],
         },

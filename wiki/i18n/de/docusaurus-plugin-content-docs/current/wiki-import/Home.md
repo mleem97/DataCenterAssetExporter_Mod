@@ -1,7 +1,7 @@
 ---
 title: Home
 description: Einstiegspunkt für End-User, Mod-Developer, Contributors, Sponsoren und den Dialog mit dem Spieleentwickler.
-sidebar_position: 10
+sidebar_position: 1
 tags:
   - audience:enduser
   - audience:moddev

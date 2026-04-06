@@ -5,6 +5,8 @@
     <Nullable>disable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <PlatformTarget>x64</PlatformTarget>
+    <!-- Linked framework sources overlap types from FrikaMF.csproj; compiler prefers the linked definitions. -->
+    <NoWarn>$(NoWarn);CS0436</NoWarn>
     <AssemblyName>FFM.Plugin.AssetExporter</AssemblyName>
     <RootNamespace>AssetExporter</RootNamespace>
     <RepositoryRoot>$(MSBuildThisFileDirectory)..\..\</RepositoryRoot>

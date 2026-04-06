@@ -47,8 +47,8 @@ For a complete overview of framework capabilities and setup flows, see [`Framewo
 ## Related pages
 
 - [Home EN](../Home)
-- [ModDevs EN](../ModDevs/Index)
-- [Contributors EN](../Contributors/Index)
+- [ModDevs EN](../ModDevs/)
+- [Contributors EN](../Contributors/)
 - [FFI Bridge Reference](../FFI-Bridge-Reference)
 - [Web UI Bridge EN (DC2WEB)](../Web-UI-Bridge)
 - [Known Incompatibilities EN](../Known-Incompatibilities)

@@ -37,17 +37,19 @@ export default function ModsCatalogPage(): JSX.Element {
                   <Link to={entry.releasePath} className="button button--secondary button--sm">
                     Release
                   </Link>
-                  <a
-                    href={entry.downloadPath}
-                    className={`button button--sm ${entry.releaseReady ? 'button--primary' : 'button--secondary'}`}
-                    aria-disabled={!entry.releaseReady}
-                    onClick={(event) => {
-                      if (!entry.releaseReady) {
-                        event.preventDefault();
-                      }
-                    }}>
-                    {entry.releaseReady ? 'Download DLL' : 'NotReleasedYet'}
-                  </a>
+                  {entry.releaseReady ? (
+                    <a href={entry.downloadPath} className="button button--primary button--sm">
+                      Download DLL
+                    </a>
+                  ) : (
+                    <span
+                      className="button button--secondary button--sm cursor-not-allowed opacity-80"
+                      role="button"
+                      aria-disabled="true"
+                      tabIndex={-1}>
+                      NotReleasedYet
+                    </span>
+                  )}
                 </div>
               </article>
             ))}
@@ -70,17 +72,19 @@ export default function ModsCatalogPage(): JSX.Element {
                   <Link to={entry.releasePath} className="button button--secondary button--sm">
                     Release
                   </Link>
-                  <a
-                    href={entry.downloadPath}
-                    className={`button button--sm ${entry.releaseReady ? 'button--primary' : 'button--secondary'}`}
-                    aria-disabled={!entry.releaseReady}
-                    onClick={(event) => {
-                      if (!entry.releaseReady) {
-                        event.preventDefault();
-                      }
-                    }}>
-                    {entry.releaseReady ? 'Download DLL' : 'NotReleasedYet'}
-                  </a>
+                  {entry.releaseReady ? (
+                    <a href={entry.downloadPath} className="button button--primary button--sm">
+                      Download DLL
+                    </a>
+                  ) : (
+                    <span
+                      className="button button--secondary button--sm cursor-not-allowed opacity-80"
+                      role="button"
+                      aria-disabled="true"
+                      tabIndex={-1}>
+                      NotReleasedYet
+                    </span>
+                  )}
                 </div>
               </article>
             ))}

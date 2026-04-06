@@ -25,9 +25,9 @@
 
 ### Audiences
 
-- [EndUser EN](EndUser/Index)
-- [ModDevs EN](ModDevs/Index)
-- [Contributors EN](Contributors/Index)
+- [EndUser EN](EndUser/)
+- [ModDevs EN](ModDevs/)
+- [Contributors EN](Contributors/)
 - [Sponsors EN](Sponsors)
 - [Letter to WASEKU (Data Center) EN](Letter-to-WASEKU)
 
@@ -41,8 +41,8 @@
 
 ## TechnicalReference
 
-- [TechnicalReference DE](TechnicalReference/Index)
-- [TechnicalReference EN](TechnicalReference/Index)
+- [TechnicalReference DE](TechnicalReference/)
+- [TechnicalReference EN](TechnicalReference/)
 
 ## Data Center FAQ
 

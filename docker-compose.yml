@@ -1,26 +1,40 @@
 services:
+  # Production-like docs + MCP in one image (Docusaurus static + /mcp). Host port 3040 → container 3000.
+  docs-mcp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: frikamf-docs-mcp
+    ports:
+      - "3040:3000"
+
   docs:
     build:
-      context: ./wiki
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: wiki/Dockerfile
     container_name: frikamf-docs
     working_dir: /app
-    command: npm run start
+    command: npm run start -- --host 0.0.0.0 --port 3000
     ports:
       - "3000:3000"
     environment:
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./wiki:/app
+      - ./docs:/docs
+      # When the repo root is mounted at /app, the site may run from /app/wiki; ../docs → /app/docs.
+      - ./docs:/app/docs
       - /app/node_modules
 
   docs-build:
     build:
-      context: ./wiki
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: wiki/Dockerfile
     container_name: frikamf-docs-build
     working_dir: /app
     command: npm run build
     volumes:
       - ./wiki:/app
+      - ./docs:/docs
+      - ./docs:/app/docs
       - /app/node_modules

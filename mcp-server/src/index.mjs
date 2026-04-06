@@ -174,7 +174,7 @@ function registerFmfTools(mcpServer, dataRoot) {
     {
       title: 'Hook registry JSON',
       description: 'Return fmf_hooks.json (declarative FMF hook list).',
-      inputSchema: {}
+      inputSchema: z.object({})
     },
     async () => {
       try {
@@ -195,7 +195,7 @@ function registerFmfTools(mcpServer, dataRoot) {
     {
       title: 'CONTRIBUTING.md',
       description: 'Read the repository CONTRIBUTING.md (conventions, workflow).',
-      inputSchema: {}
+      inputSchema: z.object({})
     },
     async () => {
       try {
@@ -215,7 +215,7 @@ function registerFmfTools(mcpServer, dataRoot) {
     {
       title: 'Repo layout overview',
       description: 'Short Markdown overview of top-level folders (no disk read).',
-      inputSchema: {}
+      inputSchema: z.object({})
     },
     async () => ({
       content: [{ type: 'text', text: REPO_OVERVIEW }]

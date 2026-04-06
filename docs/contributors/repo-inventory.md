@@ -14,7 +14,9 @@ This page is the **source of truth snapshot** for how the DataCenterExporter / g
 | Area | Path | Role |
 |------|------|------|
 | Framework core | [`framework/FrikaMF.csproj`](https://github.com/mleem97/gregFramework/blob/master/framework/FrikaMF.csproj) | MelonLoader mod hosting runtime hooks, Harmony, bridge, events |
-| Workshop tooling | [`WorkshopUploader/`](https://github.com/mleem97/gregFramework/tree/master/WorkshopUploader) | Steam Workshop upload helper (local/CI) |
+| Target layout / registry | [`FrikaModFramework/`](https://github.com/mleem97/gregFramework/tree/master/FrikaModFramework) | `fmf_hooks.json`, bindings stubs, migration docs |
+| Workshop tooling | [`WorkshopUploader/`](https://github.com/mleem97/gregFramework/tree/master/WorkshopUploader) | Steam Workshop / workspace uploader — **.NET MAUI** (Windows); see `WorkshopUploader/README.md` |
+| MCP (LLM / IDE) | [`mcp-server/`](https://github.com/mleem97/gregFramework/tree/master/mcp-server) | Model Context Protocol over docs + `fmf_hooks.json`; Docker: `docker compose up docs-mcp` |
 | Mods (sources) | [`mods/`](https://github.com/mleem97/gregFramework/tree/master/mods) | Gameplay mods (`FMF.*`, `FMF.Mod.*` folders) |
 | Plugins (sources) | [`plugins/`](https://github.com/mleem97/gregFramework/tree/master/plugins) | Framework plugins (`FFM.Plugin.*`) |
 | Templates | [`Templates/`](https://github.com/mleem97/gregFramework/tree/master/Templates) | Scaffolds for new mods/plugins |
@@ -60,6 +62,12 @@ This page is the **source of truth snapshot** for how the DataCenterExporter / g
 - String constants: [`framework/FrikaMF/HookNames.cs`](https://github.com/mleem97/gregFramework/blob/master/framework/FrikaMF/HookNames.cs) (`FFM.*` hook IDs today).
 - Numeric IDs: [`framework/FrikaMF/EventIds.cs`](https://github.com/mleem97/gregFramework/blob/master/framework/FrikaMF/EventIds.cs).
 - Generated wiki mirror: run [`tools/Generate-FmfHookCatalog.ps1`](https://github.com/mleem97/gregFramework/blob/master/tools/Generate-FmfHookCatalog.ps1) → [`fmf-hooks-catalog`](../reference/fmf-hooks-catalog.md).
+
+## Debugging (MelonLoader, IL2CPP, Unity)
+
+- **Build first:** `dotnet build FrikaMF.sln -c Debug` (requires MelonLoader + IL2CPP interop under `MelonLoader/` for your game install, or `lib/references/MelonLoader` — see `tools/refresh_refs.py`).
+- **Attach:** Run **Data Center** with MelonLoader, then attach your IDE’s **.NET / CoreCLR** debugger to the game process (process name usually matches the game executable). Breakpoints hit in **Debug** builds of mods/plugins copied into `Mods/`.
+- **`FFM.Plugin.AssetExporter`:** The project links `framework/Main.cs` (and related files) **and** references `FrikaMF.csproj`, which would normally produce **CS0436** duplicate-type warnings. Those are **suppressed** in the plugin `.csproj` (`NoWarn`); do not remove the project reference without linking the rest of the `FrikaMF` sources.
 
 ## Related
 

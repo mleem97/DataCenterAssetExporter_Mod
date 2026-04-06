@@ -1,4 +1,7 @@
-"""Rewrite commit message subject lines using scripts/version-map.json (git hook body)."""
+"""Rewrite commit message subject lines using scripts/version-map.json (git hook body).
+
+This file is merged into a git-filter-repo callback; the runtime injects ``commit``.
+"""
 
 import json
 import re
@@ -24,14 +27,14 @@ def _strip_leading_version(subject: str) -> str:
     return s.strip()
 
 
-oid = commit.original_id
+oid = commit.original_id  # noqa: F821
 if oid:
     key = oid.decode("ascii") if isinstance(oid, bytes) else str(oid)
     ver = _MAP.get(key)
     if ver:
-        msg = commit.message.decode("utf-8", errors="replace")
+        msg = commit.message.decode("utf-8", errors="replace")  # noqa: F821
         lines = msg.split("\n")
         first = lines[0] if lines else ""
         rest = _strip_leading_version(first)
         lines[0] = f"{ver}: {rest}" if rest else ver
-        commit.message = "\n".join(lines).encode("utf-8")
+        commit.message = "\n".join(lines).encode("utf-8")  # noqa: F821
