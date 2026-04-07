@@ -19,6 +19,13 @@ This project uses framework release versions in `XX.XX.XXXX` format.
 
 ### Changed
 
+- **WorkshopUploader:** **Native mod config editor** (`content/config.json` + optional `content/modconfig.json`): form UI for `modName`, `shopItems`, `staticItems`, `dlls`, IL2CPP notice for native DLL entries, and `modconfig.json` (`schemaVersion`, `modKind` standalone/fmf, `notes`, `settings`). Open from **Media & files** tab. Upload readiness warns if `config.json` is missing.
+- **WorkshopUploader:** **Projects** grid shows **preview image** (from `metadata` preview file, e.g. `preview.png`) on the left, **GregFramework** badge when **Needs FMF** is set, filename hint, and search includes **title/tags**; **Refresh** on Mod Store header, **Workshop item** detail, and editor uses global **Refresh** label.
+- **WorkshopUploader:** **Editor** has three **sub-tabs** (details & BBCode, media & `content/`, publish & readiness); **Upload readiness** includes **GregFramework (FMF)** checks vs. metadata and description/tags.
+- **WorkshopUploader:** editor shows a **live HTML preview** of the Steam **BBCode** description (toolbar tags + lists, tables, images, links, spoilers, etc.) below the description field.
+- **WorkshopUploader:** modded project templates now scaffold **`content/Mods`**, **`content/Plugins`**, and **`content/ModFramework/`** (with **`ModFramework/FMF/Plugins`**) plus **`README_GameMirror.txt`**; publish flow unchanged (Steam upload is still the **`content/`** tree).
+
+- **FMF.ModPathRedirector** (1.5.1): **`OnPreModsLoaded`**, **`MelonPriority(-10000)`**; waits for Steam UGC then for **`StreamingAssets/mods/workshop_<id>/WorkshopUploadContent`** (fallback: `workshop_<id>` alone); per-item **`DownloadItem`** / **`SteamAPI_RunCallbacks`** / timeouts; supersedes 1.5.0 path **`StreamingAssets/Mods`**.
 - Repository layout: top-level **separation** — `framework/` (FrikaMF + `Main.cs`), `wiki/` (Docusaurus, formerly `docs-site/`), `mods/`, `plugins/`, plus `tools/`, `scripts/`, `Templates/`; `src/FrikaMF/{Hooks,Plugins,References}` merged into `framework/FrikaMF/`.
 - Repository layout: former `ModsAndPlugins/` split into top-level `mods/` (gameplay mods) and `plugins/` (`FFM.Plugin.*`); `FrikaMF.sln` references `plugins\...`; framework project excludes `WorkshopUploader/**` from the default compile glob.
 - `FrikaMF.csproj` prefers `lib/references/MelonLoader` when present; excludes `Templates/**` from compile; ships IL2CPP catalog/hook diagnostics from `Core` (debug snapshot).

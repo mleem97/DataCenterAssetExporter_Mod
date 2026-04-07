@@ -15,6 +15,8 @@ public partial class EditorPage : ContentPage
 	private const int MaxWorkshopTags = 20;
 	private static string FmfNotice => "\n\n---\n" + S.Get("Editor_FmfNotice");
 
+	private static string MelonLoaderNotice => "\n\n---\n" + S.Get("Editor_MelonLoaderNotice");
+
 	private static readonly FilePickerFileType WorkshopPreviewTypes = new(
 		new Dictionary<DevicePlatform, IEnumerable<string>>
 		{
@@ -29,6 +31,7 @@ public partial class EditorPage : ContentPage
 	private readonly AppLogService _log;
 	private readonly ObservableCollection<string> _visibilityItems = new() { "Public", "FriendsOnly", "Private" };
 	private readonly ObservableCollection<UploadCheckResult> _checkResults = new();
+	private CancellationTokenSource? _bbPreviewCts;
 
 	private string _projectRoot = "";
 	private WorkshopMetadata _metadata = new();
@@ -49,7 +52,9 @@ public partial class EditorPage : ContentPage
 		_steam = steam;
 		_log = log;
 		VisibilityPicker.ItemsSource = _visibilityItems;
+		NativeProfilePicker.ItemsSource = new[] { "decoration", "code" };
 		CheckResultsList.ItemsSource = _checkResults;
+		SetEditorTab(0);
 	}
 
 	private async Task LoadAsync()
@@ -68,6 +73,8 @@ public partial class EditorPage : ContentPage
 		var localSnapshot = new WorkshopMetadata
 		{
 			NeedsFmf = _metadata.NeedsFmf,
+			NeedsMelonLoader = _metadata.NeedsMelonLoader,
+			NativeConfigProfile = _metadata.NativeConfigProfile,
 			PreviewImageRelativePath = _metadata.PreviewImageRelativePath,
 			AdditionalPreviews = new List<string>(_metadata.AdditionalPreviews),
 		};
@@ -117,6 +124,11 @@ public partial class EditorPage : ContentPage
 			: "Public";
 		TagsEntry.Text = string.Join(", ", _metadata.Tags);
 		NeedsFmfSwitch.IsToggled = _metadata.NeedsFmf;
+		NeedsMelonLoaderSwitch.IsToggled = _metadata.NeedsMelonLoader;
+		var profile = string.IsNullOrWhiteSpace(_metadata.NativeConfigProfile)
+			? "decoration"
+			: _metadata.NativeConfigProfile.Trim().ToLowerInvariant();
+		NativeProfilePicker.SelectedItem = profile == "code" ? "code" : "decoration";
 		PreviewPathLabel.Text = Path.Combine(_projectRoot, _metadata.PreviewImageRelativePath);
 
 		var isUpdate = _metadata.PublishedFileId != 0;
@@ -134,6 +146,7 @@ public partial class EditorPage : ContentPage
 		UpdateTagsHint();
 		RebuildScreenshotGallery();
 		RunUploadCheck();
+		RefreshDescriptionPreviewImmediate();
 	}
 
 	private void UpdateContentSizeUi()
@@ -196,10 +209,90 @@ public partial class EditorPage : ContentPage
 
 	#endregion
 
+	#region Editor sub-tabs
+
+	private void OnTabDetails(object? sender, EventArgs e) => SetEditorTab(0);
+
+	private void OnTabAssets(object? sender, EventArgs e) => SetEditorTab(1);
+
+	private void OnTabPublish(object? sender, EventArgs e) => SetEditorTab(2);
+
+	private void SetEditorTab(int index)
+	{
+		PanelDetails.IsVisible = index == 0;
+		PanelAssets.IsVisible = index == 1;
+		PanelPublish.IsVisible = index == 2;
+		SetEditorTabStyle(TabBtnDetails, index == 0);
+		SetEditorTabStyle(TabBtnAssets, index == 1);
+		SetEditorTabStyle(TabBtnPublish, index == 2);
+	}
+
+	private static void SetEditorTabStyle(Button btn, bool active)
+	{
+		if (active)
+		{
+			btn.BackgroundColor = Color.FromArgb("#61F4D8");
+			btn.TextColor = Color.FromArgb("#001110");
+		}
+		else
+		{
+			btn.BackgroundColor = Colors.Transparent;
+			btn.TextColor = Color.FromArgb("#61F4D8");
+		}
+	}
+
+	private void OnNeedsFmfToggled(object? sender, ToggledEventArgs e) => RunUploadCheck();
+
+	private void OnNeedsMelonLoaderToggled(object? sender, ToggledEventArgs e) => RunUploadCheck();
+
+	private void OnNativeProfileChanged(object? sender, EventArgs e) => RunUploadCheck();
+
+	private void OnChangeLogTextChanged(object? sender, TextChangedEventArgs e) => RunUploadCheck();
+
+	#endregion
+
 	#region Field events
 
 	private void OnTitleChanged(object? sender, TextChangedEventArgs e) => UpdateCounts();
-	private void OnDescriptionChanged(object? sender, TextChangedEventArgs e) => UpdateCounts();
+
+	private void OnDescriptionChanged(object? sender, TextChangedEventArgs e)
+	{
+		UpdateCounts();
+		ScheduleDescriptionPreview();
+	}
+
+	private void ScheduleDescriptionPreview()
+	{
+		_bbPreviewCts?.Cancel();
+		var cts = new CancellationTokenSource();
+		_bbPreviewCts = cts;
+		_ = Task.Run(async () =>
+		{
+			try
+			{
+				await Task.Delay(120, cts.Token).ConfigureAwait(false);
+				await MainThread.InvokeOnMainThreadAsync(() =>
+				{
+					if (cts.IsCancellationRequested)
+					{
+						return;
+					}
+
+					RefreshDescriptionPreviewImmediate();
+				});
+			}
+			catch (OperationCanceledException)
+			{
+				// next keystroke scheduled a new preview
+			}
+		});
+	}
+
+	private void RefreshDescriptionPreviewImmediate()
+	{
+		var html = SteamBbCodePreview.ToHtmlDocument(DescriptionEditor.Text ?? "");
+		DescriptionBbPreview.Source = new HtmlWebViewSource { Html = html, BaseUrl = "https://steamcommunity.com/" };
+	}
 	private void OnTagsChanged(object? sender, TextChangedEventArgs e) => UpdateTagsHint();
 
 	private void UpdateCounts()
@@ -471,6 +564,17 @@ public partial class EditorPage : ContentPage
 		}
 	}
 
+	private async void OnOpenNativeConfigEditor(object? sender, EventArgs e)
+	{
+		if (string.IsNullOrEmpty(_projectRoot))
+		{
+			return;
+		}
+
+		await Shell.Current.GoToAsync(
+			$"{nameof(NativeConfigEditorPage)}?ProjectPath={Uri.EscapeDataString(_projectRoot)}");
+	}
+
 	private async void OnExportContentZip(object? sender, EventArgs e)
 	{
 		var content = Path.Combine(_projectRoot, "content");
@@ -531,13 +635,23 @@ public partial class EditorPage : ContentPage
 		_metadata.Visibility = VisibilityPicker.SelectedItem as string ?? "Public";
 		_metadata.Tags = ParseTags(TagsEntry.Text);
 		_metadata.NeedsFmf = NeedsFmfSwitch.IsToggled;
+		_metadata.NeedsMelonLoader = NeedsMelonLoaderSwitch.IsToggled;
+		_metadata.NativeConfigProfile = NativeProfilePicker.SelectedItem as string ?? "decoration";
 	}
 
 	private static string BuildUploadDescription(WorkshopMetadata meta)
 	{
 		var desc = meta.Description ?? "";
+		if (meta.NeedsMelonLoader && !desc.Contains("MelonLoader", StringComparison.OrdinalIgnoreCase))
+		{
+			desc += MelonLoaderNotice;
+		}
+
 		if (meta.NeedsFmf && !desc.Contains("FrikaModFramework", StringComparison.OrdinalIgnoreCase))
+		{
 			desc += FmfNotice;
+		}
+
 		return desc;
 	}
 

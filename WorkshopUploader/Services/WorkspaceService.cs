@@ -292,6 +292,9 @@ public sealed class WorkspaceService
 					"[hr][/hr]\n" +
 					"[i]Replace this placeholder description with your own.[/i]";
 				meta.Tags.AddRange(new[] { "vanilla", "object", "decoration" });
+				meta.NativeConfigProfile = "decoration";
+				meta.NeedsMelonLoader = false;
+				meta.NeedsFmf = false;
 				break;
 			case WorkshopTemplateKind.ModdedMelonLoader:
 				meta.Description =
@@ -306,6 +309,9 @@ public sealed class WorkspaceService
 					"[hr][/hr]\n" +
 					"[i]Replace this placeholder description with your own.[/i]";
 				meta.Tags.AddRange(new[] { "modded", "melonloader" });
+				meta.NativeConfigProfile = "code";
+				meta.NeedsMelonLoader = true;
+				meta.NeedsFmf = false;
 				break;
 			case WorkshopTemplateKind.ModdedFrikaModFramework:
 				meta.Description =
@@ -320,6 +326,9 @@ public sealed class WorkspaceService
 					"[hr][/hr]\n" +
 					"[i]Replace this placeholder description with your own.[/i]";
 				meta.Tags.AddRange(new[] { "modded", "fmf", "frika-mod-framework" });
+				meta.NativeConfigProfile = "code";
+				meta.NeedsMelonLoader = true;
+				meta.NeedsFmf = true;
 				break;
 		}
 
@@ -392,37 +401,95 @@ public sealed class WorkspaceService
 			""".Trim());
 	}
 
-	private static void CreateMelonLoaderTemplate(string contentRoot)
+	/// <summary>
+	/// Standard layout under <c>content/</c> for modded Workshop items: mirrors <c>{GameRoot}/Mods</c>, <c>{GameRoot}/Plugins</c>,
+	/// and <c>{GameRoot}/FMF/...</c> under a single <c>ModFramework/</c> umbrella. Steam uploads this tree as workshop content;
+	/// the game delivers it under <c>.../StreamingAssets/mods/workshop_&lt;id&gt;/WorkshopUploadContent/</c>. Players typically use
+	/// directory junctions from the game root to those subfolders (see README_GameMirror.txt).
+	/// </summary>
+	private static void CreateModdedGameMirrorLayout(string contentRoot)
 	{
+		Directory.CreateDirectory(contentRoot);
+
+		File.WriteAllText(
+			Path.Combine(contentRoot, "README_GameMirror.txt"),
+			"""
+			Workshop content layout (modded)
+
+			This folder is uploaded to Steam as-is. After subscribe, the game places it under:
+			  Data Center_Data/StreamingAssets/mods/workshop_<id>/WorkshopUploadContent/
+
+			Recommended mapping next to the game executable ({GameRoot}):
+			  Mods/           -> MelonLoader MelonMods  (same relative path under WorkshopUploadContent)
+			  Plugins/        -> MelonLoader Plugins
+			  ModFramework/     -> umbrella for FMF and other framework files; use ModFramework/FMF/Plugins for FMF.Plugin DLLs
+
+			MelonLoader does not read arbitrary paths from Loader.cfg — link {GameRoot}/Mods (or a subfolder) to the
+			workshop folder if you want Workshop DLLs loaded like local mods.
+
+			Do not ship game binaries or MelonLoader; only your own assemblies and assets.
+			""".Trim());
+
 		var mods = Path.Combine(contentRoot, "Mods");
 		Directory.CreateDirectory(mods);
-
 		File.WriteAllText(
 			Path.Combine(mods, "README.txt"),
 			"""
-			MelonLoader mods
+			MelonLoader mods ({GameRoot}/Mods)
 
-			Place your MelonLoader mod DLL(s) here. When players install your Workshop item, this maps to the game's Mods folder layout.
+			Place MelonLoader MelonMod DLLs here. Relative path matches the game Mods folder when you use a junction
+			from this folder to {GameRoot}/Mods (or a subfolder under Mods).
 
 			Do not redistribute the game or MelonLoader; only your mod assemblies and your own assets.
 			""".Trim());
-	}
 
-	private static void CreateFrikaModFrameworkTemplate(string contentRoot)
-	{
-		var plugins = Path.Combine(contentRoot, "FMF", "Plugins");
+		var plugins = Path.Combine(contentRoot, "Plugins");
 		Directory.CreateDirectory(plugins);
-
 		File.WriteAllText(
 			Path.Combine(plugins, "README.txt"),
 			"""
-			FrikaModFramework plugins
+			MelonLoader plugins ({GameRoot}/Plugins)
 
-			Place FMF plugin DLLs (FFM.Plugin.*) in this folder. This mirrors FMF/Plugins next to the game executable.
+			Place MelonLoader plugin DLLs (MelonPlugin) here. Same relative path as next to the game executable.
+
+			Do not redistribute the game or MelonLoader; only your plugin assemblies and your own assets.
+			""".Trim());
+
+		var modFw = Path.Combine(contentRoot, "ModFramework");
+		Directory.CreateDirectory(modFw);
+		File.WriteAllText(
+			Path.Combine(modFw, "README.txt"),
+			"""
+			ModFramework (extra files for FMF / tooling)
+
+			Use this tree for everything that belongs to the mod framework but is not a MelonMod/MelonPlugin:
+			  - FMF plugin DLLs -> FMF/Plugins/
+			  - optional configs, catalogs, or assets your FMF plugins expect
+
+			At the game root, FMF expects FMF/Plugins next to the executable. From Workshop delivery, create a junction:
+			  {GameRoot}/FMF  ->  .../WorkshopUploadContent/ModFramework/FMF
+			so that FMF/Plugins resolves to ModFramework/FMF/Plugins in the workshop folder.
+
+			Do not ship game binaries; only your own files.
+			""".Trim());
+
+		var fmfPlugins = Path.Combine(modFw, "FMF", "Plugins");
+		Directory.CreateDirectory(fmfPlugins);
+		File.WriteAllText(
+			Path.Combine(fmfPlugins, "README.txt"),
+			"""
+			FMF plugins ({GameRoot}/FMF/Plugins)
+
+			Place FMF plugin DLLs (FFM.Plugin.*) here. With a junction from {GameRoot}/FMF to ModFramework/FMF in the
+			workshop content folder, this path matches the live game layout.
 
 			Do not ship game binaries; only your plugin DLLs and allowed content.
 			""".Trim());
 	}
+
+	private static void CreateMelonLoaderTemplate(string contentRoot) => CreateModdedGameMirrorLayout(contentRoot);
+
+	private static void CreateFrikaModFrameworkTemplate(string contentRoot) => CreateModdedGameMirrorLayout(contentRoot);
 
 	/// <summary>Copies all files from <paramref name="sourceDir"/> into <paramref name="destDir"/> (recursive).</summary>
 	public static void CopyDirectoryRecursive(string sourceDir, string destDir)

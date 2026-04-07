@@ -33,6 +33,8 @@
   <data name="Projects_Headline" xml:space="preserve"><value>本地项目</value></data>
   <data name="Projects_SearchPlaceholder" xml:space="preserve"><value>按文件夹名称或路径搜索…</value></data>
   <data name="Projects_Log" xml:space="preserve"><value>日志</value></data>
+  <data name="Projects_LogExpand" xml:space="preserve"><value>显示日志</value></data>
+  <data name="Projects_LogCollapse" xml:space="preserve"><value>隐藏日志</value></data>
   <data name="Projects_Ready" xml:space="preserve"><value>就绪。</value></data>
   <data name="Projects_Refreshed" xml:space="preserve"><value>项目列表已刷新。</value></data>
   <data name="Projects_Migrated" xml:space="preserve"><value>已从旧文件夹迁移 {0} 个项目。</value></data>
@@ -57,11 +59,20 @@
   <data name="Editor_Metadata" xml:space="preserve"><value>元数据</value></data>
   <data name="Editor_Title" xml:space="preserve"><value>标题</value></data>
   <data name="Editor_Description" xml:space="preserve"><value>描述</value></data>
+  <data name="Editor_BbLivePreview" xml:space="preserve"><value>实时预览（Steam BBCode）</value></data>
+  <data name="Editor_TabDetails" xml:space="preserve"><value>详情与正文</value></data>
+  <data name="Editor_TabAssets" xml:space="preserve"><value>媒体与文件</value></data>
+  <data name="Editor_TabPublish" xml:space="preserve"><value>发布</value></data>
   <data name="Editor_Visibility" xml:space="preserve"><value>可见性</value></data>
   <data name="Editor_Tags" xml:space="preserve"><value>标签</value></data>
   <data name="Editor_TagsPlaceholder" xml:space="preserve"><value>vanilla, modded, fmf</value></data>
   <data name="Editor_NeedsFmf" xml:space="preserve"><value>需要 FrikaModFramework</value></data>
   <data name="Editor_NeedsFmfHint" xml:space="preserve"><value>在描述中添加提示：此物品需要 FMF。</value></data>
+  <data name="Editor_NativeProfile" xml:space="preserve"><value>config.json 配置文件</value></data>
+  <data name="Editor_NativeProfileHint" xml:space="preserve"><value>装饰：shop/static。代码：仅 DLL 条目（代码 mod 不在此文件填写 shop/static）。</value></data>
+  <data name="Editor_NeedsMelonLoader" xml:space="preserve"><value>需要 MelonLoader</value></data>
+  <data name="Editor_NeedsMelonLoaderHint" xml:space="preserve"><value>若描述中尚未提及，则追加 MelonLoader 说明与下载链接。</value></data>
+  <data name="Editor_MelonLoaderNotice" xml:space="preserve"><value>[h2]运行要求[/h2][list][*] 此 Workshop 物品需要适用于 Data Center 的 [url=https://melonwiki.xyz]MelonLoader[/url]。使用前请先安装 MelonLoader。[/list]</value></data>
   <data name="Editor_FmfNotice" xml:space="preserve"><value>此物品需要 FrikaModFramework，请从 Steam Workshop 或通过 GregTools Modmanager 下载！</value></data>
   <data name="Editor_ChangeNotes" xml:space="preserve"><value>更新说明</value></data>
   <data name="Editor_ChangeNotesHint" xml:space="preserve"><value>说明变更内容。将显示在 Steam 的更新日志标签页。</value></data>
@@ -70,6 +81,30 @@
   <data name="Editor_PreviewHint" xml:space="preserve"><value>创意工坊缩略图（PNG、JPG、GIF、WebP）</value></data>
   <data name="Editor_ChooseImage" xml:space="preserve"><value>选择图片...</value></data>
   <data name="Editor_ExportZip" xml:space="preserve"><value>导出 content.zip</value></data>
+  <data name="Editor_NativeConfigButton" xml:space="preserve"><value>编辑 config.json / modconfig.json</value></data>
+  <data name="NativeConfig_Title" xml:space="preserve"><value>原生模组配置</value></data>
+  <data name="NativeConfig_Save" xml:space="preserve"><value>保存</value></data>
+  <data name="NativeConfig_Back" xml:space="preserve"><value>返回</value></data>
+  <data name="NativeConfig_TabNative" xml:space="preserve"><value>config.json</value></data>
+  <data name="NativeConfig_TabOptions" xml:space="preserve"><value>modconfig.json</value></data>
+  <data name="NativeConfig_Il2CppNotice" xml:space="preserve"><value>Data Center 使用 IL2CPP。config.json 中的 dll 为实验性原生插件；不能替代 IL2CPP 的 MelonMod。优先使用 shopItems/staticItems；代码请用 MelonLoader。</value></data>
+  <data name="NativeConfig_ProfileDecorationHint" xml:space="preserve"><value>装饰配置：编辑 shopItems 与 staticItems。DLL 条目已隐藏并在保存时清空 — 若需编辑 dll，请在 Workshop 元数据中将配置文件切换为「代码」。</value></data>
+  <data name="NativeConfig_ModName" xml:space="preserve"><value>modName</value></data>
+  <data name="NativeConfig_ShopItems" xml:space="preserve"><value>shopItems</value></data>
+  <data name="NativeConfig_AddShopItem" xml:space="preserve"><value>添加商店物品</value></data>
+  <data name="NativeConfig_StaticItems" xml:space="preserve"><value>staticItems</value></data>
+  <data name="NativeConfig_AddStaticItem" xml:space="preserve"><value>添加静态物件</value></data>
+  <data name="NativeConfig_Dlls" xml:space="preserve"><value>dlls（原生插件）</value></data>
+  <data name="NativeConfig_AddDll" xml:space="preserve"><value>添加 DLL 条目</value></data>
+  <data name="NativeConfig_ModOptionsHint" xml:space="preserve"><value>可选。运行时选项（MelonLoader/FMF）。原生资源仍需 config.json。</value></data>
+  <data name="NativeConfig_SchemaVersion" xml:space="preserve"><value>schemaVersion</value></data>
+  <data name="NativeConfig_ModKind" xml:space="preserve"><value>modKind</value></data>
+  <data name="NativeConfig_OptionsNotes" xml:space="preserve"><value>notes</value></data>
+  <data name="NativeConfig_Settings" xml:space="preserve"><value>settings（键 = JSON 值）</value></data>
+  <data name="NativeConfig_AddSetting" xml:space="preserve"><value>添加设置</value></data>
+  <data name="NativeConfig_Remove" xml:space="preserve"><value>移除</value></data>
+  <data name="NativeConfig_SavedTitle" xml:space="preserve"><value>已保存</value></data>
+  <data name="NativeConfig_SavedMsg" xml:space="preserve"><value>已写入 content/config.json 与 content/modconfig.json。</value></data>
   <data name="Editor_UploadReadiness" xml:space="preserve"><value>上传就绪状态</value></data>
   <data name="Editor_Recheck" xml:space="preserve"><value>重新检查</value></data>
   <data name="Editor_Publish" xml:space="preserve"><value>发布</value></data>
@@ -130,6 +165,10 @@
   <!-- ModManagerPage -->
   <data name="Mod_Headline" xml:space="preserve"><value>模组管理器</value></data>
   <data name="Mod_Subtitle" xml:space="preserve"><value>浏览、安装并管理 FrikaModFramework 的模组。</value></data>
+  <data name="Mod_Dep_MelonLoader" xml:space="preserve"><value>MelonLoader</value></data>
+  <data name="Mod_Dep_Fmf" xml:space="preserve"><value>FrikaModFramework</value></data>
+  <data name="Mod_StoreDepsLine" xml:space="preserve"><value>需要：{0}</value></data>
+  <data name="Detail_DependenciesHeading" xml:space="preserve"><value>此模组依赖以下组件：</value></data>
   <data name="Mod_Store" xml:space="preserve"><value>商店</value></data>
   <data name="Mod_Installed" xml:space="preserve"><value>已安装</value></data>
   <data name="Mod_Favorites" xml:space="preserve"><value>收藏</value></data>

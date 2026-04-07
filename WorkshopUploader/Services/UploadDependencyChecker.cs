@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using WorkshopUploader.Models;
 using WorkshopUploader.Steam;
 
@@ -10,11 +11,16 @@ public static class UploadDependencyChecker
 		var results = new List<UploadCheckResult>();
 
 		CheckContentFolder(projectRoot, results);
+		if (Directory.Exists(Path.Combine(projectRoot, "content")))
+		{
+			CheckNativeConfigJson(projectRoot, results);
+		}
 		CheckMetadataFields(metadata, results);
 		CheckPreviewImage(projectRoot, metadata, results);
 		CheckTags(metadata, results);
 		CheckContentSize(projectRoot, results);
 		CheckChangelog(metadata, changeLog, results);
+		CheckGregFrameworkDependency(metadata, results);
 
 		return results;
 	}
@@ -22,6 +28,30 @@ public static class UploadDependencyChecker
 	public static bool IsReadyToUpload(List<UploadCheckResult> results)
 	{
 		return results.All(r => r.Severity != UploadCheckSeverity.Error);
+	}
+
+	private static void CheckNativeConfigJson(string projectRoot, List<UploadCheckResult> results)
+	{
+		var path = Path.Combine(projectRoot, "content", "config.json");
+		if (File.Exists(path))
+		{
+			results.Add(new UploadCheckResult
+			{
+				Label = "config.json",
+				Severity = UploadCheckSeverity.Ok,
+				Detail = "Native mod definition present under content/.",
+			});
+			return;
+		}
+
+		results.Add(new UploadCheckResult
+		{
+			Label = "config.json",
+			Severity = UploadCheckSeverity.Warning,
+			Detail =
+				"content/config.json is missing. It is required for native shop/static items when you ship vanilla assets. " +
+				"Use the native config editor in the workshop project editor to create it.",
+		});
 	}
 
 	private static void CheckContentFolder(string projectRoot, List<UploadCheckResult> results)
@@ -285,5 +315,82 @@ public static class UploadDependencyChecker
 				Detail = $"{changeLog!.Length} characters.",
 			});
 		}
+	}
+
+	/// <summary>Aligns <see cref="WorkshopMetadata.NeedsFmf"/> with description/tags (FrikaModFramework / GregFramework).</summary>
+	private static void CheckGregFrameworkDependency(WorkshopMetadata metadata, List<UploadCheckResult> results)
+	{
+		var desc = metadata.Description ?? "";
+		var descMentionsFmf = ContainsFmfHint(desc);
+		var tagsSuggestFmf = metadata.Tags.Any(t => TagSuggestsFmf(t));
+
+		if (metadata.NeedsFmf)
+		{
+			if (!descMentionsFmf)
+			{
+				results.Add(new UploadCheckResult
+				{
+					Label = "GregFramework (FMF)",
+					Severity = UploadCheckSeverity.Warning,
+					Detail =
+						"Marked as requiring FrikaModFramework, but the description does not mention it yet. " +
+						"A standard notice is still appended automatically on upload if missing.",
+				});
+			}
+			else
+			{
+				results.Add(new UploadCheckResult
+				{
+					Label = "GregFramework (FMF)",
+					Severity = UploadCheckSeverity.Ok,
+					Detail = "Requires FrikaModFramework / GregFramework — description mentions the framework.",
+				});
+			}
+		}
+		else
+		{
+			if (tagsSuggestFmf || descMentionsFmf)
+			{
+				results.Add(new UploadCheckResult
+				{
+					Label = "GregFramework (FMF)",
+					Severity = UploadCheckSeverity.Warning,
+					Detail =
+						"Tags or description suggest FMF — enable “Needs FrikaModFramework” if players must install GregFramework.",
+				});
+			}
+			else
+			{
+				results.Add(new UploadCheckResult
+				{
+					Label = "GregFramework (FMF)",
+					Severity = UploadCheckSeverity.Ok,
+					Detail = "Not flagged as requiring FrikaModFramework (GregFramework).",
+				});
+			}
+		}
+	}
+
+	private static bool TagSuggestsFmf(string tag)
+	{
+		var t = tag.Trim().ToLowerInvariant();
+		return t is "fmf" or "frika-mod-framework" or "gregframework" or "frika" or "frikamodframework"
+			|| t.Contains("frikamod", StringComparison.Ordinal)
+			|| t.Contains("gregframework", StringComparison.Ordinal);
+	}
+
+	private static bool ContainsFmfHint(string text)
+	{
+		if (string.IsNullOrWhiteSpace(text))
+		{
+			return false;
+		}
+
+		var s = text;
+		return s.Contains("FrikaModFramework", StringComparison.OrdinalIgnoreCase)
+			|| s.Contains("GregFramework", StringComparison.OrdinalIgnoreCase)
+			|| s.Contains("Greg Tools", StringComparison.OrdinalIgnoreCase)
+			|| s.Contains("Frika Mod Framework", StringComparison.OrdinalIgnoreCase)
+			|| Regex.IsMatch(s, @"\bFMF\b", RegexOptions.IgnoreCase);
 	}
 }

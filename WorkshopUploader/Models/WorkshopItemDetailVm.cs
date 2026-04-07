@@ -50,4 +50,12 @@ public sealed class WorkshopItemDetailVm
 
 	private bool IsGregFramework =>
 		Tags.Any(t => GregFrameworkTags.Contains(t, StringComparer.OrdinalIgnoreCase));
+
+	/// <summary>Inferred from Steam tags and description text.</summary>
+	public string DependencyHintCompact { get; init; } = "";
+
+	/// <summary>Multi-line bullet text for the detail page.</summary>
+	public string DependencyHintBlock { get; init; } = "";
+
+	public bool HasDependencyHints { get; init; }
 }

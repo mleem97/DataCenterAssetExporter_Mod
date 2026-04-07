@@ -2,6 +2,8 @@
   <!-- Preserve WorkshopMetadata for System.Text.Json reflection-based serialization -->
   <assembly fullname="WorkshopUploader">
     <type fullname="WorkshopUploader.Models.WorkshopMetadata" preserve="all" />
+    <type fullname="WorkshopUploader.Models.NativeModConfig" preserve="all" />
+    <type fullname="WorkshopUploader.Models.ModOptionsConfigFile" preserve="all" />
   </assembly>
 
   <!-- Preserve Steamworks internals accessed via reflection in SteamUgcPreviews -->

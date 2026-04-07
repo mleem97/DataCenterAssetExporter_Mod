@@ -49,39 +49,127 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:ProjectTileVm">
-                        <Border Padding="16" StrokeThickness="0" BackgroundColor="#001715">
+                        <Border Padding="12" StrokeThickness="0" BackgroundColor="#001715">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="8" />
                             </Border.StrokeShape>
-                            <VerticalStackLayout Spacing="6">
-                                <Grid ColumnDefinitions="*,Auto">
-                                    <Label Grid.Column="0" FontAttributes="Bold" FontSize="15" Text="{Binding Title}" TextColor="#C0FCF6" LineBreakMode="TailTruncation" />
-                                    <Label Grid.Column="1" FontSize="10" TextColor="{Binding ReadinessColor}" Text="{Binding ReadinessText}" VerticalOptions="Center" />
-                                </Grid>
-                                <Label FontSize="11" TextColor="#5A9E96" LineBreakMode="TailTruncation" Text="{Binding Name}" />
-                                <HorizontalStackLayout Spacing="8">
-                                    <Label FontSize="10" TextColor="#61F4D8" Text="{Binding HasContent, StringFormat='Content: {0}'}" />
-                                    <Label FontSize="10" TextColor="#61F4D8" Text="{Binding HasPreview, StringFormat='Preview: {0}'}" />
-                                    <Label FontSize="10" TextColor="#7FBFB8" Text="{Binding IsPublished, StringFormat='Published: {0}'}" />
-                                </HorizontalStackLayout>
-                                <Label FontSize="10" TextColor="#5A9E96" Text="{Binding Tags}" LineBreakMode="TailTruncation" />
-                            </VerticalStackLayout>
+                            <Grid ColumnDefinitions="104,*" ColumnSpacing="12">
+                                <Border
+                                    Grid.Column="0"
+                                    StrokeThickness="0"
+                                    BackgroundColor="#001E1C"
+                                    HeightRequest="104"
+                                    WidthRequest="104"
+                                    VerticalOptions="Start">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="8" />
+                                    </Border.StrokeShape>
+                                    <Grid>
+                                        <Image
+                                            Aspect="AspectFill"
+                                            IsVisible="{Binding HasPreviewImage}"
+                                            Source="{Binding PreviewImage}" />
+                                        <Label
+                                            FontSize="22"
+                                            HorizontalOptions="Center"
+                                            IsVisible="{Binding ShowPreviewPlaceholder}"
+                                            Text="?"
+                                            TextColor="#5A9E96"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </Border>
+                                <VerticalStackLayout Grid.Column="1" Spacing="6" VerticalOptions="Center">
+                                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                        <Label
+                                            Grid.Column="0"
+                                            FontAttributes="Bold"
+                                            FontSize="15"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Title}"
+                                            TextColor="#C0FCF6" />
+                                        <Label
+                                            Grid.Column="1"
+                                            FontSize="10"
+                                            Text="{Binding ReadinessText}"
+                                            TextColor="{Binding ReadinessColor}"
+                                            VerticalOptions="Start" />
+                                    </Grid>
+                                    <Label
+                                        FontSize="11"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding Name}"
+                                        TextColor="#5A9E96" />
+                                    <HorizontalStackLayout Spacing="8" VerticalOptions="Start">
+                                        <Border
+                                            Padding="6,2"
+                                            BackgroundColor="#0D3835"
+                                            IsVisible="{Binding NeedsFmf}"
+                                            StrokeThickness="0">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="4" />
+                                            </Border.StrokeShape>
+                                            <HorizontalStackLayout Spacing="4">
+                                                <Label
+                                                    FontSize="11"
+                                                    Text="✓"
+                                                    TextColor="#61F4D8"
+                                                    VerticalOptions="Center" />
+                                                <Label
+                                                    FontSize="10"
+                                                    Text="GregFramework"
+                                                    TextColor="#61F4D8"
+                                                    VerticalOptions="Center" />
+                                            </HorizontalStackLayout>
+                                        </Border>
+                                        <Label FontSize="10" TextColor="#61F4D8" Text="{Binding HasContent, StringFormat='Content: {0}'}" />
+                                        <Label FontSize="10" TextColor="#61F4D8" Text="{Binding HasPreview, StringFormat='Preview: {0}'}" />
+                                        <Label FontSize="10" TextColor="#7FBFB8" Text="{Binding IsPublished, StringFormat='Published: {0}'}" />
+                                    </HorizontalStackLayout>
+                                    <Label
+                                        FontSize="10"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding Tags}"
+                                        TextColor="#5A9E96" />
+                                    <Label
+                                        FontSize="9"
+                                        IsVisible="{Binding HasPreviewImage}"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding PreviewFileName}"
+                                        TextColor="#3D6B66" />
+                                </VerticalStackLayout>
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </RefreshView>
 
-        <!--  Log panel  -->
+        <!--  Log panel (collapsible)  -->
         <Border Grid.Row="3" Padding="16" StrokeThickness="0" BackgroundColor="#001E1C">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="8" />
             </Border.StrokeShape>
             <VerticalStackLayout Spacing="6">
-                <Label Style="{StaticResource SectionTitle}" Text="{l:Translate Key=Projects_Log}" />
-                <ScrollView x:Name="LogScroll" HeightRequest="140">
-                    <Label x:Name="LogLabel" FontFamily="Consolas" FontSize="11" TextColor="#7FBFB8" LineBreakMode="WordWrap" />
-                </ScrollView>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                    <Label
+                        Grid.Column="0"
+                        Style="{StaticResource SectionTitle}"
+                        Text="{l:Translate Key=Projects_Log}"
+                        VerticalOptions="Center" />
+                    <Button
+                        x:Name="LogToggleBtn"
+                        Grid.Column="1"
+                        Padding="12,6"
+                        Clicked="OnLogToggle"
+                        FontSize="12"
+                        Style="{StaticResource TertiaryButton}"
+                        VerticalOptions="Center" />
+                </Grid>
+                <VerticalStackLayout x:Name="LogPanelContent" Spacing="0">
+                    <ScrollView x:Name="LogScroll" HeightRequest="140">
+                        <Label x:Name="LogLabel" FontFamily="Consolas" FontSize="11" TextColor="#7FBFB8" LineBreakMode="WordWrap" />
+                    </ScrollView>
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </Border>
     </Grid>

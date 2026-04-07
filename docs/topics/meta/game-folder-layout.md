@@ -36,6 +36,26 @@ This page is the **single reference** for where mod-related files live next to t
 
 Normale **MelonLoader-Mods** (einschließlich FMF-Mods) werden wie gewohnt in **`{GameRoot}/Mods/`** installiert.
 
+## Steam Workshop (Spiel) vs. MelonLoader
+
+Das Spiel legt abonnierte Workshop-Inhalte unter **`{GameRoot}/{ExeName}_Data/StreamingAssets/mods/workshop_<PublishedFileId>/WorkshopUploadContent`** ab (nativer `ModLoader`, nicht MelonLoader).
+
+- **MelonLoader** durchsucht **`{GameRoot}/Mods`** (inkl. Unterordner, je nach Einstellung), **nicht** beliebige Pfade über `Loader.cfg`.
+- **UserData:** MelonLoader-Konfiguration liegt unter **`{GameRoot}/UserData/`** (z. B. **`MelonLoader.cfg`** / je nach Version **`UserData/MelonLoader/Loader.cfg`** — bei Install prüfen). Relevant für Unterordner-Laden: **`disable_subfolder_load = false`**, optional **`disable_subfolder_manifest = true`**.
+- **Workshop-DLLs in den Melon-Scan einbinden:** Junction (oder Symlink) von einem Ordner unter **`Mods/`** auf den **`WorkshopUploadContent`**-Pfad desselben Items, z. B. (PowerShell, Pfade anpassen):
+
+```powershell
+$game = "C:\Path\To\Data Center"
+$id = "12345678901234567"
+$target = Join-Path $game "Data Center_Data\StreamingAssets\mods\workshop_$id\WorkshopUploadContent"
+$link = Join-Path $game "Mods\workshop_$id"
+cmd /c mklink /J "$link" "$target"
+```
+
+Ohne Junction müssen MelonMods weiter physisch unter **`Mods/`** liegen oder über eure Verteilung dort landen.
+
+**WorkshopUploader-Vorlagen (modded):** Unter **`content/`** werden **`Mods/`**, **`Plugins/`** und ein **`ModFramework/`**-Baum angelegt — **`ModFramework/FMF/Plugins`** entspricht dabei **`{GameRoot}/FMF/Plugins`**, wenn ihr **`FMF`** per Junction auf **`…/WorkshopUploadContent/ModFramework/FMF`** zeigen lasst. Weitere Framework-Dateien (Konfiguration, Assets) können unter **`ModFramework/`** gebündelt werden.
+
 ## Siehe auch
 
 - [Meta & operations](/wiki/topics/meta/overview)

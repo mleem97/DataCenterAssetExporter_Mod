@@ -6,9 +6,9 @@ public enum WorkshopTemplateKind
 	/// <summary>Game Object / Decoration style assets (vanilla Workshop delivery).</summary>
 	VanillaObjectDecoration,
 
-	/// <summary>MelonLoader mods — mirror <c>Mods/</c> when installed.</summary>
+	/// <summary>MelonLoader mods — <c>content/Mods</c> mirrors <c>{GameRoot}/Mods</c> when linked from Workshop delivery.</summary>
 	ModdedMelonLoader,
 
-	/// <summary>FrikaModFramework plugins under <c>FMF/Plugins/</c>.</summary>
+	/// <summary>FrikaModFramework — <c>content/ModFramework/FMF/Plugins</c> mirrors <c>{GameRoot}/FMF/Plugins</c>.</summary>
 	ModdedFrikaModFramework,
 }

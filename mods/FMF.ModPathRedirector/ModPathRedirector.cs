@@ -1,90 +1,192 @@
 using System;
+using System.IO;
+using System.Threading;
 using MelonLoader;
+using MelonLoader.Utils;
 
-[assembly: MelonInfo(typeof(ModPathRedirector.ModPathRedirectorMod), "ModPathRedirector", "1.3.0", "DataCenterExporter")]
+[assembly: MelonInfo(typeof(ModPathRedirector.ModPathRedirectorMod), "ModPathRedirector", "1.5.1", "DataCenterExporter")]
 [assembly: MelonGame("Waseku", "Data Center")]
+[assembly: MelonPriority(-10000)]
 
 namespace ModPathRedirector;
 
 /// <summary>
-/// MelonLoader <b>plugin</b> (<c>{GameRoot}/Plugins/</c>). Uses the game's <c>steam_api64.dll</c>
-/// flat API (same Steam session as the executable). Triggers Workshop downloads for subscribed items
-/// once the Steam client and UGC interface are available.
+/// Runs with high priority so <see cref="OnPreModsLoaded"/> executes before other plugins.
+/// After Il2Cpp assembly generation (see Latest.log: Il2CppAssemblyGenerator), blocks MelonMods load until
+/// each subscribed Workshop item is downloaded and present under
+/// <c>{GameRoot}/{ExeName}_Data/StreamingAssets/mods/workshop_&lt;id&gt;/WorkshopUploadContent</c>
+/// (falls back to <c>workshop_&lt;id&gt;</c> alone if the nested folder is not created yet).
 /// </summary>
 public sealed class ModPathRedirectorMod : MelonPlugin
 {
-	private const int MaxFramesWaitForSteam = 1200;
+	private const int SteamInitWaitMs = 90_000;
+	private const int WorkshopSyncMaxWaitMs = 600_000;
+	private const int FolderWaitAfterSteamMs = 180_000;
+	private const int PollMs = 100;
+	private const int ProgressLogIntervalMs = 10_000;
 
-	private int _waitFrames;
-	private bool _workshopTriggered;
-
-	public override void OnApplicationStarted()
+	public override void OnPreModsLoaded()
 	{
-		MelonEvents.OnUpdate.Subscribe(OnUpdateTryTriggerWorkshop, 100);
-	}
+		LoggerInstance.Msg(
+			"ModPathRedirector: After Il2Cpp assembly step — waiting for Workshop content before MelonMods load.");
 
-	private void OnUpdateTryTriggerWorkshop()
-	{
-		if (_workshopTriggered)
-			return;
-
-		if (_waitFrames++ > MaxFramesWaitForSteam)
+		if (!WaitForSteamUgc(SteamInitWaitMs))
 		{
-			_workshopTriggered = true;
-			MelonEvents.OnUpdate.Unsubscribe(OnUpdateTryTriggerWorkshop);
 			LoggerInstance.Warning(
-				"Timed out waiting for Steam; skipped Workshop download trigger.");
+				"ModPathRedirector: Steam UGC not available; continuing without Workshop wait (start Steam & the game from Steam).");
 			return;
 		}
 
-		if (!SteamFlatUgc.TryEnsureUgc(out var steamRunning))
+		if (SteamFlatUgc.FailedResolve)
 		{
-			if (!steamRunning)
-				return;
+			LoggerInstance.Warning("ModPathRedirector: ISteamUGC not resolved; skipping Workshop wait.");
+			return;
+		}
+
+		WaitForSubscribedWorkshopOnDisk();
+	}
+
+	private bool WaitForSteamUgc(int maxMs)
+	{
+		var deadline = DateTime.UtcNow.AddMilliseconds(maxMs);
+		while (DateTime.UtcNow < deadline)
+		{
+			SteamFlatUgc.RunCallbacks();
+			if (SteamFlatUgc.TryEnsureUgc(out var steamOk) && steamOk)
+				return true;
 
 			if (SteamFlatUgc.FailedResolve)
-			{
-				_workshopTriggered = true;
-				MelonEvents.OnUpdate.Unsubscribe(OnUpdateTryTriggerWorkshop);
-				LoggerInstance.Warning(
-					"Could not resolve ISteamUGC from steam_api64.dll (no matching SteamAPI_SteamUGC_v0xx export).");
-			}
+				return false;
 
-			return;
+			Thread.Sleep(PollMs);
 		}
 
-		try
-		{
-			TriggerWorkshopDownloads();
-			_workshopTriggered = true;
-			MelonEvents.OnUpdate.Unsubscribe(OnUpdateTryTriggerWorkshop);
-		}
-		catch (Exception ex)
-		{
-			_workshopTriggered = true;
-			MelonEvents.OnUpdate.Unsubscribe(OnUpdateTryTriggerWorkshop);
-			LoggerInstance.Warning($"Workshop download trigger failed: {ex.Message}");
-		}
+		return SteamFlatUgc.TryEnsureUgc(out _);
 	}
 
-	private void TriggerWorkshopDownloads()
+	private void WaitForSubscribedWorkshopOnDisk()
 	{
 		var count = SteamFlatUgc.GetNumSubscribedItems();
 		if (count == 0)
 		{
-			LoggerInstance.Msg("No subscribed Workshop items.");
+			LoggerInstance.Msg("ModPathRedirector: No subscribed Workshop items; loading MelonMods.");
 			return;
 		}
 
 		var items = new ulong[count];
 		var filled = SteamFlatUgc.GetSubscribedItems(items, count);
 
-		var pending = 0u;
+		RequestDownloadsPerItem(items, filled);
+
+		var modsRoot = GetStreamingModsRoot();
+		var deadline = DateTime.UtcNow.AddMilliseconds(WorkshopSyncMaxWaitMs);
+		var lastLog = DateTime.UtcNow;
+		DateTime? allSteamReadySince = null;
+
+		while (DateTime.UtcNow < deadline)
+		{
+			SteamFlatUgc.RunCallbacks();
+
+			if (!SteamFlatUgc.TryEnsureUgc(out var ok) || !ok)
+			{
+				Thread.Sleep(PollMs);
+				continue;
+			}
+
+			var allSteam = true;
+			for (var i = 0; i < (int)filled; i++)
+			{
+				if (!IsSteamItemReady(items[i]))
+				{
+					allSteam = false;
+					break;
+				}
+			}
+
+			if (!allSteam)
+			{
+				allSteamReadySince = null;
+				if ((DateTime.UtcNow - lastLog).TotalMilliseconds >= ProgressLogIntervalMs)
+				{
+					LogPendingItems(items, filled, modsRoot);
+					lastLog = DateTime.UtcNow;
+				}
+
+				Thread.Sleep(PollMs);
+				continue;
+			}
+
+			if (allSteamReadySince == null)
+				allSteamReadySince = DateTime.UtcNow;
+
+			if (AllWorkshopFoldersExist(items, filled, modsRoot))
+			{
+				LoggerInstance.Msg(
+					$"ModPathRedirector: All {filled} Workshop item(s) are installed (Steam) and workshop_* content exists under StreamingAssets/mods. Loading MelonMods.");
+				return;
+			}
+
+			// Steam client finished, but game may copy to StreamingAssets slightly later
+			if ((DateTime.UtcNow - allSteamReadySince.Value).TotalMilliseconds >= FolderWaitAfterSteamMs)
+			{
+				LoggerInstance.Warning(
+					"ModPathRedirector: Steam reports all items installed, but workshop_* folders are still missing under StreamingAssets/mods. " +
+					"Continuing MelonMods load — if mods are missing, restart once the game has synced Workshop content.");
+				return;
+			}
+
+			if ((DateTime.UtcNow - lastLog).TotalMilliseconds >= ProgressLogIntervalMs)
+			{
+				LoggerInstance.Msg($"ModPathRedirector: Waiting for workshop_*/WorkshopUploadContent under: {modsRoot}");
+				lastLog = DateTime.UtcNow;
+			}
+
+			Thread.Sleep(PollMs);
+		}
+
+		LoggerInstance.Warning(
+			"ModPathRedirector: Timed out waiting for Workshop downloads (Steam). " +
+			"MelonMods will load anyway — let Steam finish, then restart.");
+	}
+
+	private static bool AllWorkshopFoldersExist(ulong[] items, uint filled, string modsRoot)
+	{
+		for (var i = 0; i < (int)filled; i++)
+		{
+			if (!WorkshopItemPresentOnDisk(modsRoot, items[i]))
+				return false;
+		}
+
+		return true;
+	}
+
+	/// <summary>
+	/// Game syncs Workshop content under <c>StreamingAssets/mods/workshop_&lt;id&gt;/WorkshopUploadContent</c>.
+	/// Accept <c>workshop_&lt;id&gt;</c> alone for older layouts or before nested content appears.
+	/// </summary>
+	private static bool WorkshopItemPresentOnDisk(string modsRoot, ulong id)
+	{
+		var workshopDir = Path.Combine(modsRoot, "workshop_" + id);
+		var uploadContent = Path.Combine(workshopDir, "WorkshopUploadContent");
+		return Directory.Exists(uploadContent) || Directory.Exists(workshopDir);
+	}
+
+	private static string GetStreamingModsRoot()
+	{
+		var root = MelonEnvironment.GameRootDirectory;
+		var exe = MelonEnvironment.GameExecutableName;
+		if (string.IsNullOrEmpty(exe))
+			exe = "Data Center";
+
+		return Path.Combine(root, exe + "_Data", "StreamingAssets", "mods");
+	}
+
+	private static void RequestDownloadsPerItem(ulong[] items, uint filled)
+	{
 		for (var i = 0; i < (int)filled; i++)
 		{
 			var id = items[i];
 			var state = SteamFlatUgc.GetItemState(id);
-
 			var installed = (state & SteamFlatUgc.ItemState.Installed) != 0;
 			var downloading = (state & SteamFlatUgc.ItemState.Downloading) != 0;
 			var downloadPending = (state & SteamFlatUgc.ItemState.DownloadPending) != 0;
@@ -96,18 +198,35 @@ public sealed class ModPathRedirectorMod : MelonPlugin
 			if (!downloading && !downloadPending)
 			{
 				if (SteamFlatUgc.DownloadItem(id, true))
-				{
-					pending++;
-					LoggerInstance.Msg($"  Triggered download: workshop_{id}");
-				}
+					MelonLogger.Msg($"ModPathRedirector: Requested download for workshop_{id}");
+			}
+			else
+			{
+				MelonLogger.Msg($"ModPathRedirector: workshop_{id} already downloading / pending.");
 			}
 		}
+	}
 
-		if (pending > 0)
+	private static bool IsSteamItemReady(ulong id)
+	{
+		var state = SteamFlatUgc.GetItemState(id);
+		var installed = (state & SteamFlatUgc.ItemState.Installed) != 0;
+		var downloading = (state & SteamFlatUgc.ItemState.Downloading) != 0;
+		var downloadPending = (state & SteamFlatUgc.ItemState.DownloadPending) != 0;
+		var needsUpdate = (state & SteamFlatUgc.ItemState.NeedsUpdate) != 0;
+		return installed && !needsUpdate && !downloading && !downloadPending;
+	}
+
+	private void LogPendingItems(ulong[] items, uint filled, string modsRoot)
+	{
+		for (var i = 0; i < (int)filled; i++)
+		{
+			var id = items[i];
+			var state = SteamFlatUgc.GetItemState(id);
+			var workshopDir = Path.Combine(modsRoot, "workshop_" + id);
+			var uploadContent = Path.Combine(workshopDir, "WorkshopUploadContent");
 			LoggerInstance.Msg(
-				$"Triggered {pending} Workshop download(s). " +
-				"The game will copy items into StreamingAssets/Mods/workshop_<ID> when ready.");
-		else
-			LoggerInstance.Msg($"All {filled} subscribed Workshop item(s) are up to date.");
+				$"  workshop_{id}: state=0x{state:X}  workshopDir={Directory.Exists(workshopDir)}  WorkshopUploadContent={Directory.Exists(uploadContent)}");
+		}
 	}
 }

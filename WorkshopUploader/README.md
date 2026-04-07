@@ -6,7 +6,7 @@ Desktop app for **Steam Workshop** management, mod browsing, and publishing for 
 
 - **Mod Store** — browse, search, subscribe, favorite, and vote on Workshop items.
 - **Mod Manager** — dependency health checks, MelonLoader status, FMF plugin channels.
-- **Author tools** — create workshop projects from templates, edit metadata, publish with change notes.
+- **Author tools** — create workshop projects from templates, edit metadata, publish with change notes. Modded templates scaffold **`content/Mods`**, **`content/Plugins`**, and **`content/ModFramework/`** (including **`ModFramework/FMF/Plugins`**) so the uploaded tree mirrors **`{GameRoot}`** layout; Steam still receives only the **`content/`** folder — the game copies it into **`WorkshopUploadContent`** (junctions from the game root to those paths remain the player’s responsibility).
 - **Post-upload sync** — after publishing, re-downloads from Steam to keep your local copy in sync.
 - **Headless CLI** — publish from scripts or CI.
 - **Pagination** — all list views support paging through results.

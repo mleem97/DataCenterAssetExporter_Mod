@@ -23,6 +23,13 @@
             <!--  Content (hidden until loaded)  -->
             <VerticalStackLayout x:Name="ContentRoot" IsVisible="False" Spacing="20">
 
+                <HorizontalStackLayout HorizontalOptions="End">
+                    <Button
+                        Clicked="OnRefreshDetail"
+                        Style="{StaticResource SecondaryButton}"
+                        Text="{l:Translate Key=Refresh}" />
+                </HorizontalStackLayout>
+
                 <!--  Header: large preview + title  -->
                 <Grid ColumnDefinitions="160,*" ColumnSpacing="20">
                     <Border Grid.Column="0" StrokeThickness="0" BackgroundColor="#001E1C"
@@ -133,6 +140,17 @@
                                     <Label Text="{l:Translate Key=Detail_Comments}" FontSize="10" TextColor="#5A9E96" HorizontalTextAlignment="Center" />
                                 </VerticalStackLayout>
                             </Grid>
+                        </Border>
+
+                        <!--  Inferred dependencies (tags + description)  -->
+                        <Border x:Name="DependencyCard" Padding="20" StrokeThickness="0" BackgroundColor="#001E1C" IsVisible="False">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <VerticalStackLayout Spacing="8">
+                                <Label Style="{StaticResource SectionTitle}" TextColor="#D7A23B" Text="{l:Translate Key=Detail_DependenciesHeading}" />
+                                <Label x:Name="DependenciesBodyLabel" FontSize="13" TextColor="#E8C87A" LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
                         </Border>
 
                         <!--  Description card  -->

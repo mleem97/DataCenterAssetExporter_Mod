@@ -60,6 +60,7 @@ public partial class AppShell : Shell
 
 		Items.Add(tabBar);
 		Routing.RegisterRoute(nameof(EditorPage), typeof(EditorPage));
+		Routing.RegisterRoute(nameof(NativeConfigEditorPage), typeof(NativeConfigEditorPage));
 		Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
 	}
 

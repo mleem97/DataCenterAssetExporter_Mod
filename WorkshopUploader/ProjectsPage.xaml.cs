@@ -7,6 +7,8 @@ namespace WorkshopUploader;
 
 public partial class ProjectsPage : ContentPage
 {
+	private const string PrefLogExpandedKey = "ui.projects_log_expanded";
+
 	private readonly WorkspaceService _workspace;
 	private readonly AppLogService _log;
 	private readonly ObservableCollection<ProjectTileVm> _projects = new();
@@ -44,8 +46,24 @@ public partial class ProjectsPage : ContentPage
 
 		WorkspacePathLabel.Text = _workspace.WorkspaceRoot;
 		_log.LineAppended += OnLogAppended;
+		ApplyLogPanelStateFromPreferences();
 		ReloadProjects();
 		_log.Append(S.Get("Projects_Ready"));
+	}
+
+	private void ApplyLogPanelStateFromPreferences()
+	{
+		var expanded = Preferences.Default.Get(PrefLogExpandedKey, true);
+		LogPanelContent.IsVisible = expanded;
+		LogToggleBtn.Text = expanded ? S.Get("Projects_LogCollapse") : S.Get("Projects_LogExpand");
+	}
+
+	private void OnLogToggle(object? sender, EventArgs e)
+	{
+		var expanded = !LogPanelContent.IsVisible;
+		LogPanelContent.IsVisible = expanded;
+		LogToggleBtn.Text = expanded ? S.Get("Projects_LogCollapse") : S.Get("Projects_LogExpand");
+		Preferences.Default.Set(PrefLogExpandedKey, expanded);
 	}
 
 	protected override void OnDisappearing()
@@ -85,7 +103,9 @@ public partial class ProjectsPage : ContentPage
 		{
 			if (string.IsNullOrEmpty(q) ||
 			    vm.Name.Contains(q, StringComparison.OrdinalIgnoreCase) ||
-			    vm.RootPath.Contains(q, StringComparison.OrdinalIgnoreCase))
+			    vm.RootPath.Contains(q, StringComparison.OrdinalIgnoreCase) ||
+			    vm.Title.Contains(q, StringComparison.OrdinalIgnoreCase) ||
+			    (!string.IsNullOrEmpty(vm.Tags) && vm.Tags.Contains(q, StringComparison.OrdinalIgnoreCase)))
 			{
 				_projects.Add(vm);
 			}

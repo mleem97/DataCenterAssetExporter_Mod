@@ -434,6 +434,10 @@ public sealed class SteamWorkshopService
 			.ToList();
 
 		target.NeedsFmf = localSnapshot.NeedsFmf;
+		target.NeedsMelonLoader = localSnapshot.NeedsMelonLoader;
+		target.NativeConfigProfile = string.IsNullOrWhiteSpace(localSnapshot.NativeConfigProfile)
+			? "decoration"
+			: localSnapshot.NativeConfigProfile;
 		target.PreviewImageRelativePath = localSnapshot.PreviewImageRelativePath ?? "preview.png";
 		target.AdditionalPreviews = new List<string>(localSnapshot.AdditionalPreviews);
 	}
@@ -814,12 +818,16 @@ public sealed class SteamWorkshopService
 
 	private static WorkshopItemDetailVm MapItemToVm(Item item)
 	{
+		var tags = item.Tags ?? [];
+		var description = item.Description ?? "";
+		var dep = WorkshopDependencyInference.Infer(tags, description);
+
 		return new WorkshopItemDetailVm
 		{
 			PublishedFileId = item.Id.Value,
 			Title = string.IsNullOrWhiteSpace(item.Title) ? $"Item {item.Id.Value}" : item.Title,
-			Description = item.Description ?? "",
-			Tags = item.Tags ?? [],
+			Description = description,
+			Tags = tags,
 			OwnerName = item.Owner.Name ?? "",
 			OwnerSteamId = item.Owner.Id.Value,
 			PreviewImageUrl = item.PreviewImageUrl ?? "",
@@ -842,6 +850,9 @@ public sealed class SteamWorkshopService
 			ChangelogUrl = item.ChangelogUrl ?? "",
 			StatsUrl = item.StatsUrl ?? "",
 			CommentsUrl = item.CommentsUrl ?? "",
+			DependencyHintCompact = dep.CompactLine,
+			DependencyHintBlock = dep.BulletBlock,
+			HasDependencyHints = dep.HasAny,
 		};
 	}
 

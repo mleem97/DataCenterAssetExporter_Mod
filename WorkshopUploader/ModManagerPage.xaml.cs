@@ -25,6 +25,7 @@ public partial class ModManagerPage : ContentPage
 	private bool _installedHasMore;
 	private int _favoritesPage = 1;
 	private bool _favoritesHasMore;
+	private string _currentTab = "store";
 
 	public ModManagerPage(
 		SteamWorkshopService steam,
@@ -64,8 +65,29 @@ public partial class ModManagerPage : ContentPage
 	private void OnTabFavorites(object? sender, EventArgs e) => SwitchToTab("favorites");
 	private void OnTabHealth(object? sender, EventArgs e) => SwitchToTab("health");
 
+	private void OnRefreshCurrentTab(object? sender, EventArgs e)
+	{
+		switch (_currentTab)
+		{
+			case "store":
+				_ = LoadStoreAsync();
+				break;
+			case "installed":
+				_ = LoadInstalledAsync();
+				break;
+			case "favorites":
+				_ = LoadFavoritesAsync();
+				break;
+			case "health":
+				RefreshChecks();
+				RefreshPluginList();
+				break;
+		}
+	}
+
 	private void SwitchToTab(string tab)
 	{
+		_currentTab = tab;
 		StoreView.IsVisible = tab == "store";
 		InstalledView.IsVisible = tab == "installed";
 		FavoritesView.IsVisible = tab == "favorites";

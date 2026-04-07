@@ -26,6 +26,16 @@ public sealed class WorkshopMetadata
 	[JsonPropertyName("needsFmf")]
 	public bool NeedsFmf { get; set; }
 
+	/// <summary>When true, upload appends a MelonLoader requirement + link to the Steam description if not already mentioned.</summary>
+	[JsonPropertyName("needsMelonLoader")]
+	public bool NeedsMelonLoader { get; set; }
+
+	/// <summary>
+	/// <c>decoration</c> — native shop/static items in <c>config.json</c>. <c>code</c> — only native DLL entries; code mods use MelonLoader, not shop/static in this file.
+	/// </summary>
+	[JsonPropertyName("nativeConfigProfile")]
+	public string NativeConfigProfile { get; set; } = "decoration";
+
 	[JsonPropertyName("additionalPreviews")]
 	public List<string> AdditionalPreviews { get; set; } = new();
 }

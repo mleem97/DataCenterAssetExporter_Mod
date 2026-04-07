@@ -95,6 +95,8 @@ public static class MauiProgram
 			builder.Services.AddSingleton<ModManagerPage>();
 			builder.Services.AddSingleton<SettingsPage>();
 			builder.Services.AddTransient<EditorPage>();
+			builder.Services.AddTransient<NativeConfigEditorPage>(sp =>
+				new NativeConfigEditorPage(sp.GetRequiredService<WorkspaceService>()));
 			builder.Services.AddTransient<ItemDetailPage>();
 			builder.Services.AddSingleton<AppShell>();
 

@@ -9,6 +9,7 @@ public partial class ItemDetailPage : ContentPage
 {
 	private readonly SteamWorkshopService _steam;
 	private WorkshopItemDetailVm? _item;
+	private ulong _fileId;
 
 	public string FileId
 	{
@@ -16,6 +17,7 @@ public partial class ItemDetailPage : ContentPage
 		{
 			if (ulong.TryParse(value, out var id))
 			{
+				_fileId = id;
 				_ = LoadItemAsync(id);
 			}
 		}
@@ -25,6 +27,16 @@ public partial class ItemDetailPage : ContentPage
 	{
 		InitializeComponent();
 		_steam = steam;
+	}
+
+	private async void OnRefreshDetail(object? sender, EventArgs e)
+	{
+		if (_fileId == 0)
+		{
+			return;
+		}
+
+		await LoadItemAsync(_fileId);
 	}
 
 	private async Task LoadItemAsync(ulong fileId)
@@ -72,6 +84,9 @@ public partial class ItemDetailPage : ContentPage
 		CreatedLabel.Text = item.Created.ToString("d");
 		UpdatedLabel.Text = item.Updated.ToString("d");
 		DescriptionLabel.Text = string.IsNullOrWhiteSpace(item.Description) ? S.Get("Detail_NoDescription") : item.Description;
+
+		DependencyCard.IsVisible = item.HasDependencyHints;
+		DependenciesBodyLabel.Text = item.DependencyHintBlock;
 
 		VisibilitySidebarLabel.Text = item.Visibility;
 		FileIdLabel.Text = item.PublishedFileId.ToString();

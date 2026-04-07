@@ -65,6 +65,9 @@ internal static class SteamFlatUgc
 	[return: MarshalAs(UnmanagedType.I1)]
 	private static extern bool ISteamUGC_DownloadItem(IntPtr instancePtr, ulong nPublishedFileID, [MarshalAs(UnmanagedType.I1)] bool bHighPriority);
 
+	[DllImport(SteamDllName, EntryPoint = "SteamAPI_RunCallbacks", CallingConvention = CallingConvention.Cdecl)]
+	private static extern void SteamAPI_RunCallbacks();
+
 	/// <summary>
 	/// True when the Steam client is running and an <c>ISteamUGC*</c> pointer was obtained.
 	/// </summary>
@@ -173,4 +176,19 @@ internal static class SteamFlatUgc
 
 	internal static bool DownloadItem(ulong publishedFileId, bool highPriority)
 		=> ISteamUGC_DownloadItem(_ugc, publishedFileId, highPriority);
+
+	/// <summary>Pump Steam client callbacks (helps UGC download state progress).</summary>
+	internal static void RunCallbacks()
+	{
+		if (_module == IntPtr.Zero)
+			return;
+		try
+		{
+			SteamAPI_RunCallbacks();
+		}
+		catch
+		{
+			// ignored
+		}
+	}
 }
