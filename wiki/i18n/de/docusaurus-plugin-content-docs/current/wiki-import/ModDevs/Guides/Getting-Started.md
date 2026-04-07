@@ -1,13 +1,13 @@
-# Getting Started
+# Getting Started EN
 
-## Schritte
+## Steps
 
-1. FrikaMF lokal bauen (`dotnet build`).
-2. Mod-Projekt anlegen.
-3. Runtime-Abhängigkeit auf `FrikaModdingFramework` prüfen.
-4. Hooks/Events aus der Referenz verwenden.
+1. Build FrikaMF locally (`dotnet build`).
+2. Create your mod project.
+3. Validate runtime dependency on `FrikaModdingFramework`.
+4. Use hooks/events from the reference pages.
 
-## Weiter
+## Next
 
-- [Hook Event Reference](../Reference/Hook-Event-Reference)
-- [Troubleshooting](../Troubleshooting/)
+- [Hook Event Reference EN](../Reference/Hook-Event-Reference)
+- [Troubleshooting EN](../Troubleshooting/overview)

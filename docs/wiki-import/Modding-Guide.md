@@ -1,5 +1,9 @@
-# Modding Guide EN
+---
+title: Modding-Guide
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-This page was moved to:
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-- [ModDevs/Guides/Getting-Started](ModDevs/Guides/Getting-Started)

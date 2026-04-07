@@ -1,11 +1,11 @@
-# EndUser Index
+# EndUser Index EN
 
-Zielgruppe: Nutzer, die FrikaMF als Abhängigkeit verwenden möchten.
+Audience: users who want to use FrikaMF as a dependency.
 
-## Inhalte
+## Contents
 
-- [Framework Dependency Usage](Guides/Framework-Dependency)
-- [FAQ](Troubleshooting/FAQ)
-- [Troubleshooting](Troubleshooting/)
-- [Disclaimer](Reference/Disclaimer)
+- [Framework Dependency Usage EN](Guides/Framework-Dependency)
+- [FAQ EN](Troubleshooting/FAQ)
+- [Troubleshooting EN](Troubleshooting/overview)
+- [Disclaimer EN](Reference/Disclaimer)
 - [AI Usage Policy](../AI-USAGE)

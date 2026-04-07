@@ -1,10 +1,10 @@
-# ModDevs Index
+# ModDevs Index EN
 
-Zielgruppe: Entwickler, die Mods auf FrikaMF aufbauen.
+Audience: developers building mods on top of FrikaMF.
 
-## Inhalte
+## Contents
 
-- [Getting Started](Guides/Getting-Started)
-- [Hook Event Reference](Reference/Hook-Event-Reference)
-- [Troubleshooting](Troubleshooting/)
+- [Getting Started EN](Guides/Getting-Started)
+- [Hook Event Reference EN](Reference/Hook-Event-Reference)
+- [Troubleshooting EN](Troubleshooting/overview)
 - [AI Usage Policy](../AI-USAGE)

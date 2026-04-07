@@ -1,13 +1,9 @@
-# Getting Started EN
+---
+title: Getting-Started
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-## Steps
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-1. Build FrikaMF locally (`dotnet build`).
-2. Create your mod project.
-3. Validate runtime dependency on `FrikaModdingFramework`.
-4. Use hooks/events from the reference pages.
-
-## Next
-
-- [Hook Event Reference EN](../Reference/Hook-Event-Reference)
-- [Troubleshooting EN](../Troubleshooting/overview)

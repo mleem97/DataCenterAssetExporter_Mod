@@ -1,3 +1,3 @@
-# Guides Index
+# Guides Index EN
 
-- [Getting Started](Getting-Started)
+- [Getting Started EN](Getting-Started)

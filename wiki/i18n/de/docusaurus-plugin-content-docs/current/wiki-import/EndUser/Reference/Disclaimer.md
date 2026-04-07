@@ -1,11 +1,11 @@
-# Disclaimer
+# Disclaimer EN
 
-- FrikaMF ist inoffiziell und community-getrieben.
-- Nutzung auf eigenes Risiko.
-- Keine Garantie für Kompatibilität nach Spielupdates.
-- Keine Affiliation mit WASEKU.
+- FrikaMF is unofficial and community-driven.
+- Use at your own risk.
+- No compatibility guarantees after game updates.
+- No affiliation with WASEKU.
 
-## Richtlinien
+## Policies
 
 - [AI Usage Policy (Wiki)](../../AI-USAGE)
 - [AI Usage Policy (Root)](/wiki/wiki-import/AI-USAGE)

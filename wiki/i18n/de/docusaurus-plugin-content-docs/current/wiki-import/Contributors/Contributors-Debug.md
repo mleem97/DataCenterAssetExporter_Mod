@@ -1,106 +1,53 @@
 ---
-title: Contributors (Debug)
-description: "Beitrag zum Framework selbst: Setup, Hook-Workflow, Konventionen, PR-Checks und CI-Verhalten."
-sidebar_position: 40
+title: Contributors (Debug) EN
+description: Framework contributor setup, hook workflow, conventions, CI behavior, and PR checklist.
+sidebar_position: 140
 tags:
   - audience:contributor
 ---
 
 ## Contributors (Debug)
 
-Diese Seite ist für Entwickler, die direkt am `FrikaModdingFramework` arbeiten.
+This page is for contributors working on FrikaMF itself.
 
-Für die vollständige, laufend zu pflegende Feature-Matrix mit Implementierungs-Use-Cases siehe [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases).
+For the complete and maintainable feature matrix with implementation use cases, see [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases).
 
-## Dev-Setup
-
-### Voraussetzungen
-
-- Windows mit installiertem `Data Center`
-- .NET SDK 6+
-- Rust Toolchain (für FFI-/Bridge-Arbeiten)
-- MelonLoader installiert und mindestens ein Spielstart
-
-### Build-Kommandos
+## Dev setup
 
 ```powershell
 dotnet build .\framework\framework/FrikaMF.csproj -c Debug -nologo
 cargo build --release
 ```
 
-Mit explizitem Spielpfad:
+Optional game path override:
 
 ```powershell
-dotnet build .\framework\framework/FrikaMF.csproj /p:GameDir="C:\Pfad\zu\Data Center"
+dotnet build .\framework\framework/FrikaMF.csproj /p:GameDir="C:\Path\To\Data Center"
 ```
 
-## Projektstruktur (kurz erklärt)
+## Add a new hook workflow
 
-- `FrikaMF/`: Runtime Bridge, Hooks, Dispatcher, API-Tabelle
-- `FrikaMF/ModigAPIs/`: höhere API-Fassaden
-- `Events/`: Event-Contracts
-- `.wiki/`: editierbare Wiki-Quelle
-- `scripts/`: Build-/Release-/Sync-Automation
+1. Find target in dnSpy/dotPeek.
+2. Update `HOOKS.md`.
+3. Add Harmony patch.
+4. Add event id + dispatch wiring.
+5. Add/update Rust ABI event handling if needed.
+6. Test locally.
+7. Open PR.
 
-## Workflow: Neuen Hook hinzufügen (Schritt für Schritt)
+## Conventions
 
-1. **dnSpy/dotPeek:** Zielmethode finden und Signatur prüfen.
-2. **Dokumentation:** Eintrag in [`HOOKS.md`](/wiki/wiki-import/HOOKS) hinzufügen/aktualisieren.
-3. **Patch:** Harmony Patch in `FrikaMF/HarmonyPatches.cs` ergänzen.
-4. **Bridge:** Event-ID in `EventIds.cs` und Dispatch in `EventDispatcher.cs` ergänzen.
-5. **Rust-Vertrag:** Falls benötigt, C-ABI-Struktur + `mod_on_event` Vertrag ergänzen.
-6. **Test:** Build + Laufzeitprüfung.
-7. **PR:** Kleine, atomare Commits + nachvollziehbare Beschreibung.
+- Keep ABI structs blittable.
+- Keep wrappers in framework, gameplay policy in mods.
+- Use stable event names and explicit contracts.
 
-## Konventionen
+## IL2CPP pitfalls
 
-### Namensgebung
+- `b###` compiler-generated members are unstable.
+- Coroutine state-machine types (`d##`) are unstable.
+- Prefer Postfix first unless behavior blocking is required.
 
-- Hooks: `Patch_<Klasse>_<Methode>`
-- Event IDs: sprechende, stabile Namen in `EventIds.cs`
-- Rust Exports: `mod_info`, `mod_init`, `mod_on_event`, etc.
-
-### Wrapper vs. Mod-Logik
-
-- **Wrapper/Bridge (Framework):** Stabilität, Marshalling, Sicherheitschecks
-- **Mod (Feature-Logik):** Gameplay-Verhalten, Policies, UI
-
-### Blittable-Typen-Regel
-
-Für C-ABI Datenstrukturen nur blittable Felder verwenden (z. B. `int`, `float`, fixed-size buffers, Pointer). Keine managed Referenztypen in ABI-Structs.
-
-## IL2CPP-Fallstricke
-
-- `b###`-Suffixe: compiler-generierte Member, oft instabil zwischen Spielversionen.
-- Coroutine-Compiler-Typen (`d##`/Iterator-State): ebenfalls instabil.
-- Prefix bei mutierenden Methoden kann Seiteneffekte blockieren; Postfix oft sicherer.
-
-## DC2WEB Contributor-Hinweise
-
-Neue Komponenten:
-
-- `FrikaMF/DC2WebBridge.cs`
-- `FrikaMF/ModSettingsMenuBridge.cs`
-
-Hook-Fluss:
-
-- `MainMenu.Settings` öffnet Settings-Auswahl (Game vs Mod)
-- `MainMenu.Start`, `HRSystem.OnEnable`, `ComputerShop.InteractOnClick` triggern Web-/UI-Anwendung
-
-Erweiterungspunkte:
-
-- `IDc2WebFrameworkAdapter` für weitere Frameworks
-- `Dc2WebAppDescriptor` für komplexere App-Bundles
-- `Dc2WebImageAsset` für Asset-Pipelines (SVG-first)
-
-Aktuelle technische Grenze:
-
-- Kein eingebetteter Browser/DOM/JS-Engine-Laufzeitstack.
-- React/TS/JS laufen über Übersetzungsadapter auf Unity-UI-Profile.
-
-Details: [`Web UI Bridge (DC2WEB)`](/wiki/wiki-import/Web-UI-Bridge)
-
-## Lua/Python/Web FFI Contributor Notes
+## Lua/Python/Web FFI contributor notes
 
 Current core status:
 
@@ -111,35 +58,24 @@ Current core status:
 
 Contribution guidance:
 
-- Treat Lua/Python support as sidecar integration work, not as existing core runtime features.
-- Keep Unity and IL2CPP access in C# or Rust boundaries; do not expose raw Unity objects over external transport.
-- If adding web transport, define strict command schemas, authentication for non-local access, and rate limits.
-- Document every added transport/ABI contract in `Framework-Features-Use-Cases` and `FFI-Bridge-Reference`.
+- Treat Lua/Python as sidecar integration work unless core runtime hosting is explicitly added.
+- Keep Unity and IL2CPP access constrained to C#/Rust boundaries.
+- If adding transport, define strict command schemas, authentication for non-local access, and rate limits.
 
-## CI-Pipeline (warum Builds in CI anders sind)
+## CI behavior
 
-- CI läuft ohne lokale Spielinstallation.
-- In `framework/FrikaMF.csproj` wird `$(CI)=true` verwendet, um lokale Referenzvalidierung zu überspringen.
-- Lokal gilt: ohne erzeugte MelonLoader-/Interop-Dateien scheitert der Build absichtlich mit klarer Fehlermeldung.
+- CI runs without game installation.
+- `$(CI)=true` skips local game reference validation.
+- Local builds require MelonLoader-generated interop files.
 
-## PR-Checkliste
+## PR checklist
 
-- [ ] Hook in `HOOKS.md` dokumentiert (inkl. Verifikationsstatus)
-- [ ] Event-ID/Dispatch konsistent ergänzt
-- [ ] Build lokal erfolgreich (`Debug` mindestens)
-- [ ] Wiki/Docs bei API-Änderung aktualisiert
-- [ ] Keine irrelevanten Format-/Refactor-Änderungen
-- [ ] Commit Messages als Conventional Commits
+- [ ] `HOOKS.md` updated
+- [ ] Build passes locally
+- [ ] Docs updated
+- [ ] Conventional Commits used
 
-## Commit-Konvention (Conventional Commits)
-
-Beispiele:
-
-- `feat(hooks): add CustomerBase performance event`
-- `fix(ffi): guard null ptr in mod_on_event`
-- `docs(wiki): document IL2CPP hook pitfalls`
-
-## Contributor-Referenzbeispiel (beide Sprachen)
+## Example pair
 
 ### 🦀 Rust
 
@@ -148,14 +84,6 @@ Beispiele:
 pub struct MoneyChanged {
     pub old_value: i32,
     pub new_value: i32,
-}
-
-#[no_mangle]
-pub extern "C" fn mod_on_event(event_id: u32, data_ptr: *const u8, data_len: u32) {
-    if event_id == 1 && data_len as usize == core::mem::size_of::<MoneyChanged>() {
-        let payload = unsafe { &*(data_ptr as *const MoneyChanged) };
-        let _delta = payload.new_value - payload.old_value;
-    }
 }
 ```
 
@@ -167,11 +95,5 @@ public struct MoneyChanged
 {
     public int OldValue;
     public int NewValue;
-}
-
-public static void FireMoneyChanged(int oldValue, int newValue)
-{
-    var payload = new MoneyChanged { OldValue = oldValue, NewValue = newValue };
-    EventDispatcher.Dispatch(EventIds.MoneyChanged, payload);
 }
 ```

@@ -1,12 +1,12 @@
-# Naming Convention
+# Naming Convention EN
 
-## Einheitlicher Standard
+## Unified Standard
 
-- Ordner: `PascalCase`
-- Dateien: `Title-Case-Kebab.md`
-- Englisch-Spiegel: `-en` Suffix (`Page-Name-en.md`)
+- Folders: `PascalCase`
+- Files: `Title-Case-Kebab.md`
+- English mirror: `-en` suffix (`Page-Name-en.md`)
 
-## Beispiele
+## Examples
 
 - `EndUser/Guides/Framework-Dependency.md`
 - `EndUser/Guides/Framework-Dependency-en.md`

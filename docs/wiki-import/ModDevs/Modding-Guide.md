@@ -1,8 +1,9 @@
-# Modding Guide EN
+---
+title: Modding-Guide
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-English mirror page.
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-The maintained canonical page is currently:
-
-- [Modding Guide](Modding-Guide)
-- [Lua FFI — How to Start Developing (DE + EN)](/wiki/wiki-import/Lua-FFI-Start-Developing)

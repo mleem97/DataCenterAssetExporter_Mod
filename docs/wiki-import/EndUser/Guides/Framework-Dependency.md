@@ -1,17 +1,9 @@
-# Framework Dependency Usage EN
+---
+title: Framework-Dependency
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-## Goal
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-Use FrikaMF as a stable runtime dependency for custom mods.
-
-## Steps
-
-1. Place `FrikaModdingFramework.dll` in your `Mods` folder.
-2. Build your mod with runtime dependency checks.
-3. Disable gracefully if the dependency is missing.
-
-## Next Pages
-
-- [FAQ EN](../Troubleshooting/FAQ)
-- [Troubleshooting EN](../Troubleshooting/overview)
-- [Disclaimer EN](../Reference/Disclaimer)

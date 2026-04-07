@@ -1,5 +1,5 @@
-# Mod-Developer (Debug)
+# Mod-Developer (Debug) EN
 
-Diese Seite wurde verschoben nach:
+This page was moved to:
 
-- [ModDevs/Index](/wiki/wiki-import/ModDevs/)
+- [ModDevs](ModDevs/)

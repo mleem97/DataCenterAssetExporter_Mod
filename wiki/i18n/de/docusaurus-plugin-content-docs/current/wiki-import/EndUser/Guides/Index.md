@@ -1,3 +1,3 @@
-# Guides Index
+# Guides Index EN
 
-- [Framework Dependency Usage](Framework-Dependency)
+- [Framework Dependency Usage EN](Framework-Dependency)

@@ -1,11 +1,11 @@
-# TechnicalReference Index
+# TechnicalReference Index EN
 
-Technische Kernreferenz für Hooking, Runtime-Bridges und API-Verträge.
+Core technical reference for hooks, runtime bridges, and API contracts.
 
-## Inhalte
+## Contents
 
 - [Hooks](../HOOKS)
 - [Hook Naming Convention](../HOOK-NAMING-CONVENTION)
 - [FFI Bridge Reference](../FFI-Bridge-Reference)
-- [Framework Features & Use Cases](../Framework-Features-Use-Cases)
+- [Framework Features & Use Cases EN](../Framework-Features-Use-Cases)
 - [Architecture](../Architecture)

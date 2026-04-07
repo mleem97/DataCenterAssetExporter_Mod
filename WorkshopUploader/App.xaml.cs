@@ -7,10 +7,12 @@ public partial class App : Application
 	public App(AppShell shell)
 	{
 		// #region agent log
+		DebugNdjsonSessionLog.Write("H5", "Maui.App.ctor", "before_init", null);
 		DebugSessionLog.Write("H2", "App.ctor", "before_init", null);
 		// #endregion
 		InitializeComponent();
 		// #region agent log
+		DebugNdjsonSessionLog.Write("H5", "Maui.App.ctor", "after_init", null);
 		DebugSessionLog.Write("H2", "App.ctor", "after_init", null);
 		// #endregion
 		_shell = shell;
@@ -18,6 +20,9 @@ public partial class App : Application
 
 	protected override Window CreateWindow(IActivationState? activationState)
 	{
+		// #region agent log
+		DebugNdjsonSessionLog.Write("H5", "App.CreateWindow", "entry", null);
+		// #endregion
 		var window = new Window(_shell) { Title = "GregTools Modmanager" };
 
 		window.Created += (_, _) =>

@@ -1,9 +1,9 @@
-# Contribution Workflow
+# Contribution Workflow EN
 
-## Kurzablauf
+## Quick Flow
 
-1. Branch erstellen.
-2. Änderungen klein und atomar halten.
-3. Conventional Commits verwenden.
-4. Doku und Links mitziehen.
-5. PR mit klarer Beschreibung erstellen.
+1. Create a branch.
+2. Keep changes small and atomic.
+3. Use Conventional Commits.
+4. Update docs and links together.
+5. Open a PR with a clear description.

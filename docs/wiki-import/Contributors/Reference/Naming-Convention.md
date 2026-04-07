@@ -1,12 +1,9 @@
-# Naming Convention EN
+---
+title: Naming-Convention
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-## Unified Standard
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-- Folders: `PascalCase`
-- Files: `Title-Case-Kebab.md`
-- English mirror: `-en` suffix (`Page-Name-en.md`)
-
-## Examples
-
-- `EndUser/Guides/Framework-Dependency.md`
-- `EndUser/Guides/Framework-Dependency-en.md`

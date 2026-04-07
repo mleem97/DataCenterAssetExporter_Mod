@@ -66,6 +66,8 @@ Nur neu kompilieren, wenn Publish schon da ist: `.\build.ps1 -SkipPublish`. Das 
 
 **Update / Neuinstallation:** Gleiche **`AppId`** wie zuvor — Setup erkennt die bestehende Installation und **überschreibt** den Zielordner (`Program Files\GregTools Modmanager`). Vorher wird eine **laufende** `WorkshopUploader.exe` über den Windows-Restart-Manager geschlossen (`CloseApplications`). Die portable Variante **`install-local.ps1`** beendet die App ebenfalls und ersetzt den Installationsordner komplett.
 
+**Startet nach dem Setup nicht:** Der Assistent läuft mit Admin-Rechten; die **Abschluss-Aktion** startet die App mit **`runasoriginaluser`**, damit sie **nicht** im erhöhten Kontext läuft (WinUI/WebView2/MAUI verträgt das oft nicht). Verknüpfungen starten ohnehin normal. Wenn es weiter hakt: Ereignisanzeige, und testweise `CloseApplications=no` in `GregToolsModmanager.iss`.
+
 **Signatur:** Mit einer **öffentlichen CA** verschwindet der „Unbekannter Herausgeber“-Eindruck für Nutzer weitgehend; mit **Self-Signed** kannst du trotzdem z. B. **mleem97 / Greg Modding Team** im Zertifikat anzeigen — siehe **`installer\CODE_SIGNING.md`**. Self-Signed anlegen: **`.\installer\create-selfsigned-codesign-cert.ps1`**. Nur signieren **ohne Inno Setup**: **`.\build.ps1 -SignOnly`** (`CODE_SIGN_THUMBPRINT` setzen, Setup-EXE in `installer\Output\` oder `-SetupPath`).
 
 ### Schnell ohne Setup-EXE (nur Kopie + Verknüpfungen)

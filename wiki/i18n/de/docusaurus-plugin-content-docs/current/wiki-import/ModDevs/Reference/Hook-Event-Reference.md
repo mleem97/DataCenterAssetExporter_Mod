@@ -1,10 +1,10 @@
-# Hook Event Reference
+# Hook Event Reference EN
 
-Primäre Quelle:
+Primary source:
 
 - [HOOKS](../../HOOKS)
 - [Hook Naming Convention](../../HOOK-NAMING-CONVENTION)
 
-Ergänzend:
+Additional:
 
 - [FFI Bridge Reference](../../FFI-Bridge-Reference)

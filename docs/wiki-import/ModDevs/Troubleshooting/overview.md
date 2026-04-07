@@ -1,7 +1,9 @@
-# Troubleshooting EN
+---
+title: overview
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-## Verify
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-1. Validate hook signatures against `HOOKS`.
-2. Check `MelonLoader/Latest.log` and framework logs.
-3. Match game version and FrikaMF version.

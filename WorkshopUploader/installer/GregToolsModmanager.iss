@@ -25,7 +25,7 @@ DefaultDirName={autopf64}\{#MyAppName}
 UsePreviousAppDir=yes
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-; Vor Update/Reinstall laufende Instanz schließen, damit EXE/DLL überschrieben werden können.
+; Vor Update/Reinstall laufende Instanz schließen (Restart Manager). Bei Problemen beim Start auf „no“ setzen.
 CloseApplications=yes
 RestartApplications=no
 PrivilegesRequired=admin
@@ -62,4 +62,5 @@ Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
 Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+; runasoriginaluser: App als normaler Benutzer starten (nicht vererbt „Als Administrator“ vom Setup).
+Filename: "{app}\{#MyAppExeName}"; WorkingDir: "{app}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent runasoriginaluser

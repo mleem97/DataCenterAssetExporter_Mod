@@ -9,6 +9,14 @@ public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
+		// #region agent log
+		DebugNdjsonSessionLog.Write("H1", "MauiProgram.CreateMauiApp", "entry", new
+		{
+			baseDir = AppContext.BaseDirectory,
+			tempLog = DebugNdjsonSessionLog.LogPath,
+			args = Environment.GetCommandLineArgs(),
+		});
+		// #endregion
 		S.ApplySavedCulture();
 		// #region agent log
 		AppDomain.CurrentDomain.UnhandledException += (_, e) =>
@@ -57,11 +65,15 @@ public static class MauiProgram
 				// ignored — Steam init may still work if cwd is already correct
 			}
 
-			SteamApiNativeLoader.TryPreload();
+			var steamOk = SteamApiNativeLoader.TryPreload();
+			// #region agent log
+			DebugNdjsonSessionLog.Write("H4", "MauiProgram.CreateMauiApp", "after_steam_preload", new { steamOk });
+			// #endregion
 
 			if (HeadlessRunner.TryHandle(Environment.GetCommandLineArgs(), out var exitCode))
 			{
 				// #region agent log
+				DebugNdjsonSessionLog.Write("H3", "MauiProgram.CreateMauiApp", "headless_exit", new { exitCode });
 				DebugSessionLog.Write("H4", "MauiProgram.CreateMauiApp", "headless_exit", new { exitCode });
 				// #endregion
 				Environment.Exit(exitCode);
@@ -105,12 +117,14 @@ public static class MauiProgram
 #endif
 
 			// #region agent log
+			DebugNdjsonSessionLog.Write("H1", "MauiProgram.CreateMauiApp", "before_build", null);
 			DebugSessionLog.Write("H1", "MauiProgram.CreateMauiApp", "before_build", null);
 			// #endregion
 
 			var app = builder.Build();
 
 			// #region agent log
+			DebugNdjsonSessionLog.Write("H1", "MauiProgram.CreateMauiApp", "after_build", new { ok = true });
 			DebugSessionLog.Write("H1", "MauiProgram.CreateMauiApp", "after_build", null);
 			// #endregion
 
@@ -119,6 +133,7 @@ public static class MauiProgram
 		catch (Exception ex)
 		{
 			// #region agent log
+			DebugNdjsonSessionLog.Write("H1", "MauiProgram.CreateMauiApp", "exception", new { ex.Message, exType = ex.GetType().FullName, ex.StackTrace });
 			DebugSessionLog.Write("H1", "MauiProgram.CreateMauiApp", "exception", new { ex.Message, ex.StackTrace });
 			// #endregion
 			throw;

@@ -1,17 +1,13 @@
----
-slug: troubleshooting-details
----
+# Troubleshooting EN
 
-# Troubleshooting
+## Standard Checks
 
-## Standard-Checks
+1. Check `MelonLoader/Latest.log`.
+2. Verify game/FrikaMF/mod versions.
+3. Confirm `FrikaModdingFramework.dll` is available.
 
-1. `MelonLoader/Latest.log` prüfen.
-2. Versionen von Spiel/FrikaMF/Mod vergleichen.
-3. Abhängigkeit auf `FrikaModdingFramework.dll` prüfen.
-
-## Häufige Fehler
+## Common Errors
 
 - `MissingMethodException`
 - `TypeLoadException`
-- Fehlende Runtime-Abhängigkeit
+- Missing runtime dependency

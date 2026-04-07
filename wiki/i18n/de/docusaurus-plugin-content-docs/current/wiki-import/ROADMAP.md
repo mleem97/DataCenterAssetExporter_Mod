@@ -1,7 +1,9 @@
-# Legacy Roadmap Archive
+---
+title: ROADMAP
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-This page is archived and kept only for historical references.
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-Use the canonical roadmap page:
-
-- [Unified Roadmap](/wiki/roadmap/unified-roadmap)

@@ -1,157 +1,66 @@
 ---
-title: End-User (Release)
-description: Installation, Updates, Fehlerbehebung und Deinstallation für Nutzer von FrikaModdingFramework als Mod-Abhängigkeit.
-sidebar_position: 20
+title: End-User (Release) EN
+description: Installation, updates, troubleshooting, and uninstall guide for players using FrikaMF as a dependency.
+sidebar_position: 120
 tags:
   - audience:enduser
 ---
 
 ## End-User (Release)
 
-Diese Seite ist für Spieler gedacht, die **keine Mods entwickeln**, sondern FrikaMF nur als Abhängigkeit für andere Mods nutzen.
+This page is for players who do **not** develop mods and only install FrikaMF because another mod depends on it.
 
-Für einen vollständigen Überblick aller Framework-Funktionen und Use-Case-Flows siehe [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases).
+For a complete overview of framework capabilities and setup flows, see [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases).
 
-## Was du installierst
+## What you install
 
-- `FrikaModdingFramework.dll` ist ein Laufzeit-Framework für `Data Center`.
-- Es wird von anderen Mods benötigt, damit deren Hooks/Events funktionieren.
-- FrikaMF ist **inoffiziell** und **community-driven** (keine Affiliation mit WASEKU).
+- `FrikaModdingFramework.dll` is a runtime framework for `Data Center`.
+- It provides stable runtime glue required by other mods.
+- FrikaMF is **unofficial** and **community-driven**.
 
-## Schnellstart (5 Minuten)
+## Quick install
 
-1. Installiere MelonLoader (IL2CPP, stabile Version).
-2. Starte das Spiel einmal, beende es wieder.
-3. Lege `FrikaModdingFramework.dll` in den Ordner `Data Center/Mods`.
-4. Lege den eigentlichen Mod (der FrikaMF benötigt) ebenfalls in `Data Center/Mods`.
-5. Starte das Spiel und prüfe `MelonLoader/Latest.log`.
-
-## Installationsanleitung (ausführlich)
-
-### 1) Voraussetzungen
-
-- Installiertes Spiel: `Data Center`
-- Schreibrechte im Spielverzeichnis
-- Aktuelle Visual C++ Runtime (falls vom Mod verlangt)
-
-### 2) MelonLoader installieren
-
-- Nutze den offiziellen MelonLoader-Installer für IL2CPP.
-- Nach der Installation das Spiel **einmal starten**, damit Interop-Dateien erzeugt werden.
-
-### 3) FrikaMF platzieren
-
-- Zielordner:
-
-```text
-<Data Center>\Mods\FrikaModdingFramework.dll
-```
-
-### 4) Mod installieren
-
-- Den gewünschten Mod in denselben `Mods`-Ordner legen.
-- Manche Mods benötigen zusätzlich Konfigurationsdateien (README des Mods prüfen).
-
-## Ordnerstruktur prüfen
-
-```text
-Data Center/
-├─ Mods/
-│  ├─ FrikaModdingFramework.dll
-│  ├─ <DeinMod>.dll
-│  └─ RustMods/
-└─ MelonLoader/
-   └─ Latest.log
-```
-
-## Update-Anleitung
-
-1. Spiel schließen.
-2. Alte `FrikaModdingFramework.dll` ersetzen.
-3. Falls im Release erwähnt: alte Configs sichern/löschen.
-4. Spiel starten und Log prüfen.
-
-## Neues Modsettings-Menü
-
-Im Main Menu öffnet ein Klick auf `Settings` jetzt eine Auswahl:
-
-- `Game Settings` (normale Spiel-Einstellungen)
-- `Mod Settings` (FrikaMF Web/UI-Einstellungen)
-
-In `Mod Settings` kannst du steuern, ob die Framework-UI aktiv webbasiert gestylt wird (`DC2WEB`) oder beim bisherigen Modernizer bleibt.
-
-## Deinstallation
-
-1. Spiel schließen.
-2. `FrikaModdingFramework.dll` aus `Mods` entfernen.
-3. Alle Mods entfernen, die FrikaMF voraussetzen.
-4. Optional: `MelonLoader` komplett deinstallieren.
+1. Install MelonLoader (IL2CPP, latest stable).
+2. Launch the game once, then close it.
+3. Put `FrikaModdingFramework.dll` into `Data Center/Mods`.
+4. Put your actual mod into `Data Center/Mods`.
+5. Start the game and verify `MelonLoader/Latest.log`.
 
 ## Troubleshooting
 
-### Spiel startet nicht / stürzt direkt ab
+- Game crashes at startup: check `MelonLoader/Latest.log` for missing DLL/type errors.
+- Mod not loading: verify correct folder and unblock files in Windows file properties.
+- After game update: check compatibility page and wait for updated releases if hooks changed.
 
-- Prüfe `MelonLoader/Latest.log` auf `MissingMethod`, `TypeLoadException`, `DllNotFound`.
-- Entferne zuletzt installierte Mods testweise.
-- Prüfe Versionskompatibilität (Spiel-Patch kann Hooks brechen).
+## Update
 
-### Mod lädt nicht
+1. Close game.
+2. Replace `FrikaModdingFramework.dll`.
+3. Start game and verify logs.
 
-- Liegt die DLL wirklich in `Data Center/Mods`?
-- Blockiert Windows die Datei (Datei > Eigenschaften > „Zulassen“)?
-- Ist die Mod-Version für die aktuelle FrikaMF-Version gebaut?
+## Uninstall
 
-### Nach Spiel-Update funktioniert nichts mehr
+1. Close game.
+2. Remove `FrikaModdingFramework.dll` from `Mods`.
+3. Remove dependent mods.
 
-- Prüfe `Bekannte Inkompatibilitäten` im Wiki.
-- Warte auf aktualisierte Mod-/FrikaMF-Releases.
+## Related pages
 
-## FAQ
-
-### „Warum bricht mein Spiel nach Mod-Install?“
-
-Häufigste Ursachen:
-
-- Mod-Version passt nicht zum Spielstand.
-- Veraltete Abhängigkeit oder defekte DLL.
-- Hook-Ziel im Spiel wurde durch Update geändert.
-
-### „Muss ich Rust und C# verstehen?“
-
-Nein. Als End-User nicht. Du installierst nur die fertigen DLLs.
-
-### „Kann ich FrikaMF alleine nutzen?“
-
-Technisch ja, praktisch bringt es ohne abhängigen Mod kaum Mehrwert.
-
-## Was du bei Supportanfragen mitschicken solltest
-
-- Spielversion
-- FrikaMF-Version
-- Mod-Version
-- Ausschnitt aus `MelonLoader/Latest.log`
-- Schritte zur Reproduktion
-
-## Relevante Querverweise
-
-- [Home](../Home)
-- [ModDevs](/wiki/wiki-import/ModDevs/)
-- [Contributors](/wiki/wiki-import/Contributors/)
-- [Framework Features & Use Cases](../Framework-Features-Use-Cases)
+- [Home EN](../Home)
+- [ModDevs EN](../ModDevs/)
+- [Contributors EN](../Contributors/)
 - [FFI Bridge Reference](../FFI-Bridge-Reference)
-- [Web UI Bridge (DC2WEB)](../Web-UI-Bridge)
-- [Bekannte Inkompatibilitäten](../Bekannte-Inkompatibilitaeten)
+- [Web UI Bridge EN (DC2WEB)](../Web-UI-Bridge)
+- [Known Incompatibilities EN](../Known-Incompatibilities)
 
-## Minimalbeispiel (nur zur Einordnung)
-
-> Du musst diesen Code **nicht** schreiben. Er zeigt nur, dass FrikaMF Mods in beiden Sprachen ermöglicht.
+## Minimal context example (both language tracks)
 
 ### 🦀 Rust
 
 ```rust
 #[no_mangle]
 pub extern "C" fn mod_info() -> *const i8 {
-    b"example-rust-mod\0".as_ptr() as *const i8
+    b"example-rust\0".as_ptr() as *const i8
 }
 ```
 

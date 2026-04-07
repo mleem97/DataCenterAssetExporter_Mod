@@ -1,10 +1,10 @@
-# Contributors Index
+# Contributors Index EN
 
-Zielgruppe: Mitwirkende am Framework und an der Dokumentation.
+Audience: contributors working on framework code and docs.
 
-## Inhalte
+## Contents
 
-- [Contribution Workflow](Guides/Contribution-Workflow)
-- [Naming Convention](Reference/Naming-Convention)
-- [Troubleshooting](Troubleshooting/)
+- [Contribution Workflow EN](Guides/Contribution-Workflow)
+- [Naming Convention EN](Reference/Naming-Convention)
+- [Troubleshooting EN](Troubleshooting/overview)
 - [AI Usage Policy](../AI-USAGE)

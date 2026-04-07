@@ -1,11 +1,9 @@
-# Modding Guide (Merged)
+---
+title: README_MODDING
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-Last updated: 2026-04-03
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-This page was merged into the canonical guide.
-
-Use:
-
-- [Modding Guide](Modding-Guide)
-
-All extended content is maintained there to avoid duplicate documentation.

@@ -1,3 +1,3 @@
-# Troubleshooting Index
+# Troubleshooting Index EN
 
-- [Troubleshooting](troubleshooting-details)
+- [Troubleshooting EN](overview)

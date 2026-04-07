@@ -1,103 +1,68 @@
 ---
-title: Mod-Developer (Debug)
-description: Entscheidungshilfe Rust vs. C#, Getting Started für beide Tracks, Hook-Recherche, Architektur und API-Orientierung.
-sidebar_position: 30
+title: Mod-Developer (Debug) EN
+description: Rust vs C# decision guide, getting started for both tracks, hook discovery, architecture, and API orientation.
+sidebar_position: 130
 tags:
   - audience:moddev
 ---
 
 ## Mod-Developer (Debug)
 
-Diese Seite richtet sich an Entwickler, die eigene Mods auf Basis von FrikaMF bauen.
+You only need one track: **Rust** or **C#**. FrikaMF bridges runtime communication.
 
-Vollständiger Framework-Funktionskatalog inkl. Use-Case-Anleitungen: [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases).
+Full framework capability catalog with setup guides: [`Framework Features & Use Cases`](/wiki/wiki-import/Framework-Features-Use-Cases).
 
-## Kurz gesagt
+## Rust vs C# decision guide
 
-- Du musst **nicht** beide Sprachen lernen.
-- Wähle **einen** Track: Rust **oder** C#.
-- FrikaMF übernimmt die Brücke zwischen Spiel, Hooks, Events und ggf. FFI.
-
-## Rust oder C#? (Entscheidungshilfe)
-
-| Kriterium | 🔷 C# Track (MelonLoader/HarmonyX) | 🦀 Rust Track (C-ABI/FFI) |
+| Criteria | 🔷 C# Track | 🦀 Rust Track |
 | --- | --- | --- |
-| Einstiegsgeschwindigkeit | Sehr schnell | Mittel |
-| Unity/Il2Cpp Zugriff | Direkt und komfortabel | Indirekt über API/Events |
-| Performance-kritische Logik | Gut | Sehr gut |
-| Memory-Safety | Mittel | Hoch |
-| Tooling-Komplexität | Niedrig | Mittel bis hoch |
-| Empfehlung | Für die meisten Mod-Ideen | Für komplexe Systeme/Engine-nahe Logik |
+| Onboarding speed | Fast | Medium |
+| Direct Unity/Il2Cpp access | Strong | Indirect |
+| Native-level control | Medium | High |
+| Safety model | Medium | High |
+| Recommended for | Most gameplay mods | Performance/ABI-heavy systems |
 
-**Empfehlung:** Starte mit C#, wenn du neu im Stack bist. Nutze Rust, wenn du bewusst FFI-Kontrolle, klare ABI-Verträge oder native Performance brauchst.
+## Lua/Python/Web FFI status
 
-## Lua/Python/Web FFI (aktueller Status)
+- Rust FFI in framework core: **implemented**.
+- Built-in Lua runtime host: **not implemented**.
+- Built-in Python runtime host: **not implemented**.
+- Built-in generic HTTP/WebSocket FFI transport: **not implemented**.
 
-- Rust FFI im Framework: **implementiert**.
-- Integrierter Lua-Host im Framework: **nicht implementiert**.
-- Integrierter Python-Host im Framework: **nicht implementiert**.
-- Generische HTTP/WebSocket-FFI-Transportschicht im Core: **nicht implementiert**.
+Recommended approach:
 
-Empfohlener Weg:
+- Run Lua/Python as a sidecar process and connect through your C# or Rust mod boundary.
+- Use framework events as stable inputs and framework APIs as safe outputs.
+- Keep Unity/IL2CPP object access in C# or Rust layers.
 
-- Nutze Lua/Python als Sidecar-Prozess und verbinde ihn über deinen C#- oder Rust-Mod.
-- Verwende die vorhandenen Framework-Events als Input und die Framework-APIs als sicheren Output.
-- Trenne strikt zwischen Unity/IL2CPP-Zugriff (C#/Rust) und Script-/Analyse-Logik (Lua/Python).
-
-Für vollständige DE/EN Schritt-für-Schritt Tutorials pro FFI-Einstiegspunkt siehe:
+For full DE/EN step-by-step tutorials per FFI entrypoint, see:
 
 - [Lua FFI — How to Start Developing (DE + EN)](/wiki/wiki-import/Lua-FFI-Start-Developing)
 
-## Architekturüberblick
+## Architecture
 
 ```text
 Data Center (IL2CPP)
   ↓ HarmonyX Patch
-FrikaMF C# Bridge (Il2Cpp-Objekte -> C-ABI-Structs)
+FrikaMF C# Bridge (Il2Cpp objects -> C-ABI structs)
   ↓ P/Invoke / C-ABI                    ↓ MelonLoader API
 Rust Mod (.dll)                         C# Mod (.dll)
 ```
 
-## Quelle der Wahrheit für Hooks
+## Source of truth for hooks
 
-- Verifizierte Hook-Ziele: [`HOOKS.md`](../HOOKS)
-- Runtime-Patches: `FrikaMF/HarmonyPatches.cs`
+- [`HOOKS.md`](../HOOKS)
 
-## Getting Started: 🔷 C# Track
-
-### Voraussetzungen (Rust)
-
-- .NET SDK 6+
-- MelonLoader IL2CPP Setup
-- Spiel einmal mit MelonLoader gestartet
-
-### Build (Rust)
+## C# track quick start
 
 ```powershell
-dotnet build .\framework\framework/FrikaMF.csproj /p:GameDir="C:\Pfad\zu\Data Center"
+dotnet build .\framework\framework/FrikaMF.csproj /p:GameDir="C:\Path\To\Data Center"
 ```
-
-Alternative mit Umgebungsvariable:
-
-```powershell
-$env:DATA_CENTER_GAME_DIR = "C:\Pfad\zu\Data Center"
-dotnet build .\framework\framework/FrikaMF.csproj
-```
-
-### Minimaler C# Mod
 
 ```csharp
 using HarmonyLib;
 using MelonLoader;
 using Il2Cpp;
-
-public sealed class HelloCSharpMod : MelonMod
-{
-    public override void OnInitializeMelon()
-    {
-        LoggerInstance.Msg("Hello from C# track");
-    }
-}
 
 [HarmonyPatch(typeof(Server), nameof(Server.PowerButton))]
 public static class Patch_Server_PowerButton
@@ -109,125 +74,55 @@ public static class Patch_Server_PowerButton
 }
 ```
 
-## Getting Started: 🦀 Rust Track
-
-### Voraussetzungen
-
-- Rust stable toolchain
-- `cargo`
-- DLL-Export per C-ABI (`#[no_mangle] extern "C"`)
-
-### Build
+## Rust track quick start
 
 ```powershell
 cargo build --release
 ```
 
-### Minimaler Rust Mod
-
 ```rust
-#[repr(C)]
-pub struct ModInfoFFI {
-    pub id: *const i8,
-    pub name: *const i8,
-    pub version: *const i8,
-    pub author: *const i8,
-    pub description: *const i8,
-}
-
-#[no_mangle]
-pub extern "C" fn mod_info() -> ModInfoFFI {
-    ModInfoFFI {
-        id: b"hello_rust\0".as_ptr() as *const i8,
-        name: b"Hello Rust Mod\0".as_ptr() as *const i8,
-        version: b"0.1.0\0".as_ptr() as *const i8,
-        author: b"you\0".as_ptr() as *const i8,
-        description: b"minimal rust example\0".as_ptr() as *const i8,
-    }
-}
-
 #[no_mangle]
 pub extern "C" fn mod_init(_api_table: *mut core::ffi::c_void) -> bool {
     true
 }
 ```
 
-## Hook-Recherche mit dnSpy / dotPeek
+## dnSpy / dotPeek guidance
 
-1. Öffne `Assembly-CSharp.dll` aus den IL2CPP-Interop-Ausgaben.
-2. Suche Klassen/Methoden nach Gameplay-Relevanz.
-3. Prüfe Signaturen, Parameter und Seiteneffekte.
-4. Lege Kandidaten in `HOOKS.md` ab (mit Verifikationsstatus).
-5. Implementiere Patch in `HarmonyPatches.cs`.
+- Open generated `Assembly-CSharp.dll` interop output.
+- Validate signatures and call context.
+- Document candidates in `HOOKS.md`.
+- Implement Harmony patch and event dispatch.
 
-### Warum sind Methodenbodies oft leer?
+## Why many IL2CPP interop methods look empty
 
-Bei IL2CPP-Interop-Assemblies sind viele Methoden nur **Stubs/Brücken**. Der echte Code liegt im nativen IL2CPP-Binary. Daher:
+Interop assemblies often contain metadata-facing stubs; real implementation lives in native IL2CPP binaries.
 
-- Bodies wirken leer oder minimal.
-- Signaturen sind trotzdem nützlich für Hooking/Binding.
-- Für verlässliche Analyse: Runtime-Verhalten + dekompilierte Metadaten kombinieren.
+## Web FFI vs Web UI (important)
 
-## API-Orienteirung (FrikaMF intern)
+- `DC2WebBridge` provides Unity-side UI adaptation/styling.
+- It is not a generic network FFI transport bus.
+- For Web FFI, implement your own HTTP/WebSocket gateway with validation and rate limits.
 
-- `FrikaMF/HarmonyPatches.cs`: Hook-Einstieg
-- `FrikaMF/EventIds.cs`: stabile Event-IDs
-- `FrikaMF/EventDispatcher.cs`: Marshalling Richtung Rust
-- `FrikaMF/GameApi.cs`: API-Tabelle Richtung Rust
-- `FrikaMF/GameHooks.cs`: sichere Wrapper für Spielsicht
+Config API reference: [`Mod Config System`](/wiki/wiki-import/Mod-Config-System)
 
-## Web UI im Framework (DC2WEB)
+## Cross-track example
 
-- Kern: `FrikaMF/DC2WebBridge.cs`
-- Menü-Integration: `FrikaMF/ModSettingsMenuBridge.cs`
-- Settings-Hook: `MainMenu.Settings` → Auswahl `Game Settings` / `Mod Settings`
-
-Unterstützte Quellen:
-
-- Basic: `HTML`, `CSS`
-- Styling-Frameworks: `TailwindCSS`, `SASS`/`SCSS`
-- Script-Styles: `JS`, `TS`
-- React-orientierte Quellen: `React JSX/TSX` (Adapter-Übersetzung)
-
-Unterstützte Bildtypen:
-
-- SVG (bevorzugt, zur Laufzeit rasterisiert)
-- PNG, JPG/JPEG, BMP, GIF, TGA
-
-Details: [`Web UI Bridge (DC2WEB)`](/wiki/wiki-import/Web-UI-Bridge)
-
-Konfigurations-API: [`Mod Config System`](/wiki/wiki-import/Mod-Config-System)
-
-## Web FFI vs. Web UI (wichtig)
-
-- `DC2WebBridge` = UI-Übersetzung/Styling in Unity (kein allgemeiner Netzwerk-FFI-Bus).
-- Web FFI = eigene Transport-Ebene (z. B. lokales HTTP/WebSocket-Gateway), die du in deinem Mod implementierst.
-- Für sichere Steuerung: Eingaben validieren, rate-limiten, und nur über `GameAPITable`/`GameHooks` mutieren.
-
-## Praxisregel: Prefix oder Postfix?
-
-- **Prefix**: wenn du Verhalten blockieren/überschreiben musst (`return false`).
-- **Postfix**: wenn du nur beobachten/ergänzen willst.
-- Bei riskanten State-Methoden immer erst mit Postfix anfangen.
-
-## Cross-Track Beispiel (gleiches Ziel, beide Sprachen)
-
-### 🦀 Rust (Event-getrieben)
+### 🦀 Rust
 
 ```rust
 #[no_mangle]
-pub extern "C" fn mod_on_event(event_id: u32, _data_ptr: *const u8, _data_len: u32) {
+pub extern "C" fn mod_on_event(event_id: u32, _ptr: *const u8, _len: u32) {
     if event_id == 1001 {
-        // handle event in Rust
     }
 }
 ```
 
-### 🔷 C# (Patch-getrieben)
+### 🔷 C\#
 
 ```csharp
 [HarmonyPatch(typeof(CustomerBase), nameof(CustomerBase.AreAllAppRequirementsMet))]
-public static class Patch_Customer_Requirements
+public static class Patch_Requirements
 {
     public static void Postfix(bool __result)
     {

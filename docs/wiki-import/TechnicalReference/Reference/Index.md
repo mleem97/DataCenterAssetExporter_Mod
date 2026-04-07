@@ -1,5 +1,9 @@
-# Reference Index EN
+---
+title: Index
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-- [Architecture](../../Architecture)
-- [FFI Bridge Reference](../../FFI-Bridge-Reference)
-- [HOOKS](../../HOOKS)
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
+

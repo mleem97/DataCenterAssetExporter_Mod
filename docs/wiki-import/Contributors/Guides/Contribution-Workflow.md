@@ -1,9 +1,9 @@
-# Contribution Workflow EN
+---
+title: Contribution-Workflow
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-## Quick Flow
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-1. Create a branch.
-2. Keep changes small and atomic.
-3. Use Conventional Commits.
-4. Update docs and links together.
-5. Open a PR with a clear description.

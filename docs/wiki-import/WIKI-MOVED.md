@@ -1,5 +1,5 @@
 ---
-title: Lua-FFI-Start-Developing
+title: WIKI-MOVED
 description: English translation pending; use the Deutsch locale for the full legacy page.
 ---
 

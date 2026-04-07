@@ -1,5 +1,5 @@
-# Contributors (Debug)
+# Contributors (Debug) EN
 
-Diese Seite wurde verschoben nach:
+This page was moved to:
 
-- [Contributors/Index](/wiki/wiki-import/Contributors/)
+- [Contributors](Contributors/)

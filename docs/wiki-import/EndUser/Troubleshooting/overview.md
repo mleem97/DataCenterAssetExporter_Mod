@@ -1,13 +1,9 @@
-# Troubleshooting EN
+---
+title: overview
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-## Standard Checks
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-1. Check `MelonLoader/Latest.log`.
-2. Verify game/FrikaMF/mod versions.
-3. Confirm `FrikaModdingFramework.dll` is available.
-
-## Common Errors
-
-- `MissingMethodException`
-- `TypeLoadException`
-- Missing runtime dependency

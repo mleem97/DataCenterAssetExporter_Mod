@@ -1,17 +1,17 @@
-# Framework Dependency Usage
+# Framework Dependency Usage EN
 
-## Ziel
+## Goal
 
-FrikaMF als stabile Laufzeit-Abhängigkeit für eigene Mods verwenden.
+Use FrikaMF as a stable runtime dependency for custom mods.
 
-## Schritte
+## Steps
 
-1. `FrikaModdingFramework.dll` in den `Mods`-Ordner legen.
-2. Eigenen Mod so bauen, dass er FrikaMF zur Laufzeit prüft.
-3. Bei fehlender Abhängigkeit sauber deaktivieren (kein Crash).
+1. Place `FrikaModdingFramework.dll` in your `Mods` folder.
+2. Build your mod with runtime dependency checks.
+3. Disable gracefully if the dependency is missing.
 
-## Nächste Seiten
+## Next Pages
 
-- [FAQ](../Troubleshooting/FAQ)
-- [Troubleshooting](../Troubleshooting/)
-- [Disclaimer](../Reference/Disclaimer)
+- [FAQ EN](../Troubleshooting/FAQ)
+- [Troubleshooting EN](../Troubleshooting/overview)
+- [Disclaimer EN](../Reference/Disclaimer)

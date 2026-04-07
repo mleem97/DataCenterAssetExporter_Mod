@@ -1,13 +1,13 @@
-# FAQ
+# FAQ EN
 
-## Brauche ich Rust und C# gleichzeitig?
+## Do I need Rust and C# together?
 
-Nein. Du kannst eine Sprache wählen.
+No. You can choose one language.
 
-## Wo liegt das Framework-DLL?
+## Where is the framework DLL?
 
 `Data Center/Mods/FrikaModdingFramework.dll`
 
-## Lädt mein Mod nicht?
+## My mod is not loading
 
-Siehe [Troubleshooting](troubleshooting-details).
+See [Troubleshooting EN](overview).

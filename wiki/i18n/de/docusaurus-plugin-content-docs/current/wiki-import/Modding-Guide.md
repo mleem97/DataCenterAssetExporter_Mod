@@ -1,5 +1,5 @@
-# Modding Guide
+# Modding Guide EN
 
-Diese Seite wurde verschoben nach:
+This page was moved to:
 
 - [ModDevs/Guides/Getting-Started](ModDevs/Guides/Getting-Started)

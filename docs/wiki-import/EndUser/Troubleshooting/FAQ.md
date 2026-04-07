@@ -1,13 +1,9 @@
-# FAQ EN
+---
+title: FAQ
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-## Do I need Rust and C# together?
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-No. You can choose one language.
-
-## Where is the framework DLL?
-
-`Data Center/Mods/FrikaModdingFramework.dll`
-
-## My mod is not loading
-
-See [Troubleshooting EN](overview).

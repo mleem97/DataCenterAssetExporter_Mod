@@ -1,11 +1,9 @@
-# EndUser Index EN
+---
+title: Index
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-Audience: users who want to use FrikaMF as a dependency.
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-## Contents
-
-- [Framework Dependency Usage EN](Guides/Framework-Dependency)
-- [FAQ EN](Troubleshooting/FAQ)
-- [Troubleshooting EN](Troubleshooting/overview)
-- [Disclaimer EN](Reference/Disclaimer)
-- [AI Usage Policy](../AI-USAGE)

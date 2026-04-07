@@ -1,9 +1,9 @@
-# Legacy Multiplayer Roadmap Archive
+---
+title: Steamworks-P2P-Multiplayer-Roadmap
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-This page is archived and kept for historical context.
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-Steamworks multiplayer was planned but is currently not implementable in production because the game developer has not integrated Steamworks support required by this project.
-
-Use the canonical roadmap page:
-
-- [Unified Roadmap](/wiki/roadmap/unified-roadmap)

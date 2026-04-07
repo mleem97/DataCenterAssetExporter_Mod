@@ -1,11 +1,9 @@
-# TechnicalReference Index EN
+---
+title: Index
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-Core technical reference for hooks, runtime bridges, and API contracts.
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-## Contents
-
-- [Hooks](../HOOKS)
-- [Hook Naming Convention](../HOOK-NAMING-CONVENTION)
-- [FFI Bridge Reference](../FFI-Bridge-Reference)
-- [Framework Features & Use Cases EN](../Framework-Features-Use-Cases)
-- [Architecture](../Architecture)

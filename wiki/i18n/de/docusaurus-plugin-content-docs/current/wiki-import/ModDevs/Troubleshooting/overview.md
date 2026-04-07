@@ -1,11 +1,7 @@
----
-slug: troubleshooting-details
----
+# Troubleshooting EN
 
-# Troubleshooting
+## Verify
 
-## Prüfen
-
-1. Hook-Signaturen gegen `HOOKS` verifizieren.
-2. `MelonLoader/Latest.log` und Framework-Logs prüfen.
-3. Game-Version und FrikaMF-Version abgleichen.
+1. Validate hook signatures against `HOOKS`.
+2. Check `MelonLoader/Latest.log` and framework logs.
+3. Match game version and FrikaMF version.

@@ -1,12 +1,9 @@
-# Troubleshooting EN
+---
+title: overview
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-## Common Contributor Issues
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-- Outdated links after restructuring
-- Inconsistent file names
-- Non-atomic commits
-
-## Fix
-
-- Always update sidebar and redirect pages together.
-- Apply naming convention consistently.

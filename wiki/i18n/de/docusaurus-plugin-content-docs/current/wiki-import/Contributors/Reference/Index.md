@@ -1,3 +1,3 @@
-# Reference Index
+# Reference Index EN
 
-- [Naming Convention](Naming-Convention)
+- [Naming Convention EN](Naming-Convention)

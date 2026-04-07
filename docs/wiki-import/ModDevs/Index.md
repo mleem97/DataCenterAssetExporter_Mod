@@ -1,10 +1,9 @@
-# ModDevs Index EN
+---
+title: Index
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-Audience: developers building mods on top of FrikaMF.
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-## Contents
-
-- [Getting Started EN](Guides/Getting-Started)
-- [Hook Event Reference EN](Reference/Hook-Event-Reference)
-- [Troubleshooting EN](Troubleshooting/overview)
-- [AI Usage Policy](../AI-USAGE)

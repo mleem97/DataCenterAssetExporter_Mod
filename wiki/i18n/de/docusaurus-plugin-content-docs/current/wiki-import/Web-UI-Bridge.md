@@ -1,64 +1,64 @@
-# Web UI Bridge (DC2WEB)
+# Web UI Bridge (DC2WEB) EN
 
 Last updated: 2026-04-03
 
-Diese Seite beschreibt das neue Web-UI-System im Framework (`DC2WebBridge`) und das `Modsettings`-Menü.
+This page describes the framework web-style UI system (`DC2WebBridge`) and the in-game `Mod Settings` menu integration.
 
-## Überblick
+## Overview
 
-- Einstiegspunkt: `FrikaMF/DC2WebBridge.cs`
-- Mod-Menü: `FrikaMF/ModSettingsMenuBridge.cs`
-- Hook-Integration: `FrikaMF/HarmonyPatches.cs`
+- Entry point: `FrikaMF/DC2WebBridge.cs`
+- Mod menu: `FrikaMF/ModSettingsMenuBridge.cs`
+- Hook integration: `FrikaMF/HarmonyPatches.cs`
 
-Abgrenzung:
+Boundary:
 
-- `DC2WebBridge` ist eine UI-/Styling-Brücke innerhalb Unity.
-- `DC2WebBridge` ist keine generische HTTP/WebSocket-FFI-Transportebene.
+- `DC2WebBridge` is a Unity-side UI/styling bridge.
+- `DC2WebBridge` is not a generic HTTP/WebSocket FFI transport layer.
 
-## Was jetzt möglich ist
+## What is currently supported
 
-- UI-Styling aus `HTML`/`CSS`
-- Utility-Frameworks: `TailwindCSS`, `SASS`/`SCSS`
-- Scriptbasierte Styles: `JavaScript` / `TypeScript`
-- React-orientierter Adapterpfad: `React JSX/TSX`
-- Bildtypen: `SVG` (bevorzugt), `PNG`, `JPG/JPEG`, `BMP`, `GIF`, `TGA`
+- UI styling from `HTML`/`CSS`
+- Utility styling frameworks: `TailwindCSS`, `SASS`/`SCSS`
+- Script-style sources: `JavaScript` / `TypeScript`
+- React-oriented adapter path: `React JSX/TSX`
+- Image types: `SVG` (preferred), `PNG`, `JPG/JPEG`, `BMP`, `GIF`, `TGA`
 
-## Modsettings Menü (im Spiel)
+## In-game Mod Settings menu
 
-Beim Klick auf `Settings` im Main Menu öffnet sich ein Auswahlfenster:
+Clicking `Settings` in the main menu opens a chooser:
 
 - `Game Settings`
 - `Mod Settings`
 
-Im `Mod Settings`-Fenster können Framework-Optionen zur Laufzeit gesteuert werden:
+The `Mod Settings` panel can toggle runtime options:
 
-- `DC2WEB Bridge aktiv`
-- `Unity UI Modernizer aktiv`
-- `MainMenu Settings per Web-Overlay ersetzen`
+- `DC2WEB Bridge enabled`
+- `Unity UI Modernizer enabled`
+- `Replace MainMenu Settings with Web overlay`
 
-## Bild-Support und SVG-Strategie
+## Image support and SVG strategy
 
-`DC2WebBridge` unterstützt direkte Sprite-Erzeugung über `Dc2WebImageAsset`.
+`DC2WebBridge` supports runtime sprite creation from `Dc2WebImageAsset`.
 
-- Rasterbilder werden mit Unity `Texture2D.LoadImage(...)` geladen.
-- SVG hat einen priorisierten Pfad und wird zur Laufzeit in beliebiger Zielgröße rasterisiert.
+- Raster images are loaded through Unity `Texture2D.LoadImage(...)`.
+- SVG follows a prioritized path and is rasterized at runtime to the target size.
 
-Wichtig: Der interne SVG-Rasterizer ist bewusst leichtgewichtig und deckt primär einfache Shapes/Fills ab. Für komplexe SVGs (viele Pfade/Filter/Masken) sollte ein Preprocess/Bake-Schritt in der Mod-Pipeline genutzt werden.
+Note: The internal SVG raster path is intentionally lightweight and focuses on common/simple shapes and fills. For advanced SVGs (complex paths, filters, masks), pre-bake assets in your mod pipeline and provide raster fallback.
 
-## Von Basic HTML bis React-Apps
+## From basic HTML to React-style apps
 
-Das System arbeitet adapterbasiert:
+The system is adapter-driven:
 
-- `Basic HTML/CSS`: direkte Übernahme in ein Unity-Style-Profil
-- `Tailwind/SASS`: Übersetzung in CSS-Variablen/Properties
-- `JS/TS`: Heuristiken für Stilfelder (`backgroundColor`, `color`, `fontSize`, ...)
-- `React`: `ReactAdapter` liest `className`/Inline-Styles und übersetzt sie in ein Profil
+- `Basic HTML/CSS`: direct translation into a Unity style profile
+- `Tailwind/SASS`: translated into CSS variables/properties
+- `JS/TS`: heuristic extraction for style fields (`backgroundColor`, `color`, `fontSize`, ...)
+- `React`: adapter reads `className` and inline style-like content and translates to a profile
 
-### Hinweis zur React-Unterstützung
+### React support note
 
-Es wird **kein voller Browser/DOM/JS-Runtime-Stack** eingebettet. Stattdessen nutzt DC2WEB einen Übersetzungspfad auf Unity-UI-Stile und Overlays. Für komplexe Apps ist der empfohlene Weg ein precompiled App-Descriptor (`Dc2WebAppDescriptor`) mit klaren Styling-/Asset-Contracts.
+The framework does not embed a full browser DOM/JS runtime. DC2WEB uses translation adapters that map web-like source bundles to Unity UI profiles and overlays. For larger app-like UIs, use a precompiled descriptor (`Dc2WebAppDescriptor`) with clear style and asset contracts.
 
-## Beispiel: Web-App registrieren
+## Example: register a web app
 
 ```csharp
 DC2WebBridge.RegisterWebApp(new Dc2WebAppDescriptor
@@ -72,18 +72,18 @@ DC2WebBridge.RegisterWebApp(new Dc2WebAppDescriptor
 });
 ```
 
-## Empfohlener Workflow
+## Recommended workflow
 
-1. Start mit einfachem `HTML/CSS` Bundle.
-2. Bei Bedarf `Tailwind/SASS`-Quellen ergänzen.
-3. `Dc2WebImageAsset` für Icons/Grafiken nutzen (SVG-first).
-4. Für größere UIs: App-Descriptor (React/TS) plus klare Design-Tokens.
-5. Im Spiel über `Mod Settings` live prüfen und austarieren.
+1. Start with a simple `HTML/CSS` bundle.
+2. Add `Tailwind/SASS` sources as needed.
+3. Use `Dc2WebImageAsset` for icons/graphics (SVG-first).
+4. For larger UI flows, move to app descriptor bundles (`React/TS`) with design tokens.
+5. Tune behavior in-game through `Mod Settings`.
 
-## Relevante Querverweise
+## Related links
 
 - [Framework Features & Use Cases](/wiki/wiki-import/Framework-Features-Use-Cases)
 - [FFI Bridge Reference](/wiki/wiki-import/FFI-Bridge-Reference)
-- [Mod-Developer (Debug)](Mod-Developer-Debug)
-- [Contributors (Debug)](Contributors-Debug)
-- [Web UI Bridge (DC2WEB) EN](Web-UI-Bridge)
+- [Mod-Developer (Debug) EN](Mod-Developer-Debug)
+- [Contributors (Debug) EN](Contributors-Debug)
+- [Web UI Bridge (DC2WEB)](/wiki/wiki-import/Web-UI-Bridge)

@@ -1,10 +1,9 @@
-# Hook Event Reference EN
+---
+title: Hook-Event-Reference
+description: English translation pending; use the Deutsch locale for the full legacy page.
+---
 
-Primary source:
+:::note
+This page is available in **German** in the legacy wiki import. Use the language menu (**Deutsch**) for the full text, or contribute an English translation under `docs/wiki-import`.
+:::
 
-- [HOOKS](../../HOOKS)
-- [Hook Naming Convention](../../HOOK-NAMING-CONVENTION)
-
-Additional:
-
-- [FFI Bridge Reference](../../FFI-Bridge-Reference)

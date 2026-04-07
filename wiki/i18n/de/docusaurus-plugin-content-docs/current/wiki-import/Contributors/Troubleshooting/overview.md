@@ -1,16 +1,12 @@
----
-slug: troubleshooting-details
----
+# Troubleshooting EN
 
-# Troubleshooting
+## Common Contributor Issues
 
-## Typische Contributor-Probleme
+- Outdated links after restructuring
+- Inconsistent file names
+- Non-atomic commits
 
-- Veraltete Links nach Umstrukturierung
-- Uneinheitliche Dateinamen
-- Nicht atomare Commits
+## Fix
 
-## Lösung
-
-- Sidebar und Redirect-Seiten immer mit aktualisieren.
-- Namenskonvention strikt anwenden.
+- Always update sidebar and redirect pages together.
+- Apply naming convention consistently.

@@ -1,5 +1,5 @@
-# End-User (Release)
+# End-User (Release) EN
 
 This page was moved to:
 
-- [EndUser/Index](/wiki/wiki-import/EndUser/)
+- [EndUser](EndUser/)

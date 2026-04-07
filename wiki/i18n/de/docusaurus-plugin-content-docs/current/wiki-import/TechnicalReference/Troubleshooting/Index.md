@@ -1,3 +1,3 @@
-# Troubleshooting Index
+# Troubleshooting Index EN
 
-- [Known Incompatibilities](../../Bekannte-Inkompatibilitaeten)
+- [Known Incompatibilities EN](../../Known-Incompatibilities)
