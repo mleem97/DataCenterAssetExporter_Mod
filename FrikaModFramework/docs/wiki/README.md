@@ -1,5 +1,9 @@
 # FrikaModFramework/docs/wiki (optional mirror)
 
-The **live** Docusaurus wiki is rooted at the repository’s [`docs/`](../../../docs/) folder (sibling to `wiki/`).
+This folder remains an optional mirror for documentation continuity during the repository split.
 
-You can keep extra stubs here for documentation-only experiments; prefer editing `docs/` for anything that should appear on the site.
+The active framework runtime and main build flow moved to:
+
+- `c:\Users\marvi\source\repos\gregFramework\Framework\FrikaMF-StandaloneRepo`
+
+If a page references runtime internals, treat the standalone repository as the source of truth.
