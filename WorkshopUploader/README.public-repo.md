@@ -24,6 +24,8 @@ After this folder is its **own repository**, edit that workflow (or copy it to `
 
 **First releases** ship a **ZIP** of the self-contained `win10-x64` publish folder at **best compression**. Optional **MSIX / App Installer** packaging is documented in [EXTERNAL_DEPENDENCIES.md](./EXTERNAL_DEPENDENCIES.md) (CI job is off until signing is configured).
 
+**VirusTotal:** [file relations](https://www.virustotal.com/gui/file/c0ea7929eee9d754e81363e9ec81c601e763e65f7db1eb0d971edf2c2036f0af/relations) (SHA-256 `c0ea7929eee9d754e81363e9ec81c601e763e65f7db1eb0d971edf2c2036f0af`) — see `README.md` for context.
+
 ## Open source & external dependencies
 
 See **[EXTERNAL_DEPENDENCIES.md](./EXTERNAL_DEPENDENCIES.md)** for licenses, **Steamworks** / **steam_api64.dll**, and distribution notes.

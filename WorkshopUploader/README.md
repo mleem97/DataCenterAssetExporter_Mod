@@ -75,6 +75,13 @@ Copy the publish folder to:
 
 so it sits alongside the game executable (not inside `Mods` or `MelonLoader`).
 
+## VirusTotal
+
+A third-party scan is published for transparency (self-contained .NET builds are sometimes flagged heuristically; compare SHA-256 if you download from GitHub releases):
+
+- **SHA-256:** `c0ea7929eee9d754e81363e9ec81c601e763e65f7db1eb0d971edf2c2036f0af`
+- **Report:** [VirusTotal — file relations](https://www.virustotal.com/gui/file/c0ea7929eee9d754e81363e9ec81c601e763e65f7db1eb0d971edf2c2036f0af/relations)
+
 ## See also
 
 - [External dependencies & distribution (licenses, Steamworks)](./EXTERNAL_DEPENDENCIES.md)
