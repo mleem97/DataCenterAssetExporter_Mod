@@ -1,12 +1,13 @@
 # GREG FRAMEWORK
 **DATA CENTER MODDING API**
+---
 [![.NET CI](https://github.com/mleem97/gregFramework/actions/workflows/dotnet-ci.yml/badge.svg?branch=master)](https://github.com/mleem97/gregFramework/actions/workflows/dotnet-ci.yml)
 [![Commit Lint](https://github.com/mleem97/gregFramework/actions/workflows/commitlint.yml/badge.svg?branch=master)](https://github.com/mleem97/gregFramework/actions/workflows/commitlint.yml)
 [![Last Commit](https://img.shields.io/github/last-commit/mleem97/gregFramework/master)](https://github.com/mleem97/gregFramework/commits/master)
 [![License: Custom-NC--NR](https://img.shields.io/badge/license-Custom%20NC--NR-red.svg)](LICENSE.txt)
-
+---
 <img width="838" height="150" alt="gregframeworkapibanner" src="https://github.com/user-attachments/assets/3e78050a-67e8-4eaa-981e-7fa5cfbc466c" />
-
+---
 *FrikaMF** (Frika Mod Framework) is a MelonLoader-based modding stack for **Data Center**: Harmony hooks, events, Rust/native bridge, and optional Workshop tooling. |
 
 ## What end users need
