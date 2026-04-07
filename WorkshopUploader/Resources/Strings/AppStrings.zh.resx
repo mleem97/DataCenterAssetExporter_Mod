@@ -73,6 +73,16 @@
   <data name="Editor_NeedsMelonLoader" xml:space="preserve"><value>需要 MelonLoader</value></data>
   <data name="Editor_NeedsMelonLoaderHint" xml:space="preserve"><value>若描述中尚未提及，则追加 MelonLoader 说明与下载链接。</value></data>
   <data name="Editor_MelonLoaderNotice" xml:space="preserve"><value>[h2]运行要求[/h2][list][*] 此 Workshop 物品需要适用于 Data Center 的 [url=https://melonwiki.xyz]MelonLoader[/url]。使用前请先安装 MelonLoader。[/list]</value></data>
+  <data name="Editor_WorkshopDependencies" xml:space="preserve"><value>Workshop 依赖</value></data>
+  <data name="Editor_WorkshopDependenciesHint" xml:space="preserve"><value>可选：本模组依赖的其他 Steam Workshop 物品 ID。保存在 metadata.json 的 workshop_dependency 中。</value></data>
+  <data name="Editor_WorkshopDepIdPlaceholder" xml:space="preserve"><value>Workshop 文件 ID…</value></data>
+  <data name="Editor_WorkshopDepAdd" xml:space="preserve"><value>添加</value></data>
+  <data name="Editor_WorkshopDepSearchTitle" xml:space="preserve"><value>搜索 Workshop 并添加</value></data>
+  <data name="Editor_WorkshopDepSearchPlaceholder" xml:space="preserve"><value>搜索…</value></data>
+  <data name="Editor_WorkshopDepRemove" xml:space="preserve"><value>移除</value></data>
+  <data name="Editor_WorkshopDepInvalidId" xml:space="preserve"><value>请输入有效的 Steam Workshop 文件 ID（数字）。</value></data>
+  <data name="Editor_WorkshopDepDuplicate" xml:space="preserve"><value>该 Workshop ID 已在列表中。</value></data>
+  <data name="Editor_WorkshopDepSelf" xml:space="preserve"><value>不能将自身添加为依赖。</value></data>
   <data name="Editor_FmfNotice" xml:space="preserve"><value>此物品需要 FrikaModFramework，请从 Steam Workshop 或通过 GregTools Modmanager 下载！</value></data>
   <data name="Editor_ChangeNotes" xml:space="preserve"><value>更新说明</value></data>
   <data name="Editor_ChangeNotesHint" xml:space="preserve"><value>说明变更内容。将显示在 Steam 的更新日志标签页。</value></data>

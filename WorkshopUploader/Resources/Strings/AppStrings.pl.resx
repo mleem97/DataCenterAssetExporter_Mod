@@ -73,6 +73,16 @@
   <data name="Editor_NeedsMelonLoader" xml:space="preserve"><value>Wymaga MelonLoader</value></data>
   <data name="Editor_NeedsMelonLoaderHint" xml:space="preserve"><value>Dodaje do opisu Steam ostrzeżenie i link do MelonLoader, jeśli jeszcze nie wspomniano.</value></data>
   <data name="Editor_MelonLoaderNotice" xml:space="preserve"><value>[h2]Wymagania[/h2][list][*] Ten przedmiot Workshop wymaga [url=https://melonwiki.xyz]MelonLoader[/url] dla Data Center. Zainstaluj MelonLoader przed użyciem tego moda.[/list]</value></data>
+  <data name="Editor_WorkshopDependencies" xml:space="preserve"><value>Zależności Workshop</value></data>
+  <data name="Editor_WorkshopDependenciesHint" xml:space="preserve"><value>Opcjonalnie: identyfikatory plików Steam Workshop innych przedmiotów wymaganych przez ten mod. Zapisywane jako workshop_dependency w metadata.json.</value></data>
+  <data name="Editor_WorkshopDepIdPlaceholder" xml:space="preserve"><value>ID pliku Workshop…</value></data>
+  <data name="Editor_WorkshopDepAdd" xml:space="preserve"><value>Dodaj</value></data>
+  <data name="Editor_WorkshopDepSearchTitle" xml:space="preserve"><value>Szukaj w Workshop</value></data>
+  <data name="Editor_WorkshopDepSearchPlaceholder" xml:space="preserve"><value>Szukaj…</value></data>
+  <data name="Editor_WorkshopDepRemove" xml:space="preserve"><value>Usuń</value></data>
+  <data name="Editor_WorkshopDepInvalidId" xml:space="preserve"><value>Podaj prawidłowy numeryczny identyfikator pliku Steam Workshop.</value></data>
+  <data name="Editor_WorkshopDepDuplicate" xml:space="preserve"><value>Ten identyfikator Workshop jest już na liście.</value></data>
+  <data name="Editor_WorkshopDepSelf" xml:space="preserve"><value>Nie można dodać zależności od tego samego przedmiotu.</value></data>
   <data name="Editor_FmfNotice" xml:space="preserve"><value>Ten przedmiot wymaga FrikaModFramework — pobierz go ze Steam Workshop lub przez GregTools Modmanager!</value></data>
   <data name="Editor_ChangeNotes" xml:space="preserve"><value>Notatki ze zmian</value></data>
   <data name="Editor_ChangeNotesHint" xml:space="preserve"><value>Opisz, co się zmieniło. Widoczne w zakładce zmian Steam.</value></data>

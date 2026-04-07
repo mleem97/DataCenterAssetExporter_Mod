@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO.Compression;
+using System.Linq;
 using System.Text;
 using WorkshopUploader.Localization;
 using WorkshopUploader.Models;
@@ -31,6 +33,8 @@ public partial class EditorPage : ContentPage
 	private readonly AppLogService _log;
 	private readonly ObservableCollection<string> _visibilityItems = new() { "Public", "FriendsOnly", "Private" };
 	private readonly ObservableCollection<UploadCheckResult> _checkResults = new();
+	private readonly ObservableCollection<WorkshopItemDetailVm> _workshopDepSearchResults = new();
+	private readonly Dictionary<ulong, string> _workshopDepTitles = new();
 	private CancellationTokenSource? _bbPreviewCts;
 
 	private string _projectRoot = "";
@@ -54,6 +58,7 @@ public partial class EditorPage : ContentPage
 		VisibilityPicker.ItemsSource = _visibilityItems;
 		NativeProfilePicker.ItemsSource = new[] { "decoration", "code" };
 		CheckResultsList.ItemsSource = _checkResults;
+		WorkshopDepSearchList.ItemsSource = _workshopDepSearchResults;
 		SetEditorTab(0);
 	}
 
@@ -77,6 +82,7 @@ public partial class EditorPage : ContentPage
 			NativeConfigProfile = _metadata.NativeConfigProfile,
 			PreviewImageRelativePath = _metadata.PreviewImageRelativePath,
 			AdditionalPreviews = new List<string>(_metadata.AdditionalPreviews),
+			WorkshopDependencyIds = new List<ulong>(_metadata.WorkshopDependencyIds),
 		};
 
 		if (_metadata.PublishedFileId != 0)
@@ -129,6 +135,7 @@ public partial class EditorPage : ContentPage
 			? "decoration"
 			: _metadata.NativeConfigProfile.Trim().ToLowerInvariant();
 		NativeProfilePicker.SelectedItem = profile == "code" ? "code" : "decoration";
+		_metadata.WorkshopDependencyIds = _metadata.WorkshopDependencyIds.Where(x => x > 0).Distinct().ToList();
 		PreviewPathLabel.Text = Path.Combine(_projectRoot, _metadata.PreviewImageRelativePath);
 
 		var isUpdate = _metadata.PublishedFileId != 0;
@@ -147,6 +154,14 @@ public partial class EditorPage : ContentPage
 		RebuildScreenshotGallery();
 		RunUploadCheck();
 		RefreshDescriptionPreviewImmediate();
+		_workshopDepTitles.Clear();
+		foreach (var id in _metadata.WorkshopDependencyIds)
+		{
+			_workshopDepTitles[id] = "";
+		}
+
+		RebuildWorkshopDepRows();
+		_ = EnrichWorkshopDependencyTitlesAsync();
 	}
 
 	private void UpdateContentSizeUi()
@@ -188,6 +203,189 @@ public partial class EditorPage : ContentPage
 		}
 		return n;
 	}
+
+	#region Workshop dependencies (workshop_dependency)
+
+	private void RebuildWorkshopDepRows()
+	{
+		WorkshopDepStack.Children.Clear();
+		foreach (var id in _metadata.WorkshopDependencyIds)
+		{
+			var grid = new Grid { ColumnSpacing = 8 };
+			grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+			grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
+			var lbl = new Label
+			{
+				Text = FormatWorkshopDepLabel(id),
+				FontSize = 12,
+				TextColor = Color.FromArgb("#C0FCF6"),
+				LineBreakMode = LineBreakMode.TailTruncation,
+				VerticalOptions = LayoutOptions.Center,
+			};
+			Grid.SetColumn(lbl, 0);
+			grid.Children.Add(lbl);
+			var rm = new Button
+			{
+				Text = S.Get("Editor_WorkshopDepRemove"),
+				Style = Application.Current?.Resources["TertiaryButton"] as Style,
+				CommandParameter = id,
+			};
+			rm.Clicked += OnRemoveWorkshopDepClicked;
+			Grid.SetColumn(rm, 1);
+			grid.Children.Add(rm);
+			WorkshopDepStack.Children.Add(grid);
+		}
+	}
+
+	private string FormatWorkshopDepLabel(ulong id)
+	{
+		if (_workshopDepTitles.TryGetValue(id, out var t) && !string.IsNullOrWhiteSpace(t))
+		{
+			return $"{id} · {t}";
+		}
+
+		return id.ToString(CultureInfo.InvariantCulture);
+	}
+
+	private async Task EnrichWorkshopDependencyTitlesAsync()
+	{
+		foreach (var id in _metadata.WorkshopDependencyIds.ToList())
+		{
+			if (_workshopDepTitles.TryGetValue(id, out var t) && !string.IsNullOrWhiteSpace(t))
+			{
+				continue;
+			}
+
+			var item = await _steam.GetItemDetailsAsync(id, CancellationToken.None).ConfigureAwait(false);
+			if (item is null)
+			{
+				continue;
+			}
+
+			_workshopDepTitles[id] = item.Title;
+			await MainThread.InvokeOnMainThreadAsync(RebuildWorkshopDepRows);
+		}
+	}
+
+	private async Task EnrichSingleWorkshopDepTitleAsync(ulong id)
+	{
+		var item = await _steam.GetItemDetailsAsync(id, CancellationToken.None).ConfigureAwait(false);
+		if (item is null)
+		{
+			return;
+		}
+
+		_workshopDepTitles[id] = item.Title;
+		await MainThread.InvokeOnMainThreadAsync(RebuildWorkshopDepRows);
+	}
+
+	private async void OnWorkshopDepAddById(object? sender, EventArgs e)
+	{
+		var s = WorkshopDepIdEntry.Text?.Trim() ?? "";
+		if (!ulong.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out var id) || id == 0)
+		{
+			await DisplayAlert(S.Get("Error"), S.Get("Editor_WorkshopDepInvalidId"), S.Get("OK"));
+			return;
+		}
+
+		if (!await TryAddWorkshopDependencyAsync(id, null))
+		{
+			return;
+		}
+
+		WorkshopDepIdEntry.Text = "";
+	}
+
+	private async Task<bool> TryAddWorkshopDependencyAsync(ulong id, string? titleHint)
+	{
+		if (_metadata.PublishedFileId != 0 && id == _metadata.PublishedFileId)
+		{
+			await DisplayAlert(S.Get("Error"), S.Get("Editor_WorkshopDepSelf"), S.Get("OK"));
+			return false;
+		}
+
+		if (_metadata.WorkshopDependencyIds.Contains(id))
+		{
+			await DisplayAlert(S.Get("Error"), S.Get("Editor_WorkshopDepDuplicate"), S.Get("OK"));
+			return false;
+		}
+
+		_metadata.WorkshopDependencyIds.Add(id);
+		_workshopDepTitles[id] = titleHint ?? "";
+		RebuildWorkshopDepRows();
+		RunUploadCheck();
+		if (string.IsNullOrWhiteSpace(titleHint))
+		{
+			_ = EnrichSingleWorkshopDepTitleAsync(id);
+		}
+
+		return true;
+	}
+
+	private void OnRemoveWorkshopDepClicked(object? sender, EventArgs e)
+	{
+		if (sender is not Button b || b.CommandParameter is null)
+		{
+			return;
+		}
+
+		var id = Convert.ToUInt64(b.CommandParameter, CultureInfo.InvariantCulture);
+		_metadata.WorkshopDependencyIds.Remove(id);
+		_workshopDepTitles.Remove(id);
+		RebuildWorkshopDepRows();
+		RunUploadCheck();
+	}
+
+	private async void OnWorkshopDepSearch(object? sender, EventArgs e) => await RunWorkshopDepSearchAsync();
+
+	private async void OnWorkshopDepSearchCompleted(object? sender, EventArgs e) => await RunWorkshopDepSearchAsync();
+
+	private async Task RunWorkshopDepSearchAsync()
+	{
+		var q = WorkshopDepSearchEntry.Text?.Trim() ?? "";
+		if (q.Length < 2)
+		{
+			await MainThread.InvokeOnMainThreadAsync(() =>
+			{
+				_workshopDepSearchResults.Clear();
+				WorkshopDepSearchList.IsVisible = false;
+			});
+			return;
+		}
+
+		var result = await _steam.SearchAsync(q, 1, CancellationToken.None).ConfigureAwait(false);
+		await MainThread.InvokeOnMainThreadAsync(() =>
+		{
+			_workshopDepSearchResults.Clear();
+			foreach (var item in result.Items)
+			{
+				_workshopDepSearchResults.Add(item);
+			}
+
+			WorkshopDepSearchList.IsVisible = _workshopDepSearchResults.Count > 0;
+		});
+	}
+
+	private async void OnWorkshopDepSearchItemTapped(object? sender, TappedEventArgs e)
+	{
+		if ((sender as BindableObject)?.BindingContext is not WorkshopItemDetailVm vm)
+		{
+			return;
+		}
+
+		if (!await TryAddWorkshopDependencyAsync(vm.PublishedFileId, vm.Title))
+		{
+			return;
+		}
+
+		await MainThread.InvokeOnMainThreadAsync(() =>
+		{
+			_workshopDepSearchResults.Clear();
+			WorkshopDepSearchList.IsVisible = false;
+		});
+	}
+
+	#endregion
 
 	#region Upload Dependency Checker
 
@@ -637,6 +835,7 @@ public partial class EditorPage : ContentPage
 		_metadata.NeedsFmf = NeedsFmfSwitch.IsToggled;
 		_metadata.NeedsMelonLoader = NeedsMelonLoaderSwitch.IsToggled;
 		_metadata.NativeConfigProfile = NativeProfilePicker.SelectedItem as string ?? "decoration";
+		_metadata.WorkshopDependencyIds = _metadata.WorkshopDependencyIds.Where(x => x > 0).Distinct().ToList();
 	}
 
 	private static string BuildUploadDescription(WorkshopMetadata meta)

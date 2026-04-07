@@ -205,6 +205,7 @@ public sealed class WorkspaceService
 		var meta = JsonSerializer.Deserialize<WorkshopMetadata>(json) ?? new WorkshopMetadata();
 		meta.Title ??= string.Empty;
 		meta.Description ??= string.Empty;
+		meta.WorkshopDependencyIds ??= new List<ulong>();
 
 		AutoDetectPreviewImage(projectRoot, meta);
 

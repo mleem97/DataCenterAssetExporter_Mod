@@ -73,6 +73,16 @@
   <data name="Editor_NeedsMelonLoader" xml:space="preserve"><value>Needs MelonLoader</value></data>
   <data name="Editor_NeedsMelonLoaderHint" xml:space="preserve"><value>Appends a MelonLoader requirements notice and download link to the Steam description if not already mentioned.</value></data>
   <data name="Editor_MelonLoaderNotice" xml:space="preserve"><value>[h2]Requirements[/h2][list][*] This Workshop item requires [url=https://melonwiki.xyz]MelonLoader[/url] for Data Center. Install MelonLoader before using this mod.[/list]</value></data>
+  <data name="Editor_WorkshopDependencies" xml:space="preserve"><value>Workshop dependencies</value></data>
+  <data name="Editor_WorkshopDependenciesHint" xml:space="preserve"><value>Optional: Steam Workshop file IDs of other items this mod requires. Stored as workshop_dependency in metadata.json.</value></data>
+  <data name="Editor_WorkshopDepIdPlaceholder" xml:space="preserve"><value>Workshop file ID…</value></data>
+  <data name="Editor_WorkshopDepAdd" xml:space="preserve"><value>Add</value></data>
+  <data name="Editor_WorkshopDepSearchTitle" xml:space="preserve"><value>Search Workshop to add</value></data>
+  <data name="Editor_WorkshopDepSearchPlaceholder" xml:space="preserve"><value>Search…</value></data>
+  <data name="Editor_WorkshopDepRemove" xml:space="preserve"><value>Remove</value></data>
+  <data name="Editor_WorkshopDepInvalidId" xml:space="preserve"><value>Enter a valid numeric Steam Workshop file ID.</value></data>
+  <data name="Editor_WorkshopDepDuplicate" xml:space="preserve"><value>This Workshop ID is already in the list.</value></data>
+  <data name="Editor_WorkshopDepSelf" xml:space="preserve"><value>You cannot add this item as a dependency of itself.</value></data>
   <data name="Editor_FmfNotice" xml:space="preserve"><value>This Item needs the FrikaModFramework, please download it from Steam Workshop or via the GregTools Modmanager!</value></data>
   <data name="Editor_ChangeNotes" xml:space="preserve"><value>Change notes</value></data>
   <data name="Editor_ChangeNotesHint" xml:space="preserve"><value>Describe what changed. Shown on Steam's changelog tab.</value></data>

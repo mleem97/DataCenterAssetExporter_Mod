@@ -73,6 +73,16 @@
   <data name="Editor_NeedsMelonLoader" xml:space="preserve"><value>MelonLoader が必要</value></data>
   <data name="Editor_NeedsMelonLoaderHint" xml:space="preserve"><value>Steam の説明に MelonLoader の注意書きとリンクを追記します（未記載の場合）。</value></data>
   <data name="Editor_MelonLoaderNotice" xml:space="preserve"><value>[h2]要件[/h2][list][*] この Workshop アイテムには Data Center 用の [url=https://melonwiki.xyz]MelonLoader[/url] が必要です。使用前に MelonLoader をインストールしてください。[/list]</value></data>
+  <data name="Editor_WorkshopDependencies" xml:space="preserve"><value>Workshop 依存関係</value></data>
+  <data name="Editor_WorkshopDependenciesHint" xml:space="preserve"><value>任意：この Mod が必要とする他アイテムの Steam Workshop ファイル ID。metadata.json の workshop_dependency に保存されます。</value></data>
+  <data name="Editor_WorkshopDepIdPlaceholder" xml:space="preserve"><value>Workshop ファイル ID…</value></data>
+  <data name="Editor_WorkshopDepAdd" xml:space="preserve"><value>追加</value></data>
+  <data name="Editor_WorkshopDepSearchTitle" xml:space="preserve"><value>Workshop を検索して追加</value></data>
+  <data name="Editor_WorkshopDepSearchPlaceholder" xml:space="preserve"><value>検索…</value></data>
+  <data name="Editor_WorkshopDepRemove" xml:space="preserve"><value>削除</value></data>
+  <data name="Editor_WorkshopDepInvalidId" xml:space="preserve"><value>有効な Steam Workshop ファイル ID（数値）を入力してください。</value></data>
+  <data name="Editor_WorkshopDepDuplicate" xml:space="preserve"><value>この Workshop ID はすでにリストにあります。</value></data>
+  <data name="Editor_WorkshopDepSelf" xml:space="preserve"><value>自分自身を依存関係に追加できません。</value></data>
   <data name="Editor_FmfNotice" xml:space="preserve"><value>このアイテムには FrikaModFramework が必要です。Steam Workshop または GregTools Modmanager からダウンロードしてください！</value></data>
   <data name="Editor_ChangeNotes" xml:space="preserve"><value>変更メモ</value></data>
   <data name="Editor_ChangeNotesHint" xml:space="preserve"><value>変更内容を記載します。Steam の変更履歴タブに表示されます。</value></data>

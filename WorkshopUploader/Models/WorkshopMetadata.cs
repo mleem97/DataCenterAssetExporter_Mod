@@ -38,4 +38,8 @@ public sealed class WorkshopMetadata
 
 	[JsonPropertyName("additionalPreviews")]
 	public List<string> AdditionalPreviews { get; set; } = new();
+
+	/// <summary>Other Steam Workshop file ids this item depends on (subscribe order / tooling).</summary>
+	[JsonPropertyName("workshop_dependency")]
+	public List<ulong> WorkshopDependencyIds { get; set; } = new();
 }

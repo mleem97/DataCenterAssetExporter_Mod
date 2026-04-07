@@ -440,6 +440,7 @@ public sealed class SteamWorkshopService
 			: localSnapshot.NativeConfigProfile;
 		target.PreviewImageRelativePath = localSnapshot.PreviewImageRelativePath ?? "preview.png";
 		target.AdditionalPreviews = new List<string>(localSnapshot.AdditionalPreviews);
+		target.WorkshopDependencyIds = new List<ulong>(localSnapshot.WorkshopDependencyIds ?? new List<ulong>());
 	}
 
 	#endregion
