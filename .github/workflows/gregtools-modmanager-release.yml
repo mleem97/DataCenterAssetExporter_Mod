@@ -1,0 +1,157 @@
+# GregTools Modmanager (Workshop Uploader) — GitHub Releases
+#
+# Monorepo: tag with prefix  gregtools-modmanager-v1.2.3  (avoids clashing with other v* tags).
+# Standalone workshopuploader repo: copy this file to `.github/workflows/`, then add tag pattern `v*`
+#   (see WorkshopUploader/EXTERNAL_DEPENDENCIES.md — avoid broad `v*` while this app lives inside the monorepo).
+#
+# First releases: primary artifact is a ZIP at best compression (folder layout, self-contained).
+# MSIX / App Installer: optional job — enable when packaging + code signing are configured.
+
+name: GregTools Modmanager Release
+
+on:
+  push:
+    tags:
+      - "gregtools-modmanager-v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag (e.g. gregtools-modmanager-v1.0.0). Must match an existing ref when run manually."
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  # Set to "true" in the standalone Workshop Uploader repo (project at repo root).
+  STANDALONE_REPO: false
+
+jobs:
+  package-zip:
+    name: Publish (ZIP, best compression)
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Install MAUI workload
+        shell: pwsh
+        run: dotnet workload install maui --skip-manifest-update
+
+      - name: Resolve release tag
+        id: meta
+        shell: pwsh
+        run: |
+          $tag = "${{ github.ref_name }}"
+          if ("${{ github.event_name }}" -eq "workflow_dispatch") {
+            $tag = "${{ github.event.inputs.tag }}".Trim()
+          }
+          if ([string]::IsNullOrWhiteSpace($tag)) {
+            throw "Could not resolve release tag."
+          }
+
+          $wuRoot = $null
+          if (Test-Path -LiteralPath "WorkshopUploader.csproj") { $wuRoot = "." }
+          elseif (Test-Path -LiteralPath "workshopuploader/WorkshopUploader.csproj") { $wuRoot = "workshopuploader" }
+          elseif (Test-Path -LiteralPath "WorkshopUploader/WorkshopUploader.csproj") { $wuRoot = "WorkshopUploader" }
+          if (-not $wuRoot) {
+            throw "WorkshopUploader.csproj not found (repo root, workshopuploader/, or WorkshopUploader/)."
+          }
+
+          $proj = Join-Path $wuRoot "WorkshopUploader.csproj"
+          $csprojXml = [xml](Get-Content -LiteralPath $proj -Raw)
+          $ver = ($csprojXml.Project.PropertyGroup | ForEach-Object { $_.ApplicationDisplayVersion } | Where-Object { $_ } | Select-Object -First 1)
+          if ($ver) { $ver = $ver.Trim() } else { $ver = "0.0.0" }
+
+          $publishDir = Join-Path $wuRoot "bin\Release\net9.0-windows10.0.19041.0\win10-x64\publish"
+          $zipName = "Gregtools-Modmanager-$ver-win10-x64.zip"
+
+          "tag=$tag" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "wuRoot=$wuRoot" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "proj=$proj" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "publishDir=$publishDir" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "zipName=$zipName" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          "displayVersion=$ver" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+          Write-Host "Tag=$tag WU=$wuRoot Version=$ver"
+
+      - name: dotnet publish (self-contained)
+        shell: pwsh
+        run: |
+          dotnet publish "${{ steps.meta.outputs.proj }}" -c Release
+
+      - name: Zip publish folder (Optimal)
+        id: zip
+        shell: pwsh
+        run: |
+          $publishDir = "${{ steps.meta.outputs.publishDir }}"
+          $zipName = "${{ steps.meta.outputs.zipName }}"
+          if (-not (Test-Path -LiteralPath $publishDir)) {
+            throw "Publish output not found: $publishDir"
+          }
+          $zipPath = Join-Path $PWD $zipName
+          if (Test-Path -LiteralPath $zipPath) { Remove-Item -LiteralPath $zipPath -Force }
+          Compress-Archive -Path (Join-Path $publishDir '*') -DestinationPath $zipPath -CompressionLevel Optimal
+          "zipPath=$zipPath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+          Get-Item -LiteralPath $zipPath | Format-List Name, Length
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.meta.outputs.tag }}
+          name: GregTools Modmanager ${{ steps.meta.outputs.displayVersion }}
+          files: ${{ steps.zip.outputs.zipPath }}
+          generate_release_notes: true
+          body: |
+            **Distribution (this release):** portable ZIP (self-contained win10-x64), best compression.
+
+            **App Installer / MSIX:** not attached for early releases; see `WorkshopUploader/EXTERNAL_DEPENDENCIES.md` for roadmap and licensing.
+
+  # Flip `if` to `true` after: WindowsPackageType=Msix (or equivalent), signing cert in secrets, and verified local publish.
+  package-app-installer:
+    name: Publish (MSIX + App Installer) — optional
+    if: false
+    runs-on: windows-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Install MAUI workload
+        shell: pwsh
+        run: dotnet workload install maui --skip-manifest-update
+
+      - name: Resolve project root
+        id: meta
+        shell: pwsh
+        run: |
+          $wuRoot = $null
+          if (Test-Path -LiteralPath "WorkshopUploader.csproj") { $wuRoot = "." }
+          if (-not $wuRoot -and (Test-Path -LiteralPath "workshopuploader/WorkshopUploader.csproj")) { $wuRoot = "workshopuploader" }
+          if (-not $wuRoot -and (Test-Path -LiteralPath "WorkshopUploader/WorkshopUploader.csproj")) { $wuRoot = "WorkshopUploader" }
+          if (-not $wuRoot) { throw "WorkshopUploader.csproj not found." }
+          "wuRoot=$wuRoot" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+
+      # Example (adjust signing / thumbprint / Azure Trusted Signing to your setup):
+      # dotnet publish $proj -c Release -p:WindowsPackageType=Msix -p:AppxPackageSigningEnabled=true
+      - name: Placeholder (enable MSIX + App Installer locally first)
+        shell: pwsh
+        run: Write-Host "See WorkshopUploader/EXTERNAL_DEPENDENCIES.md — enable this job after MSIX publish works on your machine."

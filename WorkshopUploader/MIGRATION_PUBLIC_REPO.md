@@ -40,6 +40,6 @@ To **keep history** from the monorepo, use `git subtree split` or `git filter-re
 
 ## Monorepo scripts
 
-`scripts/Package-WorkshopUploaderRelease.ps1`, `Deploy-Release-ToDataCenter.ps1`, and `Deploy-Release-ToWorkshop.ps1` already use `workshopuploader\WorkshopUploader.csproj`.
+`scripts/Package-WorkshopUploaderRelease.ps1`, `Deploy-Release-ToDataCenter.ps1`, and `Deploy-Release-ToWorkshop.ps1` resolve the project via `scripts/Resolve-WorkshopUploaderMonorepoDir.ps1`: **`workshopuploader\WorkshopUploader.csproj` is preferred** (canonical layout); **`WorkshopUploader\`** is still accepted until `git mv` succeeds.
 
-`framework/FrikaMF.csproj` excludes `..\workshopuploader\**\*.cs` so the framework project does not compile MAUI sources.
+`framework/FrikaMF.csproj` excludes both `..\workshopuploader\**\*.cs` and `..\WorkshopUploader\**\*.cs` so the framework project does not compile MAUI sources.

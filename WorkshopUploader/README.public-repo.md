@@ -14,6 +14,20 @@ dotnet publish WorkshopUploader.csproj -c Release -p:SelfContained=true -p:Runti
 
 See the original `README.md` in this directory for troubleshooting, Steam layout, and headless CLI.
 
+## Releases (GitHub Actions)
+
+In the **monorepo**, releases are driven by `.github/workflows/gregtools-modmanager-release.yml`. Push a tag:
+
+`gregtools-modmanager-v1.0.0`
+
+After this folder is its **own repository**, edit that workflow (or copy it to `.github/workflows/release.yml`) and switch the tag pattern to `v*` if you prefer.
+
+**First releases** ship a **ZIP** of the self-contained `win10-x64` publish folder at **best compression**. Optional **MSIX / App Installer** packaging is documented in [EXTERNAL_DEPENDENCIES.md](./EXTERNAL_DEPENDENCIES.md) (CI job is off until signing is configured).
+
+## Open source & external dependencies
+
+See **[EXTERNAL_DEPENDENCIES.md](./EXTERNAL_DEPENDENCIES.md)** for licenses, **Steamworks** / **steam_api64.dll**, and distribution notes.
+
 ## License
 
 Use the same license as the parent [DataCenterExporter / gregFramework](https://github.com/mleem97/gregFramework) project unless you add a dedicated `LICENSE` to this repository.

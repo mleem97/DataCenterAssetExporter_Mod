@@ -18,7 +18,9 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $RepoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
-$Proj = Join-Path $RepoRoot 'workshopuploader\WorkshopUploader.csproj'
+. (Join-Path $PSScriptRoot 'Resolve-WorkshopUploaderMonorepoDir.ps1')
+$WuDir = Resolve-WorkshopUploaderMonorepoDir $RepoRoot
+$Proj = Join-Path $RepoRoot "$WuDir\WorkshopUploader.csproj"
 
 $csprojXml = [xml](Get-Content -LiteralPath $Proj -Raw)
 $version = ($csprojXml.Project.PropertyGroup | ForEach-Object { $_.ApplicationDisplayVersion } | Where-Object { $_ } | Select-Object -First 1).Trim()
@@ -32,7 +34,7 @@ if ($LASTEXITCODE -ne 0) {
     throw "dotnet publish failed with exit code $LASTEXITCODE"
 }
 
-$publishDir = Join-Path $RepoRoot "workshopuploader\bin\$Configuration\net9.0-windows10.0.19041.0\win10-x64\publish"
+$publishDir = Join-Path $RepoRoot "$WuDir\bin\$Configuration\net9.0-windows10.0.19041.0\win10-x64\publish"
 if (-not (Test-Path -LiteralPath $publishDir)) {
     throw "Publish output not found: $publishDir"
 }

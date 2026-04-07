@@ -2,6 +2,10 @@
 
 Desktop app for **Steam Workshop** management, mod browsing, and publishing for **Data Center** (Steamworks API, App ID 4170200).
 
+### Open source and external dependencies
+
+This project is developed in the open alongside **many open-source libraries** (.NET, MAUI, Facepunch.Steamworks, etc.). It also **ships Valve’s closed-source `steam_api64.dll`** (Steamworks) subject to Valve’s terms—not everything in the distributed app is “open source” in the OSI sense. See **[EXTERNAL_DEPENDENCIES.md](./EXTERNAL_DEPENDENCIES.md)** for a full breakdown, licenses, and redistribution notes.
+
 ## Features
 
 - **Mod Store** — browse, search, subscribe, favorite, and vote on Workshop items.
@@ -73,6 +77,7 @@ so it sits alongside the game executable (not inside `Mods` or `MelonLoader`).
 
 ## See also
 
+- [External dependencies & distribution (licenses, Steamworks)](./EXTERNAL_DEPENDENCIES.md)
 - [Workshop wiki page](../docs/wiki/tools/workshop-uploader.md)
 - [End-User Guide](../wiki/docs/guides/enduser-workshop.md)
 - [Contributor Guide](../wiki/docs/guides/contributor-workshop.md)
