@@ -6,7 +6,7 @@ This repository is in a **post-monorepo split** state.
 
 The runtime framework has been migrated to the standalone repository path:
 
-- `c:\Users\marvi\source\repos\gregFramework\Framework\FrikaMF-StandaloneRepo`
+- `c:\Users\marvi\source\repos\gregFramework\gregCore`
 
 This means framework runtime development (`FrikaMF`, runtime plugins, templates, MCP runtime stack) now belongs to that standalone location.
 
@@ -28,7 +28,7 @@ Primary retained areas include:
 If you were previously building from this repo root, switch to the standalone framework workspace for active runtime work:
 
 ```powershell
-Set-Location "c:\Users\marvi\source\repos\gregFramework\Framework\FrikaMF-StandaloneRepo"
+Set-Location "c:\Users\marvi\source\repos\gregFramework\gregCore"
 dotnet build "FrikaMF.sln" -c Release
 ```
 
