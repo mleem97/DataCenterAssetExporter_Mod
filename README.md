@@ -1,40 +1,44 @@
-# DataCenterExporter
+# gregDataCenterExporter (DataCenterExporter)
 
-## Repository Status
+Legacy monolith after the **old monorepo split**: exporter, migration, and tooling assets. Active framework runtime development lives in **gregCore**.
 
-This repository is in a **post-monorepo split** state.
+---
 
-The runtime framework has been migrated to the standalone repository path:
+## Part of gregFramework
 
-- `c:\Users\marvi\source\repos\gregFramework\gregCore`
+This directory is part of the **[gregFramework](https://github.com/mleem97/gregFramework)** workspace. Clone sibling repositories side by side so each project lives at `gregFramework/<RepoName>/`. See the workspace [README](https://github.com/mleem97/gregFramework/blob/master/README.md) for the full layout and migration notes.
 
-This means framework runtime development (`FrikaMF`, runtime plugins, templates, MCP runtime stack) now belongs to that standalone location.
+| | |
+|:---|:---|
+| **Remote** | [`mleem97/gregFramework`](https://github.com/mleem97/gregFramework) (history; content may align with this folder) |
+
+---
 
 ## What remains here
 
-`DataCenterExporter` now focuses on exporter/migration-related assets and supporting project history needed for the transition.
-
-Primary retained areas include:
-
 - `FrikaModFramework/`
-- `mcp-server/`
-- `tools/`
-- `scripts/`
-- `Templates/`
-- `lib/references/`
+- `mcp-server/`, `tools/`, `scripts/`, `Templates/`, `lib/references/` (as applicable)
 
-## Migration note
+---
 
-If you were previously building from this repo root, switch to the standalone framework workspace for active runtime work:
+## Building the active framework
+
+For runtime work on the framework:
 
 ```powershell
-Set-Location "c:\Users\marvi\source\repos\gregFramework\gregCore"
+Set-Location ".\..\gregCore"
 dotnet build "FrikaMF.sln" -c Release
 ```
 
+(Path is relative from `gregDataCenterExporter/` to the sibling `gregCore` repository.)
+
+---
+
 ## Policies
 
-- [Contributing](CONTRIBUTING.md)
-- [Security](SECURITY.md)
-- [Support](SUPPORT.md)
-- [AI Policy](AI_POLICY.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [SECURITY.md](SECURITY.md)
+- [SUPPORT.md](SUPPORT.md)
+- [AI_POLICY.md](AI_POLICY.md)
+
+Migration: see **`../MONOREPO-LEGACY.md`** at the workspace root (if present).
