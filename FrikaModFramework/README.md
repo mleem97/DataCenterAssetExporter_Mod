@@ -1,21 +1,21 @@
-# FrikaModFramework (Zielstruktur)
+# FrikaModFramework (target layout)
 
-Dieser Ordner ist die **Single Source of Truth** für die geplante Monorepo-Gliederung aus dem Workspace-Plan:
+This folder is the **single source of truth** for the planned monorepo layout from the workspace plan:
 
-- **`fmf_hooks.json`** — deklarative Hook-Registry (`FMF.DOMAIN.Event` — siehe `CONTRIBUTING.md`).
-- **`src/core/`** — domänenbasierte Namens-Helfer (`FmfDomains`, `FmfHookName`), per MSBuild in das bestehende C#-Projekt [`framework/FrikaMF.csproj`](../framework/FrikaMF.csproj) eingebunden.
-- **`src/bindings/`** — Platzhalter für spätere Sprach-Bindings (Lua, Rust, Python, TypeScript, …).
-- **`src/game2framework/`** — Platzhalter für die Legacy-Kompatibilitätsschicht (Game2Framework → FMF).
-- **`docs/wiki/`** — optionale **Quell-Stubs**; die öffentliche Docusaurus-Site liegt weiterhin im Repo-Root unter [`wiki/`](../wiki/) mit Inhalten in [`docs/`](../docs/).
+- **`fmf_hooks.json`** — declarative hook registry (`FMF.DOMAIN.Event` — see `CONTRIBUTING.md`).
+- **`src/core/`** — domain-based naming helpers (`FmfDomains`, `FmfHookName`), wired into the existing C# project [`framework/FrikaMF.csproj`](../framework/FrikaMF.csproj) via MSBuild.
+- **`src/bindings/`** — placeholder for future language bindings (Lua, Rust, Python, TypeScript, …).
+- **`src/game2framework/`** — placeholder for the legacy compatibility layer (Game2Framework → FMF).
+- **`docs/wiki/`** — optional **source stubs**; the public Docusaurus site remains at the repository root under [`wiki/`](../wiki/) with content in [`docs/`](../docs/).
 
-## Bestehende Pfade (noch nicht verschoben)
+## Existing paths (not yet moved)
 
-| Bereich | Aktueller Ort im Repo |
-|--------|------------------------|
-| MelonLoader-Framework (C#) | `framework/` |
-| Mods | `mods/` (z. B. HexLabel: `mods/FMF.Mod.HexLabelMod/`) |
+| Area | Current location in repo |
+|------|--------------------------|
+| MelonLoader framework (C#) | `framework/` |
+| Mods | `mods/` (e.g. HexLabel: `mods/FMF.Mod.HexLabelMod/`) |
 | Plugins | `plugins/` |
-| Docusaurus-App | `wiki/` |
-| Wiki-Markdown/MDX | `docs/` |
+| Docusaurus app | `wiki/` |
+| Wiki Markdown/MDX | `docs/` |
 
-Eine vollständige physische Verschiebung von `framework/` → `FrikaModFramework/src/core/` würde Solution, CI und Pfade massiv ändern; sie ist absichtlich **nicht** in einem Schritt erfolgt. Siehe [`CONTRIBUTING.md`](../CONTRIBUTING.md) und [`Refactoring.md`](../Refactoring.md).
+A full physical move of `framework/` → `FrikaModFramework/src/core/` would change solution, CI, and paths substantially; it was intentionally **not** done in one step. See [`CONTRIBUTING.md`](../CONTRIBUTING.md) and [`Refactoring.md`](../Refactoring.md).

@@ -10,13 +10,13 @@ services:
     ports:
       - "3040:3000"
 
-  # Dev-only: Docusaurus `npm run start` (second HTTP service → duplicate Coolify URLs if left on default profile)
+  # Dev-only: Docusaurus `npm run start` — sibling repo ../gregWiki (NOT ./wiki; that path does not exist here).
   docs:
     profiles:
       - dev
     build:
-      context: .
-      dockerfile: wiki/Dockerfile
+      context: ../gregWiki
+      dockerfile: Dockerfile
     container_name: frikamf-docs
     working_dir: /app
     command: npm run start -- --host 0.0.0.0 --port 3000
@@ -25,24 +25,19 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
     volumes:
-      - ./wiki:/app
-      - ./docs:/docs
-      # When the repo root is mounted at /app, the site may run from /app/wiki; ../docs → /app/docs.
-      - ./docs:/app/docs
+      - ../gregWiki:/app
       - /app/node_modules
 
-  # Dev-only: one-off `npm run build` (use locally; not for Coolify routing)
+  # Dev-only: one-off `npm run build`
   docs-build:
     profiles:
       - dev
     build:
-      context: .
-      dockerfile: wiki/Dockerfile
+      context: ../gregWiki
+      dockerfile: Dockerfile
     container_name: frikamf-docs-build
     working_dir: /app
     command: npm run build
     volumes:
-      - ./wiki:/app
-      - ./docs:/docs
-      - ./docs:/app/docs
+      - ../gregWiki:/app
       - /app/node_modules

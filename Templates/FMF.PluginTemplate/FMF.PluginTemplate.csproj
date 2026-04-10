@@ -7,9 +7,9 @@
     <PlatformTarget>x64</PlatformTarget>
     <AssemblyName>FFM.PluginTemplate</AssemblyName>
     <RootNamespace>FFM.PluginTemplate</RootNamespace>
-    <RepositoryRoot>$(MSBuildThisFileDirectory)..\..\</RepositoryRoot>
+    <RepositoryRoot>$(MSBuildThisFileDirectory)..\..\..\</RepositoryRoot>
     <DefaultSteamGamePath>Program Files (x86)\Steam\steamapps\common\Data Center</DefaultSteamGamePath>
-    <FindDataCenterPathScript>$(RepositoryRoot)scripts\Find-DataCenterPath.ps1</FindDataCenterPathScript>
+    <FindDataCenterPathScript>$(RepositoryRoot)gregCore\scripts\Find-DataCenterPath.ps1</FindDataCenterPathScript>
   </PropertyGroup>
 
   <Target Name="DetectGameDir" BeforeTargets="ResolveAssemblyReferences">
@@ -78,7 +78,11 @@
   </Target>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\framework\FrikaMF.csproj" />
+    <Compile Remove="**\*.Tests\**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\gregCore\framework\FrikaMF.csproj" />
   </ItemGroup>
 
   <Target Name="CopyToModsFolder" AfterTargets="Build" DependsOnTargets="DetectGameDir" Condition="'$(CI)' != 'true' and Exists('$(ModsOutputDir)')">

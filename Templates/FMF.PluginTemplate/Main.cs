@@ -1,4 +1,5 @@
 using System;
+using DataCenterModLoader;
 using FrikaMF;
 using FrikaMF.Plugins;
 using MelonLoader;
@@ -8,7 +9,10 @@ using MelonLoader;
 
 namespace FFM.PluginTemplate;
 
-public sealed class Main : FFMPluginBase
+/// <summary>
+/// Legacy template folder name (<c>FMF.*</c>); use <see cref="GregPluginBase"/> — same pattern as <c>gregCore/Templates/greg.PluginTemplate</c>.
+/// </summary>
+public sealed class Main : GregPluginBase
 {
     private bool _registered;
 

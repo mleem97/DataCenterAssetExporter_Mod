@@ -1,4 +1,5 @@
 using System;
+using DataCenterModLoader;
 using FrikaMF;
 using MelonLoader;
 
@@ -7,6 +8,9 @@ using MelonLoader;
 
 namespace FMF.BasedModTemplate;
 
+/// <summary>
+/// Legacy template name; mirrors <c>gregCore/Templates/greg.BasedModTemplate</c> with explicit <see cref="DataCenterModLoader.Core"/>.
+/// </summary>
 public sealed class Main : MelonMod
 {
     private bool _frameworkReady;
@@ -32,7 +36,7 @@ public sealed class Main : MelonMod
             return;
 
         _frameworkReady = true;
-        LoggerInstance.Msg("FMF core detected. Mod is now active.");
+        LoggerInstance.Msg("FrikaMF core detected. Mod is now active.");
     }
 
     public override void OnApplicationQuit()
